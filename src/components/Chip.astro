@@ -1,0 +1,28 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<div class="chip">
+  <a class="link" href="#" target="_blank">{title}</a>
+</div>
+
+<style>
+  .chip {
+    display: inline-block;
+    padding: 0 10px;
+    height: 40px;
+    font-size: 16px;
+    line-height: 40px;
+    border-radius: 6px;
+    border: 1px solid black;
+    margin-bottom: 10px;
+  }
+  .link {
+    color: black;
+    text-decoration: none;
+  }
+</style>

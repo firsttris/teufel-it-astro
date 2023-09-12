@@ -1,0 +1,47 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Chip from "../components/Chip.astro";
+---
+
+<Layout title="Welcome to Astro.">
+  <div class="container">
+    <div class="name">Tristan Teufel</div>
+	<div class="title">Senior Softwareentwickler</div>
+	<div class="academic-title">Wirtschaftsinformatik (B.Sc.)</div>
+    <div class="description">
+		Engagierter Softwareentwickler mit über 10 Jahren Erfahrung in der Entwicklung von robustem Code für Unternehmensanwendungen. 
+		Zuverlässiger Partner für die Entwicklung von Softwarelösungen.
+    </div>
+    <Chip title="Lebenslauf" />
+	<Chip title="Github" />
+	<Chip title="LinkedIn" />
+	<Chip title="Xing" />
+	<Chip title="Freelancermap" />
+  </div>
+</Layout>
+
+<style>
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+	margin-top: 50px;
+  }
+  .name {
+    font-size: 35px;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+  .title {
+	font-size: 15px;
+  }
+  .academic-title {
+	font-size: 10px;
+  }
+  .description {
+	max-width: 50%;
+	margin-top: 20px;
+	margin-bottom: 20px;
+
+  }
+</style>
