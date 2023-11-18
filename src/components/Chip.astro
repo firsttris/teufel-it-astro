@@ -5,7 +5,9 @@ interface Props {
 
 const { title } = Astro.props;
 ---
-
-<div class="inline-block p-2 h-10 text-base rounded-md border border-solid border-black">
-  <a class="font-black no-underline" href="#" target="_blank">{title}</a>
+<div class="flex justify-center">
+  <div class="inline-block p-2 h-10 text-base rounded-md border border-solid border-black">
+    <a class="no-underline" href="#" target="_blank">{title}</a>
+  </div>
 </div>
+

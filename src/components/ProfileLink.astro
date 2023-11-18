@@ -1,0 +1,16 @@
+---
+import { Icon } from 'astro-icon'
+
+interface Props {
+  name: string;
+  link: string;
+  icon: string
+}
+
+const { name, link, icon }: Props = Astro.props;
+---
+
+<div class="flex flex-row items-center cursor-pointer">
+    <Icon name={icon} class="h-10" />
+    <span><a class="no-underline" href={link} target="_blank">{name}</a></span>
+</div>

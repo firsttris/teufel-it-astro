@@ -1,0 +1,43 @@
+---
+import { Image } from "astro:assets";
+import Chip from "./Chip.astro";
+import { getLangFromUrl, useTranslations } from "./../i18n/utils";
+import { useMarkdown } from "../content/_useMarkdown";
+import ProfileLink from './ProfileLink.astro'
+
+const lang = getLangFromUrl(Astro.url);
+const markdown = useMarkdown(lang);
+const Description = markdown.description;
+const t = useTranslations(lang);
+
+---
+<div class="md:container m-3 xl:mx-auto md:max-w-6xl">
+    <div class="mt-10 flex flex-col md:flex-row items-center justify-center gap-4">
+        <Image
+            class="rounded-lg shadow-md"
+            src="/src/images/profil.png"
+            alt="Profilbild"
+            height={225}
+            width={240}
+        />
+        <div class="flex flex-col">
+            <div class="flex flex-col mt-6 md:mt-0 items-center">
+                <div class="uppercase text-4xl text-center">Tristan Teufel</div>
+                <div>{t('business-title')}</div>
+                <div>{t('academic-title')}</div>
+                <div class="mt-3 flex flex-col md:flex-row justify-center gap-1">
+                    <ProfileLink name={t('cv')} icon="ph:note-duotone" link="https://cv.teufel-it.de" />
+                    <ProfileLink name="Github" icon="mdi:github" link="https://github.com/firsttris" />
+                    <ProfileLink name="LinkedIn" icon="mdi:linkedin" link="https://www.linkedin.com/in/tristanteufel/" />
+                    <ProfileLink name="Xing" icon="ri:xing-fill" link="https://www.xing.com/profile/Tristan_Teufel/cv" />
+                    <ProfileLink name="Freelancermap" icon="mdi:world" link="https://www.freelancermap.de/profil/tristan-teufel" />
+                    
+                </div>
+    
+            </div>
+        </div>
+    </div>
+    <div class="mt-5">
+        <Description />
+    </div>
+</div>
