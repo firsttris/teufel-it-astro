@@ -1,7 +1,10 @@
 import { defineConfig } from 'astro/config';
 
+import tailwind from "@astrojs/tailwind";
+
 // https://astro.build/config
 export default defineConfig({
-    site: 'https://firsttris.github.io',
-    base: '/teufel-it-astro',
+  site: 'https://firsttris.github.io',
+  base: '/teufel-it-astro',
+  integrations: [tailwind()]
 });

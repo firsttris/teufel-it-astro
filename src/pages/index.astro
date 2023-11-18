@@ -1,47 +1,38 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Chip from "../components/Chip.astro";
+import { Image } from "astro:assets";
 ---
 
 <Layout title="Welcome to Astro.">
-  <div class="container">
-    <div class="name">Tristan Teufel</div>
-	<div class="title">Senior Softwareentwickler</div>
-	<div class="academic-title">Wirtschaftsinformatik (B.Sc.)</div>
-    <div class="description">
-		Engagierter Softwareentwickler mit über 10 Jahren Erfahrung in der Entwicklung von robustem Code für Unternehmensanwendungen. 
-		Zuverlässiger Partner für die Entwicklung von Softwarelösungen.
+  <div
+    class="flex flex-col md:flex-row font-mono items-center md:space-x-6 mx-4 mt-3"
+  >
+    <Image
+      class="rounded-lg shadow-md"
+      src="/src/images/profil.png"
+      alt="Profilbild"
+      height={225}
+      width={240}
+    />
+    <div class="flex flex-col">
+      <div class="flex flex-col mt-6 md:mt-0 items-center">
+        <div class="uppercase text-4xl">Tristan Teufel</div>
+        <div>Senior Software Entwickler</div>
+        <div>Wirtschaftsinformatik (B.Sc.)</div>
+        <div class="mt-5">
+          Engagierter Softwareentwickler mit über 10 Jahren Erfahrung in der
+          Entwicklung von robustem Code für Unternehmensanwendungen.
+          Zuverlässiger Partner für die Entwicklung von Softwarelösungen.
+        </div>
+      </div>
+      <div class="mt-5 flex justify-center gap-1">
+        <Chip title="Lebenslauf" />
+        <Chip title="Github" />
+        <Chip title="LinkedIn" />
+        <Chip title="Xing" />
+        <Chip title="Freelancermap" />
+      </div>
     </div>
-    <Chip title="Lebenslauf" />
-	<Chip title="Github" />
-	<Chip title="LinkedIn" />
-	<Chip title="Xing" />
-	<Chip title="Freelancermap" />
   </div>
 </Layout>
-
-<style>
-  .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-	margin-top: 50px;
-  }
-  .name {
-    font-size: 35px;
-    font-weight: 400;
-    text-transform: uppercase;
-  }
-  .title {
-	font-size: 15px;
-  }
-  .academic-title {
-	font-size: 10px;
-  }
-  .description {
-	max-width: 50%;
-	margin-top: 20px;
-	margin-bottom: 20px;
-
-  }
-</style>
