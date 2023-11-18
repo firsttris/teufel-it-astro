@@ -1,6 +1,6 @@
 Engagierter Softwareentwickler mit über 10 Jahren Erfahrung in der Entwicklung von robustem Code für kritische Unternehmensanwendungen.
 
-Entwickler von [Jest Runner](https://marketplace.visualstudio.com/items?itemName=firsttris.vscode-jest-runner), einer VSCode-Erweiterung zur Testausführung. ([Seit 2020](https://github.com/nrwl/nx/issues/3868) wird Jest Runner als empfohlene Erweiterung von [NX](https://nx.dev/) installiert.)
+Entwickler von [Jest Runner](https://marketplace.visualstudio.com/items?itemName=firsttris.vscode-jest-runner), einer VSCode-Erweiterung zur Testausführung, die [seit 2020](https://github.com/nrwl/nx/issues/3868) als empfohlene Erweiterung von [NX](https://nx.dev/) installiert wird.
 
 Umfangreiche Erfahrung in moderner Frontend-Entwicklung und Architektur, um skalierbare Benutzeroberflächen effizient zu erstellen und zu warten.
 
