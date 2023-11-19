@@ -4,7 +4,7 @@ import { getLangFromUrl, useTranslations } from "./../i18n/utils";
 import ProfileLink from "./ProfileLink.astro";
 import Profile from "./../images/profil.png";
 
-const lang = getLangFromUrl(Astro.url);
+const lang = getLangFromUrl(Astro.url.pathname);
 const t = useTranslations(lang);
 ---
 
