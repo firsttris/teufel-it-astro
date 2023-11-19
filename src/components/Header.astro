@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import { getLangFromUrl, useTranslations } from "./../i18n/utils";
 import ProfileLink from "./ProfileLink.astro";
+import Profile from "./../images/profil.png"
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -11,8 +12,8 @@ const t = useTranslations(lang);
     <div class="mt-10 flex flex-col items-center justify-center gap-4">
         <Image
             class="rounded-lg shadow-md"
-            src="/src/images/profil.png"
-            alt="Profilbild"
+            src={Profile}
+            alt="Tristan Teufel"
             height={225}
             width={240}
         />
