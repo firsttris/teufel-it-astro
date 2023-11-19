@@ -2,7 +2,7 @@
 import { Image } from "astro:assets";
 import { getLangFromUrl, useTranslations } from "./../i18n/utils";
 import ProfileLink from "./ProfileLink.astro";
-import Profile from "./../images/profil.png"
+import Profile from "./../images/profil.png";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -18,34 +18,34 @@ const t = useTranslations(lang);
             width={240}
         />
         <div class="flex flex-col">
-            <div class="flex flex-col mt-6 items-center">
-                <div class="uppercase text-4xl text-center">Tristan Teufel</div>
-                <div>{t("business-title")}</div>
-                <div>{t("academic-title")}</div>
+            <div class="flex flex-col mt-6 items-center text-center">
+                <div class="uppercase text-6xl">Tristan Teufel</div>
+                <div class="text-xl mt-1">{t("business-title")}</div>
+                <div class="text-xs mt-1">{t("academic-title")}</div>
                 <div class="mt-6 flex flex-col justify-center gap-1">
                     <ProfileLink
+                        name="info@teufel-it.de"
+                        icon="openmoji:closed-mailbox-with-raised-flag"
+                        link="mailto:info@teufel-it.de"
+                    />
+                    <ProfileLink
                         name={t("cv")}
-                        icon="carbon:document"
+                        icon="openmoji:notebook-with-decorative-cover"
                         link="https://cv.teufel-it.de"
                     />
                     <ProfileLink
-                        name="Github"
-                        icon="mdi:github"
+                        name="Github.com"
+                        icon="openmoji:github"
                         link="https://github.com/firsttris"
                     />
                     <ProfileLink
-                        name="LinkedIn"
-                        icon="mdi:linkedin"
+                        name="LinkedIn.com"
+                        icon="openmoji:linkedin"
                         link="https://www.linkedin.com/in/tristanteufel/"
                     />
                     <ProfileLink
-                        name="Xing"
-                        icon="ri:xing-fill"
-                        link="https://www.xing.com/profile/Tristan_Teufel/cv"
-                    />
-                    <ProfileLink
-                        name="Freelancermap"
-                        icon="mdi:world"
+                        name="Freelancermap.de"
+                        icon="openmoji:globe-with-meridians"
                         link="https://www.freelancermap.de/profil/tristan-teufel"
                     />
                 </div>

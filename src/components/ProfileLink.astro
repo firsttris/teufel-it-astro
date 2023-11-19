@@ -11,6 +11,6 @@ const { name, link, icon }: Props = Astro.props;
 ---
 
 <div class="flex flex-row items-center cursor-pointer mt-2">
-    <Icon name={icon} class="h-10 mr-1" />
-    <span><a class="no-underline" href={link} target="_blank" rel="noopener noreferrer">{name}</a></span>
+    <Icon name={icon} class="h-8 mr-1" />
+    <span><a class="no-underline text-sm text-blue-700" href={link} target="_blank" rel="noopener noreferrer">{name}</a></span>
 </div>
