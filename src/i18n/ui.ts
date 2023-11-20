@@ -3,7 +3,7 @@ export const languages = {
     de: 'German',
 };
 
-export const defaultLang = navigator.language.includes('de') ? 'de' : 'en'; 
+export const defaultLang = 'de'; 
 
 export const ui = {
     en: {

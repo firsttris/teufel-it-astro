@@ -8,8 +8,8 @@ const lang = getLangFromUrl(Astro.url.pathname);
 const t = useTranslations(lang);
 ---
 
-<div class="container mx-auto">
-    <div class="mt-10 flex flex-col items-center justify-center gap-4">
+<div class="container mx-auto h-screen flex flex-col justify-between">
+    <div class="mt-8 flex flex-col items-center justify-center gap-4">
         <Image
             class="rounded-lg shadow-md"
             src={Profile}
@@ -18,11 +18,16 @@ const t = useTranslations(lang);
             width={240}
         />
         <div class="flex flex-col">
-            <div class="flex flex-col mt-6 items-center text-center">
+            <div class="flex flex-col my-4 items-center text-center">
                 <div class="uppercase text-6xl">Tristan Teufel</div>
                 <div class="text-xl mt-1">{t("business-title")}</div>
                 <div class="text-xs mt-1">{t("academic-title")}</div>
                 <div class="mt-6 flex flex-col justify-center gap-1">
+                    <ProfileLink
+                        name="+49 176 45744166"
+                        icon="openmoji:mobile-phone"
+                        link="tel:+4917645744166"
+                    />
                     <ProfileLink
                         name="info@teufel-it.de"
                         icon="openmoji:closed-mailbox-with-raised-flag"
@@ -30,7 +35,7 @@ const t = useTranslations(lang);
                     />
                     <ProfileLink
                         name={t("cv")}
-                        icon="openmoji:notebook-with-decorative-cover"
+                        icon="openmoji:bookmark-tabs"
                         link="https://cv.teufel-it.de"
                     />
                     <ProfileLink
@@ -51,5 +56,11 @@ const t = useTranslations(lang);
                 </div>
             </div>
         </div>
+    </div>
+    <div class="flex items-center justify-center text-xs my-1">
+        <a
+            href="https://github.com/firsttris/teufel-it-astro"
+            target="_blank"
+            rel="noopener noreferrer">Source Code</a>
     </div>
 </div>
