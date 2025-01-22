@@ -6,11 +6,13 @@ export const ui = {
         'academic-title': 'Business Informatics (B.Sc.)',
         'cv': 'Curriculum Vitae',
         "source-code": "Source Code",
+        "generated": "Generated at:"
     },
     de: {
         'business-title': 'Senior Software Entwickler',
         'academic-title': 'Wirtschaftsinformatik (B.Sc.)',
         'cv': 'Lebenslauf',
         "source-code": "Quellcode",
+        "generated": "Generiert am:"
     },
 } as const;
