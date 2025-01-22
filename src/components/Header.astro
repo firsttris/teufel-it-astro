@@ -1,11 +1,10 @@
 ---
 import { Image } from "astro:assets";
-import { getLangFromUrl, useTranslations } from "./../i18n/utils";
+import { useTranslations } from "./../i18n/utils";
 import ProfileLink from "./ProfileLink.astro";
 import Profile from "./../images/profil.png";
 
-const lang = getLangFromUrl(Astro.url.pathname);
-const t = useTranslations(lang);
+const t = useTranslations(Astro.url.pathname);
 ---
 
 <div class="container mx-auto h-screen flex flex-col justify-between">

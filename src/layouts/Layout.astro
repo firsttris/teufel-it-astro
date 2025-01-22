@@ -1,15 +1,27 @@
 ---
 import "@fontsource/roboto";
+import { useTranslations } from "../i18n/utils";
+
+const t = useTranslations(Astro.url.pathname);
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
-		<meta name="viewport" content="width=device-width" />
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta
+		  name="viewport"
+		  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+		/>
 		<meta name="generator" content={Astro.generator} />
-		<title>Tristan Teufel, Softwareentwickler</title>
+		<meta name="description" content="Clean Code and Test Automation Specialist with experience in React, TypeScript, MUI, and Node.js." />
+		<meta name="keywords" content="Softwareentwickler, Software developer, CV, Resume, Freelance, Clean Code, Test Automation, React, TypeScript, MUI, Node.js" />
+		<meta property="og:title" content=`Tristan Teufel, ${t('business-title')}` />
+		<meta property="og:description" content="Clean Code and Test Automation Specialist with experience in React, TypeScript, MUI, and Node.js." />
+		<meta property="og:image" content="https://avatars.githubusercontent.com/u/1709260" />
+		<meta property="og:url" content="https://teufel-it.de" />
+		<title>Tristan Teufel, {t('business-title')}</title>
 	</head>
 	<body>
 		<slot />
