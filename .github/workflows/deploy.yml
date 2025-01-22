@@ -34,7 +34,6 @@ jobs:
           git push https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git HEAD:master
 
   build:
-    needs: update-version
     runs-on: ubuntu-latest
     steps:
       - name: Checkout your repository using git
