@@ -5,65 +5,79 @@ import ProfileLink from "./ProfileLink.astro";
 import Profile from "./../images/profil.png";
 import { version } from "../getVersion";
 
+const buildTime = new Date().toLocaleString("de-DE", {
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+  hour: "2-digit",
+  minute: "2-digit",
+  second: "2-digit",
+  timeZone: "Europe/Berlin",
+  timeZoneName: "short",
+});
+
 const t = useTranslations(Astro.url.pathname);
 ---
 
 <div class="container mx-auto h-screen flex flex-col justify-between">
-    <div class="mt-8 flex flex-col items-center justify-center gap-4">
-        <Image
-            class="rounded-lg shadow-md"
-            src={Profile}
-            alt="Tristan Teufel"
-            height={225}
-            width={240}
-        />
-        <div class="flex flex-col">
-            <div class="flex flex-col my-4 items-center text-center">
-                <div class="uppercase text-6xl">Tristan Teufel</div>
-                <div class="text-xl mt-1">{t("business-title")}</div>
-                <div class="text-xs mt-1">{t("academic-title")}</div>
-                <div class="mt-6 flex flex-col justify-center gap-1">
-                    <ProfileLink
-                        name="+49 176 45744166"
-                        icon="openmoji:mobile-phone"
-                        link="tel:+4917645744166"
-                    />
-                    <ProfileLink
-                        name="info@teufel-it.de"
-                        icon="openmoji:closed-mailbox-with-raised-flag"
-                        link="mailto:info@teufel-it.de"
-                    />
-                    <ProfileLink
-                        name={t("cv")}
-                        icon="openmoji:bookmark-tabs"
-                        link="https://cv.teufel-it.de"
-                    />
-                    <ProfileLink
-                        name="Github.com"
-                        icon="openmoji:github"
-                        link="https://github.com/firsttris"
-                    />
-                    <ProfileLink
-                        name="LinkedIn.com"
-                        icon="openmoji:linkedin"
-                        link="https://www.linkedin.com/in/tristanteufel/"
-                    />
-                    <ProfileLink
-                        name="Freelancermap.de"
-                        icon="openmoji:globe-with-meridians"
-                        link="https://www.freelancermap.de/profil/tristan-teufel"
-                    />
-                </div>
-            </div>
+  <div class="mt-8 flex flex-col items-center justify-center gap-4">
+    <Image
+      class="rounded-lg shadow-md"
+      src={Profile}
+      alt="Tristan Teufel"
+      height={225}
+      width={240}
+    />
+    <div class="flex flex-col">
+      <div class="flex flex-col my-4 items-center text-center">
+        <div class="uppercase text-6xl">Tristan Teufel</div>
+        <div class="text-xl mt-1">{t("business-title")}</div>
+        <div class="text-xs mt-1">{t("academic-title")}</div>
+        <div class="mt-6 flex flex-col justify-center gap-1">
+          <ProfileLink
+            name="+49 176 45744166"
+            icon="openmoji:mobile-phone"
+            link="tel:+4917645744166"
+          />
+          <ProfileLink
+            name="info@teufel-it.de"
+            icon="openmoji:closed-mailbox-with-raised-flag"
+            link="mailto:info@teufel-it.de"
+          />
+          <ProfileLink
+            name={t("cv")}
+            icon="openmoji:bookmark-tabs"
+            link="https://cv.teufel-it.de"
+          />
+          <ProfileLink
+            name="Github.com"
+            icon="openmoji:github"
+            link="https://github.com/firsttris"
+          />
+          <ProfileLink
+            name="LinkedIn.com"
+            icon="openmoji:linkedin"
+            link="https://www.linkedin.com/in/tristanteufel/"
+          />
+          <ProfileLink
+            name="Freelancermap.de"
+            icon="openmoji:globe-with-meridians"
+            link="https://www.freelancermap.de/profil/tristan-teufel"
+          />
         </div>
+      </div>
     </div>
-    <div class="flex items-center justify-center text-xs my-1 pb-2 space-x-2">
-        <a
-            class="text-gray-500 hover:text-gray-700"
-            href="https://github.com/firsttris/teufel-it-astro"
-            target="_blank"
-            rel="noopener noreferrer">{t("source-code")}</a>
-        <span class="text-gray-500">|</span>
-        <span class="text-gray-500">Version: {version}</span>
-    </div>
+  </div>
+  <div class="flex items-center justify-center text-xs my-1 pb-2 space-x-2">
+    <span class="text-gray-500">Generiert am: {buildTime}</span>
+    <span class="text-gray-500">|</span>
+    <span class="text-gray-500">Version: {version}</span>
+    <span class="text-gray-500">|</span>
+    <a
+      class="text-gray-500 hover:text-gray-700"
+      href="https://github.com/firsttris/teufel-it-astro"
+      target="_blank"
+      rel="noopener noreferrer">{t("source-code")}</a
+    >
+  </div>
 </div>
