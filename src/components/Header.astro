@@ -4,6 +4,7 @@ import { useTranslations } from "./../i18n/utils";
 import ProfileLink from "./ProfileLink.astro";
 import Profile from "./../images/profil.png";
 import { version } from "../getVersion";
+import Link from "./Link.astro";
 
 const buildTime = new Date().toLocaleString("de-DE", {
   year: "numeric",
@@ -19,54 +20,93 @@ const buildTime = new Date().toLocaleString("de-DE", {
 const t = useTranslations(Astro.url.pathname);
 ---
 
-<div class="container mx-auto h-screen flex flex-col justify-between">
-  <div class="mt-8 flex flex-col items-center justify-center gap-4">
-    <Image
-      class="rounded-lg shadow-md"
-      src={Profile}
-      alt="Tristan Teufel"
-      height={225}
-      width={240}
-    />
-    <div class="flex flex-col">
-      <div class="flex flex-col my-4 items-center text-center">
-        <div class="uppercase text-6xl">Tristan Teufel</div>
-        <div class="text-xl mt-1">{t("business-title")}</div>
-        <div class="text-xs mt-1">{t("academic-title")}</div>
-        <div class="mt-6 flex flex-col justify-center gap-1">
-          <ProfileLink
-            name="+49 176 45744166"
-            icon="openmoji:mobile-phone"
-            link="tel:+4917645744166"
+<div>
+  <div class="relative flex items-center justify-center min-h-screen z-10">
+    <div>
+    <div
+      class="flex w-screen border flex-col md:flex-row justify-between md:px-32 bg-background/80 backdrop-blur-xs"
+      style="opacity: 1;"
+    >
+      <div class="p-12">
+        <div class="flex flex-col lg:flex-row items-center">
+          <Image
+            class="rounded-full shadow-md"
+            src={Profile}
+            alt="Tristan Teufel"
+            height={100}
+            width={100}
           />
-          <ProfileLink
-            name="info@teufel-it.de"
-            icon="openmoji:closed-mailbox-with-raised-flag"
-            link="mailto:info@teufel-it.de"
-          />
-          <ProfileLink
-            name={t("cv")}
-            icon="openmoji:bookmark-tabs"
-            link="https://cv.teufel-it.de"
-          />
-          <ProfileLink
-            name="Github.com"
-            icon="openmoji:github"
-            link="https://github.com/firsttris"
-          />
-          <ProfileLink
-            name="LinkedIn.com"
-            icon="openmoji:linkedin"
-            link="https://www.linkedin.com/in/tristanteufel/"
-          />
-          <ProfileLink
-            name="Freelancermap.de"
-            icon="openmoji:globe-with-meridians"
-            link="https://www.freelancermap.de/profil/tristan-teufel"
-          />
+          <div class="mt-4 lg:ml-3 lg:mt-0">
+            <h1 class="font-serif text-4xl">Tristan Teufel</h1>
+            <p class="text-neutral-500">
+              Ich bin Experte für Clean-Code, Testautomatisierung und
+              Testgetriebene Entwicklung (TDD).
+            </p>
+          </div>
         </div>
+        <div class="mt-3">
+          <p>
+            Derzeit arbeite ich als selbständiger Softwareentwickler und habe in
+            den vergangenen 10 Jahren viele spannende <Link
+              name="Projekte"
+              link="#"
+            /> realisiert.
+          </p><p>
+            In meiner Freizeit arbeite ich an Open-Source Projekten auf <Link
+              name="GitHub"
+              link="#"
+            />.
+          </p>
+          <p>
+            Eines meiner erfolgreichstes Projekt ist <Link
+              name="Jest-Runner"
+              link="#"
+            /> eine VSCode-Erweiterung zur Testausführung, die seit 2020 als empfohlene
+            Erweiterung von <Link name="NX" link="#"/> installiert wird.
+          </p>
+          <p>
+            Falls Sie Unterstützung bei der Entwicklung von Software benötigen, können Sie mich gerne <Link
+              name="kontaktieren"
+              link="#"
+              />.
+          </p>
+        </div>
+
       </div>
     </div>
+    <div class="md:px-32 ml-12 mt-4 flex flex-col xl:flex-row xl:space-x-2 space-y-2 xl:space-y-0 mb-4">
+      <ProfileLink
+        name="+49 176 45744166"
+        icon="openmoji:mobile-phone"
+        link="tel:+4917645744166"
+      />
+      <ProfileLink
+        name="info@teufel-it.de"
+        icon="openmoji:closed-mailbox-with-raised-flag"
+        link="mailto:info@teufel-it.de"
+      />
+      <ProfileLink
+        name={t("cv")}
+        icon="openmoji:bookmark-tabs"
+        link="https://cv.teufel-it.de"
+      />
+      <ProfileLink
+        name="Github.com"
+        icon="openmoji:github"
+        link="https://github.com/firsttris"
+      />
+      <ProfileLink
+        name="LinkedIn.com"
+        icon="openmoji:linkedin"
+        link="https://www.linkedin.com/in/tristanteufel/"
+      />
+      <ProfileLink
+        name="Freelancermap.de"
+        icon="openmoji:globe-with-meridians"
+        link="https://www.freelancermap.de/profil/tristan-teufel"
+      />
+    </div>
+  </div>
   </div>
   <div class="flex items-center justify-center text-xs my-1 pb-2 space-x-2">
     <span class="text-gray-500">{t("generated")} {buildTime}</span>
