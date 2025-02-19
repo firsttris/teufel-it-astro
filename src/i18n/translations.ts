@@ -25,7 +25,7 @@ export const ui = {
         "current": "Derzeit arbeite ich als selbständiger Softwareentwickler und habe in den vergangenen 10 Jahren viele spannende {{projects}} realisiert.",
         "projects": "Projekte",
         "in-my-freetime": "In meiner Freizeit arbeite ich an Open-Source Projekten auf {{github}}.",
-        "best-project": "Eines meiner erfolgreichstes Projekt ist {{jestRunner}} eine VSCode-Erweiterung zur Testausführung, die seit 2020 als empfohlene Erweiterung von {{nx}} installiert wird.",
+        "best-project": "Eines meiner erfolgreichstes Projekte ist {{jestRunner}} eine VSCode-Erweiterung zur Testausführung, die seit 2020 als empfohlene Erweiterung von {{nx}} installiert wird.",
          "contactMe": "Falls Sie Unterstützung bei der Entwicklung von Software benötigen, können Sie mich gerne {{contact}}.",
          "contact": "Kontaktieren"
     },
