@@ -10,7 +10,7 @@ interface Props {
 const { name, link, icon }: Props = Astro.props;
 ---
 
-<div class="flex flex-row items-center cursor-pointer mt-2">
-    <Icon name={icon} class="h-8 text-4xl" />
-    <span><a class="no-underline text-sm" href={link} target="_blank" rel="noopener noreferrer">{name}</a></span>
-</div>
+<a href={link} target="_blank" rel="noopener noreferrer" class="flex flex-row items-center cursor-pointer mt-2 no-underline">
+  <Icon name={icon} class="h-8 text-4xl" />
+  <span class="text-sm">{name}</span>
+</a>
