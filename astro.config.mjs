@@ -4,6 +4,8 @@ import tailwind from "@astrojs/tailwind";
 
 import icon from 'astro-icon';
 
+import mdx from '@astrojs/mdx';
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://teufel-it.de/',
@@ -18,5 +20,5 @@ export default defineConfig({
         'globe-with-meridians'
       ]
     },
-  })]
+  }), mdx()]
 });

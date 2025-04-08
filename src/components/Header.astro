@@ -2,9 +2,14 @@
 import { Image } from "astro:assets";
 import { useTranslations } from "./../i18n/utils";
 import ProfileLink from "./ProfileLink.astro";
-import Profile from "./../images/profil.png";
-import { version } from "../getVersion";
+import Real from "./../images/real.png";
+import Ghibli from "./../images/ghibli.png";
 import Link from "./Link.astro";
+import { getLangFromUrl } from "../i18n/utils";
+
+// Dynamically import the correct MDX file based on language
+const lang = getLangFromUrl(Astro.url.pathname);
+const Biography = await import(`../content/bio/${lang}.mdx`);
 
 const buildTime = new Date().toLocaleString("de-DE", {
   year: "numeric",
@@ -29,38 +34,44 @@ const t = useTranslations(Astro.url.pathname);
       >
         <div class="p-12">
           <div class="flex flex-col lg:flex-row items-center">
-            <Image
-              class="rounded-full shadow-md"
-              src={Profile}
-              alt="Tristan Teufel"
-              height={100}
-              width={100}
-            />
+            <div class="relative group">
+              <Image
+                class="rounded-full shadow-lg border-2 border-neutral-100 dark:border-neutral-700 transition-all duration-500 opacity-100 group-hover:opacity-0 group-hover:scale-105"
+                src={Ghibli}
+                alt="Ghibli Style"
+                height={100}
+                width={100}
+              />
+              <Image
+                class="absolute top-0 left-0 rounded-full shadow-lg border-2 border-neutral-100 dark:border-neutral-700 transition-all duration-500 opacity-0 group-hover:opacity-100 group-hover:scale-105"
+                src={Real}
+                alt="Real Image"
+                height={100}
+                width={100}
+              />
+            </div>
             <div class="mt-4 lg:ml-3 lg:mt-0">
               <h1 class="font-serif text-4xl">Tristan Teufel</h1>
               <p class="text-neutral-500">
                 {t("subtitle")}
               </p>
+              <div class="mt-2 inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100">
+                <span class="relative flex h-2 w-2">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                </span>
+                {t("available") || "Verfügbar für Projekte"}
+              </div>
             </div>
           </div>
-          <div class="mt-3">
-            <p>
-              {t("current", { projects: <Link name={t('projects') as string} link="https://cv.teufel-it.de" /> })}
-            </p><p>
-              {t('in-my-freetime', { github: <Link name="GitHub" link="https://github.com/firsttris" /> })}
-            </p>
-            <p>
-              {t('best-project', { jestRunner: <Link name="Jest-Runner" link="https://marketplace.visualstudio.com/items?itemName=firsttris.vscode-jest-runner" />, nx: <Link name="NX" link="https://nx.dev/" /> })}
-            </p>
-            <p>
-              {t('contactMe', { contact: <Link name={t('contact') as string} link="mailto:info@teufel-it.de" /> })}
-            </p>
+          <div class="mt-8 space-y-2 prose prose-sm">
+            <Biography.Content />
           </div>
         </div>
       </div>
       <div
-        class="md:px-32 ml-12 mt-4 flex flex-col xl:flex-row xl:space-x-2 space-y-2 xl:space-y-0 mb-4"
-      >
+      class="mt-4 flex justify-center gap-3 pb-6 mx-auto px-4 max-w-screen-xl flex-wrap"
+    >
         <ProfileLink
           name="+49 176 45744166"
           icon="openmoji:mobile-phone"

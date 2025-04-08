@@ -13,7 +13,8 @@ export const ui = {
         "in-my-freetime": "In my free time I work on open-source projects on {{github}}.",
         "best-project": "One of my most successful projects is {{jestRunner}} a VSCode extension for test execution, which has been installed as a recommended extension by {{nx}} since 2020.",
         "contactMe": "If you need support in developing software, you can contact me {{contact}}.",
-        "contact": "Contact me"
+        "contact": "Contact me",
+        "available": "Available for projects",
     },
     de: {
         'business-title': 'Senior Software Entwickler',
@@ -27,6 +28,7 @@ export const ui = {
         "in-my-freetime": "In meiner Freizeit arbeite ich an Open-Source Projekten auf {{github}}.",
         "best-project": "Eines meiner erfolgreichstes Projekt ist {{jestRunner}} eine VSCode-Erweiterung zur Testausführung, die seit 2020 als empfohlene Erweiterung von {{nx}} installiert wird.",
          "contactMe": "Falls Sie Unterstützung bei der Entwicklung von Software benötigen, können Sie mich gerne {{contact}}.",
-         "contact": "Kontaktieren"
+         "contact": "Kontaktieren",
+         "available": "Verfügbar für Projekte",
     },
 } as const;
