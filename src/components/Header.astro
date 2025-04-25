@@ -3,8 +3,6 @@ import { Image } from "astro:assets";
 import { useTranslations } from "./../i18n/utils";
 import ProfileLink from "./ProfileLink.astro";
 import Real from "./../images/real.png";
-import Ghibli from "./../images/ghibli.png";
-import Link from "./Link.astro";
 import { getLangFromUrl } from "../i18n/utils";
 
 // Dynamically import the correct MDX file based on language
@@ -26,7 +24,9 @@ const t = useTranslations(Astro.url.pathname);
 ---
 
 <div>
-  <div class="relative flex items-center justify-center xl:mt-[calc(50vh-300px)]">
+  <div
+    class="relative flex items-center justify-center xl:mt-[calc(50vh-300px)]"
+  >
     <div>
       <div
         class="flex w-screen border flex-col md:flex-row justify-between md:px-32 bg-background/80 backdrop-blur-xs"
@@ -34,18 +34,11 @@ const t = useTranslations(Astro.url.pathname);
       >
         <div class="p-12">
           <div class="flex flex-col lg:flex-row items-center">
-            <div class="relative group">
+            <div class="relative p-[3px] rounded-full bg-gradient-to-r from-gray-700 via-gray-500 to-gray-700 animate-gradient-x group">
               <Image
-                class="rounded-full shadow-lg border-2 border-neutral-100 dark:border-neutral-700 transition-all duration-500 opacity-100 group-hover:opacity-0 group-hover:scale-105"
-                src={Ghibli}
-                alt="Ghibli Style"
-                height={100}
-                width={100}
-              />
-              <Image
-                class="absolute top-0 left-0 rounded-full shadow-lg border-2 border-neutral-100 dark:border-neutral-700 transition-all duration-500 opacity-0 group-hover:opacity-100 group-hover:scale-105"
+                class="rounded-full border-3 border-white dark:border-gray-800 shadow-lg transition-all duration-300 group-hover:transform group-hover:scale-[1.03] group-hover:shadow-xl"
                 src={Real}
-                alt="Real Image"
+                alt="Tristan Teufel"
                 height={100}
                 width={100}
               />
@@ -55,10 +48,16 @@ const t = useTranslations(Astro.url.pathname);
               <p class="text-neutral-500">
                 {t("subtitle")}
               </p>
-              <div class="mt-2 inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100">
+              <div
+                class="mt-2 inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100"
+              >
                 <span class="relative flex h-2 w-2">
-                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                  <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                  <span
+                    class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"
+                  ></span>
+                  <span
+                    class="relative inline-flex rounded-full h-2 w-2 bg-green-500"
+                  ></span>
                 </span>
                 {t("available") || "Verfügbar für Projekte"}
               </div>
@@ -70,8 +69,8 @@ const t = useTranslations(Astro.url.pathname);
         </div>
       </div>
       <div
-      class="mt-4 flex justify-center gap-3 pb-6 mx-auto px-4 max-w-screen-xl flex-wrap"
-    >
+        class="mt-4 flex justify-center gap-3 pb-6 mx-auto px-4 max-w-screen-xl flex-wrap"
+      >
         <ProfileLink
           name="+49 176 45744166"
           icon="openmoji:mobile-phone"
@@ -116,3 +115,16 @@ const t = useTranslations(Astro.url.pathname);
     >
   </div>
 </div>
+
+<style>
+  @keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  .animate-gradient-x {
+    background-size: 200% 200%;
+    animation: gradient-shift 6s ease infinite;
+  }
+</style>
