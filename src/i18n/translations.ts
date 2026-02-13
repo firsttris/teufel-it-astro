@@ -2,7 +2,7 @@ export const defaultLang = (() => typeof window !== "undefined" && navigator.lan
 
 export const ui = {
     en: {
-        'business-title': 'Senior Software Developer',
+        'business-title': 'Software Architect & Developer Experience Expert',
         'academic-title': 'Business Informatics (B.Sc.)',
         'cv': 'Curriculum Vitae',
         "source-code": "Source Code",
@@ -42,7 +42,7 @@ export const ui = {
         "cta.button": "Request Project",
     },
     de: {
-        'business-title': 'Senior Software Entwickler',
+        'business-title': 'Software Architekt & Developer Experience-Experte',
         'academic-title': 'Wirtschaftsinformatik (B.Sc.)',
         'cv': 'Lebenslauf',
         "source-code": "Quellcode",
