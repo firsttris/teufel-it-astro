@@ -10,8 +10,8 @@ export const getLangFromUrl = (pathname: string) => {
 export const useTranslations = (pathname: string) => {
   const lang = getLangFromUrl(pathname);
   return (
-    key: keyof typeof ui[typeof defaultLang],
-    params?: Record<string, JSX.Element>
+    key: keyof typeof ui['en'],
+    params?: Record<string, string | JSX.Element>
   ): (string | JSX.Element)[] | string => {
     const translation = ui[lang][key] || ui[defaultLang][key];
 

@@ -1,0 +1,49 @@
+---
+import { useTranslations } from "../i18n/utils";
+
+const t = useTranslations(Astro.url.pathname);
+---
+
+<section class="py-24 relative overflow-hidden">
+  <!-- Background Glow -->
+  <div
+    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[100px] -z-10"
+  >
+  </div>
+
+  <div class="container mx-auto px-6 md:px-12 text-center">
+    <div class="max-w-3xl mx-auto space-y-8">
+      <h2 class="text-4xl md:text-5xl font-bold text-white tracking-tight">
+        {t("cta.title")}
+      </h2>
+      <p class="text-xl text-gray-300 leading-relaxed">
+        {t("cta.subtitle")}
+      </p>
+
+      <div class="pt-8">
+        <a
+          href="mailto:info@teufel-it.de"
+          class="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-300 bg-gray-900 border border-gray-700 rounded-full hover:border-blue-500 hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 focus:ring-offset-gray-900 overflow-hidden"
+        >
+          <span
+            class="absolute inset-0 w-full h-full bg-gradient-to-r from-blue-600 to-cyan-500 opacity-0 group-hover:opacity-20 transition-opacity duration-300"
+          ></span>
+          <span class="relative flex items-center">
+            {t("cta.button")}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                clip-rule="evenodd"></path>
+            </svg>
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

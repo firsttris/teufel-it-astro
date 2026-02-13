@@ -1,0 +1,75 @@
+---
+import { Image } from "astro:assets";
+import Real from "./../images/real.png";
+import ProfileLink from "./ProfileLink.astro";
+import { useTranslations } from "./../i18n/utils";
+
+const t = useTranslations(Astro.url.pathname);
+---
+
+<section class="relative flex items-center justify-center min-h-[90vh] py-20">
+  <div class="container mx-auto px-6 md:px-12 bg-background rounded-xl">
+    <div class="flex flex-col md:flex-row items-center gap-12">
+      <!-- Profile Image with Glow Effect -->
+      <div class="relative group">
+        <div
+          class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"
+        >
+        </div>
+        <div class="relative p-1 bg-background rounded-full">
+          <Image
+            class="rounded-full w-48 h-48 md:w-64 md:h-64 object-cover border-4 border-background shadow-2xl"
+            src={Real}
+            alt="Tristan Teufel"
+            width={400}
+            height={400}
+            loading="eager"
+          />
+        </div>
+      </div>
+
+      <!-- Text Content -->
+      <div class="text-center md:text-left space-y-6 max-w-3xl">
+        <h1 class="text-5xl md:text-7xl font-bold tracking-tight text-white">
+          Tristan Teufel <span
+            class="block text-2xl md:text-3xl text-blue-400 font-medium mt-2"
+            >Software Architect</span
+          >
+        </h1>
+
+        <p class="text-xl md:text-2xl text-gray-300 font-light leading-relaxed">
+          Sustainable Architecture. High-End Test Automation. DevEx.
+        </p>
+
+        <blockquote
+          class="text-lg md:text-xl text-gray-400 italic border-l-4 border-blue-500 pl-4 py-2 my-8"
+        >
+          "{t("hero.quote")}"
+        </blockquote>
+
+        <div class="flex flex-wrap justify-center md:justify-start gap-4 pt-4">
+          <ProfileLink
+            name="Github"
+            icon="simple-icons:github"
+            link="https://github.com/firsttris"
+          />
+          <ProfileLink
+            name="LinkedIn"
+            icon="simple-icons:linkedin"
+            link="https://www.linkedin.com/in/tristanteufel/"
+          />
+          <ProfileLink
+            name={t("cv") as string}
+            icon="mdi:file-account"
+            link="https://cv.teufel-it.de"
+          />
+          <ProfileLink
+            name="Email"
+            icon="mdi:email"
+            link="mailto:info@teufel-it.de"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

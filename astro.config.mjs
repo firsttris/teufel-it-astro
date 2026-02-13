@@ -11,14 +11,9 @@ export default defineConfig({
   site: 'https://teufel-it.de/',
   integrations: [tailwind(), icon({
     include: {
-      openmoji: [
-        'mobile-phone',
-        'closed-mailbox-with-raised-flag',
-        'bookmark-tabs',
-        'github',
-        'linkedin',
-        'globe-with-meridians'
-      ]
+      mdi: ['email', 'menu', 'close', 'arrow-right', 'file-account' ],
+      'simple-icons': ['github', 'linkedin'],
+
     },
   }), mdx()]
 });
