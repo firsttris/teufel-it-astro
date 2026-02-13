@@ -1,40 +1,61 @@
 ---
-import "@fontsource/roboto/300.css";
+import "@fontsource/inter/300.css";
 import "../styles/global.css";
-import "@fontsource/roboto/400.css";
-import "@fontsource/roboto/500.css";
-import "@fontsource/roboto/700.css";
+import "@fontsource/inter/400.css";
+import "@fontsource/inter/500.css";
+import "@fontsource/inter/600.css";
+import "@fontsource/inter/700.css";
 import { useTranslations } from "../i18n/utils";
 
 const t = useTranslations(Astro.url.pathname);
-
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta
-		  name="viewport"
-		  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+			name="viewport"
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
 		/>
 		<meta name="generator" content={Astro.generator} />
-		<meta name="description" content="Clean Code and Test Automation Specialist with experience in React, TypeScript, MUI, and Node.js." />
-		<meta name="keywords" content="Softwareentwickler, Software developer, CV, Resume, Freelance, Clean Code, Test Automation, React, TypeScript, MUI, Node.js" />
-		<meta property="og:title" content=`Tristan Teufel, ${t('business-title')}` />
-		<meta property="og:description" content="Clean Code and Test Automation Specialist with experience in React, TypeScript, MUI, and Node.js." />
-		<meta property="og:image" content="https://avatars.githubusercontent.com/u/1709260" />
+		<meta
+			name="description"
+			content="Clean Code and Test Automation Specialist with experience in React, TypeScript, MUI, and Node.js."
+		/>
+		<meta
+			name="keywords"
+			content="Softwareentwickler, Software developer, CV, Resume, Freelance, Clean Code, Test Automation, React, TypeScript, MUI, Node.js"
+		/>
+		<meta
+			property="og:title"
+			content=`Tristan Teufel, ${t('business-title')}`
+		/>
+		<meta
+			property="og:description"
+			content="Clean Code and Test Automation Specialist with experience in React, TypeScript, MUI, and Node.js."
+		/>
+		<meta
+			property="og:image"
+			content="https://avatars.githubusercontent.com/u/1709260"
+		/>
 		<meta property="og:url" content="https://teufel-it.de" />
-		<title>Tristan Teufel, {t('business-title')}</title>
+		<title>Tristan Teufel, {t("business-title")}</title>
 	</head>
-	<body>
+	<body
+		class="bg-background text-white antialiased selection:bg-blue-500 selection:text-white"
+	>
+		<div
+			class="fixed inset-0 z-[-1] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-900/20 via-background to-background pointer-events-none"
+		>
+		</div>
 		<slot />
 	</body>
 </html>
 <style is:global>
 	html {
-		font-family: "Roboto", sans-serif;
+		font-family: "Inter", sans-serif;
 	}
 
 	/* Reveal Animation Classes */
@@ -44,11 +65,21 @@ const t = useTranslations(Astro.url.pathname);
 		animation: reveal 0.8s ease forwards;
 	}
 
-	.reveal-delay-1 { animation-delay: 0.1s; }
-	.reveal-delay-2 { animation-delay: 0.2s; }
-	.reveal-delay-3 { animation-delay: 0.3s; }
-	.reveal-delay-4 { animation-delay: 0.4s; }
-	.reveal-delay-5 { animation-delay: 0.5s; }
+	.reveal-delay-1 {
+		animation-delay: 0.1s;
+	}
+	.reveal-delay-2 {
+		animation-delay: 0.2s;
+	}
+	.reveal-delay-3 {
+		animation-delay: 0.3s;
+	}
+	.reveal-delay-4 {
+		animation-delay: 0.4s;
+	}
+	.reveal-delay-5 {
+		animation-delay: 0.5s;
+	}
 
 	@keyframes reveal {
 		to {

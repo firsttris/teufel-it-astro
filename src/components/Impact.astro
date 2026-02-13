@@ -4,7 +4,8 @@ import { useTranslations } from "../i18n/utils";
 const t = useTranslations(Astro.url.pathname);
 ---
 
-<section class="py-24 bg-gray-900/50">
+<section class="py-24 relative">
+  <div class="absolute inset-0 bg-blue-900/5 -z-10"></div>
   <div class="container mx-auto px-6 md:px-12 text-center">
     <div class="max-w-4xl mx-auto space-y-12">
       <div class="space-y-4">
@@ -17,7 +18,7 @@ const t = useTranslations(Astro.url.pathname);
       <div class="grid md:grid-cols-2 gap-8 items-stretch">
         <!-- Stat Card 1 -->
         <div
-          class="bg-gray-800/50 p-8 rounded-2xl border border-gray-700 hover:border-blue-500/50 transition-all duration-300 group h-full flex flex-col justify-center"
+          class="bg-zinc-900/30 backdrop-blur-sm p-8 rounded-2xl border border-white/10 hover:border-blue-500/50 transition-all duration-300 group h-full flex flex-col justify-center"
         >
           <div
             class="text-3xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400 mb-2"
@@ -25,11 +26,11 @@ const t = useTranslations(Astro.url.pathname);
             2.000.000+
           </div>
           <div
-            class="text-gray-400 font-medium uppercase tracking-wider text-sm"
+            class="text-zinc-500 font-medium uppercase tracking-wider text-sm"
           >
             {t("impact.installations")}
           </div>
-          <p class="mt-4 text-gray-300 leading-relaxed">
+          <p class="mt-4 text-zinc-300 leading-relaxed">
             {
               t("impact.creator", {
                 vscodeJestRunner: (
@@ -56,7 +57,7 @@ const t = useTranslations(Astro.url.pathname);
           >
             {t("impact.enterprise")}
           </div>
-          <p class="mt-4 text-gray-300 leading-relaxed">
+          <p class="mt-4 text-zinc-300 leading-relaxed">
             {
               t("impact.nx", {
                 nx: <span class="text-white font-semibold">Nx</span>,

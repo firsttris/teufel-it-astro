@@ -4,13 +4,26 @@ import { Icon } from "astro-icon/components";
 interface Props {
   name: string;
   link: string;
-  icon: string
+  icon: string;
+  class?: string;
 }
 
-const { name, link, icon }: Props = Astro.props;
+const { name, link, icon, class: className }: Props = Astro.props;
 ---
 
-<a href={link} target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-800/50 hover:bg-gray-700 hover:text-white transition-all duration-300 text-gray-300 border border-gray-700 hover:border-blue-500 group no-underline">
-  <Icon name={icon} class="w-5 h-5 group-hover:text-blue-400 transition-colors" />
+<a
+  href={link}
+  target="_blank"
+  rel="noopener noreferrer"
+  class:list={[
+    "flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 group no-underline border",
+    className ||
+      "bg-gray-800/50 hover:bg-gray-700 text-gray-300 border-gray-700 hover:border-blue-500",
+  ]}
+>
+  <Icon
+    name={icon}
+    class="w-5 h-5 group-hover:text-blue-400 transition-colors"
+  />
   <span class="text-sm font-medium">{name}</span>
 </a>

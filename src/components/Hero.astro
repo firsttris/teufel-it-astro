@@ -7,70 +7,89 @@ import { useTranslations } from "./../i18n/utils";
 const t = useTranslations(Astro.url.pathname);
 ---
 
-<section class="relative flex items-center justify-center min-h-[90vh] py-20">
-  <div class="container mx-auto px-6 md:px-12 bg-background rounded-xl">
-    <div class="flex flex-col md:flex-row items-center gap-12">
-      <!-- Profile Image with Glow Effect -->
-      <div class="relative group shrink-0">
-        <div
-          class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"
-        >
-        </div>
-        <div class="relative p-1 bg-background rounded-full">
-          <Image
-            class="rounded-full w-48 h-48 md:w-64 md:h-64 object-cover border-4 border-background shadow-2xl"
-            src={Real}
-            alt="Tristan Teufel"
-            width={400}
-            height={400}
-            loading="eager"
-          />
-        </div>
-      </div>
+<section
+  class="relative flex flex-col items-center justify-center min-h-[90vh] py-20 overflow-hidden"
+>
+  <!-- Dynamic Background Glow -->
+  <div
+    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-600/20 rounded-full blur-[120px] -z-10 opacity-50"
+  >
+  </div>
+  <div
+    class="absolute top-0 left-1/4 w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[100px] -z-10"
+  >
+  </div>
 
-      <!-- Text Content -->
-      <div class="text-center md:text-left space-y-6 max-w-3xl">
-        <h1 class="text-5xl md:text-7xl font-bold tracking-tight text-white">
-          Tristan Teufel <span
-            class="block text-2xl md:text-3xl text-blue-400 font-medium mt-2"
-            >Software Architect</span
-          >
-        </h1>
+  <div
+    class="container mx-auto px-6 md:px-12 flex flex-col items-center text-center gap-10"
+  >
+    <!-- Badge / Tagline -->
 
-        <p class="text-xl md:text-2xl text-gray-300 font-light leading-relaxed">
-          Sustainable Architecture. High-End Test Automation.<br />
-          Developer Experience.
-        </p>
+    <!-- Main Heading -->
+    <h1
+      class="text-6xl md:text-8xl font-black tracking-tight text-white max-w-5xl leading-[1.1] animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-100"
+    >
+      Tristan Teufel
+      <br />
+      <span
+        class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600"
+      >
+        Software Architect
+      </span>
+    </h1>
 
-        <blockquote
-          class="text-lg md:text-xl text-gray-400 italic border-l-4 border-blue-500 pl-4 py-2 my-8"
-        >
-          "{t("hero.quote")}"
-        </blockquote>
+    <!-- Subheading -->
+    <p
+      class="text-xl md:text-2xl text-zinc-400 max-w-2xl font-light leading-relaxed animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-200"
+    >
+      Sustainable Architecture. High-End Test Automation. <br
+        class="hidden md:block"
+      />
+      Building the foundation for your developer experience.
+    </p>
 
-        <div class="flex flex-wrap justify-center md:justify-start gap-4 pt-4">
-          <ProfileLink
-            name="Github"
-            icon="simple-icons:github"
-            link="https://github.com/firsttris"
-          />
-          <ProfileLink
-            name="LinkedIn"
-            icon="simple-icons:linkedin"
-            link="https://www.linkedin.com/in/tristanteufel/"
-          />
-          <ProfileLink
-            name={t("cv") as string}
-            icon="mdi:file-account"
-            link="https://cv.teufel-it.de"
-          />
-          <ProfileLink
-            name="Email"
-            icon="mdi:email"
-            link="mailto:info@teufel-it.de"
-          />
-        </div>
-      </div>
+    <!-- Quote -->
+    <blockquote
+      class="text-lg md:text-xl text-zinc-500 italic max-w-2xl animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-300"
+    >
+      &ldquo;{t("hero.quote")}&rdquo;
+    </blockquote>
+
+    <!-- CTAs / Links -->
+    <div
+      class="flex flex-wrap justify-center gap-4 pt-4 animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-400"
+    >
+      <ProfileLink
+        name="Github"
+        icon="simple-icons:github"
+        link="https://github.com/firsttris"
+        class="bg-zinc-100 text-zinc-950 hover:bg-white border-transparent"
+      />
+      <ProfileLink
+        name="LinkedIn"
+        icon="simple-icons:linkedin"
+        link="https://www.linkedin.com/in/tristanteufel/"
+        class="bg-white/5 text-white hover:bg-white/10 border-white/10"
+      />
+      <ProfileLink
+        name={t("cv") as string}
+        icon="mdi:file-account"
+        link="https://cv.teufel-it.de"
+        class="bg-white/5 text-white hover:bg-white/10 border-white/10"
+      />
+      <ProfileLink
+        name="Email"
+        icon="mdi:email"
+        link="mailto:info@teufel-it.de"
+        class="bg-white/5 text-white hover:bg-white/10 border-white/10"
+      />
     </div>
   </div>
+
+  <!-- Subtle Profile Image Integrated differently or removed to focus on typography as per NX style -->
+  <!-- Keeping it distinct: A faint watermark or valid stylistic choice could be to have it smaller or later. 
+       For now, focusing on the typography heavy hero of NX. 
+       If the user wants the image back prominently we can add it. 
+       Let's add a stylistic subtle version below or as a background element if needed, 
+       but for now sticking to the "NX Text Hero" vibe. -->
 </section>
