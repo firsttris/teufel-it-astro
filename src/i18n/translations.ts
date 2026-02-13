@@ -1,4 +1,4 @@
-export const defaultLang = (() => typeof window !== "undefined" && navigator.language.includes('de') ? 'de' : 'en')(); 
+export const defaultLang = (() => typeof window !== "undefined" && navigator.language.includes('de') ? 'de' : 'en')();
 
 export const ui = {
     en: {
@@ -16,11 +16,11 @@ export const ui = {
         "contactMe": "If you need support in developing software, you can contact me {{contact}}.",
         "contact": "Contact me",
         "available": "Available for projects",
-        
+
         // Impact
         "impact.title": "Open Source with Impact",
         "impact.installations": "Installations",
-        "impact.creator": "Creator of {{vscodeJestRunner}}. A tool used daily by developers worldwide.",
+        "impact.creator": "Creator of {{vscodeJestRunner}} — a VS Code extension for running and debugging Jest, Vitest, and Playwright tests. A tool used daily by thousands of developers worldwide.",
         "impact.enterprise": "Enterprise Standard",
         "impact.nx": "Official recommendation by {{nx}} for enterprise monorepos since 2020. I build tools that set the standard for modern testing.",
 
@@ -33,6 +33,8 @@ export const ui = {
         "services.testing.desc": "Building scalable test suites (Vitest, Playwright, Jest) that drastically accelerate your release cycles. High quality at maximum speed.",
         "services.ai.title": "AI-Augmented Engineering",
         "services.ai.desc": "Integration of agent-based workflows (Claude Code / AI-CLI) to multiply your team's productivity. Use AI as a lever for your development.",
+        "services.cleancode.title": "Clean Code & Best Practices",
+        "services.cleancode.desc": "Turning technical debt into clean architecture. I refactor existing codebases following SOLID & KISS — for fewer bugs, faster features, and happier developers.",
 
         // CTA
         "cta.title": "Ready for the next level of code quality?",
@@ -51,30 +53,32 @@ export const ui = {
         "in-my-freetime": "In meiner Freizeit arbeite ich an Open-Source Projekten auf {{github}}.",
         "best-project": "Eines meiner erfolgreichstes Projekt ist {{jestRunner}} eine VSCode-Erweiterung zur Testausführung, die seit 2020 als empfohlene Erweiterung von {{nx}} installiert wird.",
         "hero.quote": "Ich baue Software, die technologisch am Puls der Zeit bleibt und architektonisch Generationen überdauert.",
-         "contactMe": "Falls Sie Unterstützung bei der Entwicklung von Software benötigen, können Sie mich gerne {{contact}}.",
-         "contact": "Kontaktieren",
-         "available": "Verfügbar für Projekte",
+        "contactMe": "Falls Sie Unterstützung bei der Entwicklung von Software benötigen, können Sie mich gerne {{contact}}.",
+        "contact": "Kontaktieren",
+        "available": "Verfügbar für Projekte",
 
-         // Impact
-         "impact.title": "Open Source mit Impact",
-         "impact.installations": "Installations",
-         "impact.creator": "Schöpfer des {{vscodeJestRunner}}. Ein Tool, das täglich weltweit von Entwicklern genutzt wird.",
-         "impact.enterprise": "Enterprise Standard",
-         "impact.nx": "Seit 2020 offizielle Empfehlung von {{nx}} für Enterprise-Monorepos. Ich entwickle Tools, die den Standard für modernes Testing setzen.",
+        // Impact
+        "impact.title": "Open Source mit Impact",
+        "impact.installations": "Installations",
+        "impact.creator": "Schöpfer des {{vscodeJestRunner}} — eine VS Code Erweiterung zum Ausführen und Debuggen von Jest, Vitest und Playwright Tests. Ein Tool, das täglich von tausenden Entwicklern weltweit genutzt wird.",
+        "impact.enterprise": "Enterprise Standard",
+        "impact.nx": "Seit 2020 offizielle Empfehlung von {{nx}} für Enterprise-Monorepos. Ich entwickle Tools, die den Standard für modernes Testing setzen.",
 
-         // Services
-         "services.title": "Wobei ich Sie unterstütze",
-         "services.subtitle": "Gezielte Expertise für Ihre größten technischen Herausforderungen.",
-         "services.refactoring.title": "Modernisierung & Refactoring",
-         "services.refactoring.desc": "Ich führe Ihre Legacy-Codebases sicher in moderne Architekturen über. Reduzieren Sie technische Schulden und machen Sie Ihr System zukunftssicher.",
-         "services.testing.title": "Test-Infrastruktur & Strategie",
-         "services.testing.desc": "Aufbau skalierbarer Test-Suiten (Vitest, Playwright, Jest), die Ihre Release-Zyklen drastisch beschleunigen. Hohe Qualität bei maximaler Geschwindigkeit.",
-         "services.ai.title": "AI-Augmented Engineering",
-         "services.ai.desc": "Integration agentenbasierter Workflows (Claude Code / AI-CLI), um die Produktivität Ihres Teams zu vervielfachen. Nutzen Sie KI als Hebel für Ihre Entwicklung.",
+        // Services
+        "services.title": "Wobei ich Sie unterstütze",
+        "services.subtitle": "Gezielte Expertise für Ihre größten technischen Herausforderungen.",
+        "services.refactoring.title": "Modernisierung & Refactoring",
+        "services.refactoring.desc": "Ich führe Ihre Legacy-Codebases sicher in moderne Architekturen über. Reduzieren Sie technische Schulden und machen Sie Ihr System zukunftssicher.",
+        "services.testing.title": "Test-Infrastruktur & Strategie",
+        "services.testing.desc": "Aufbau skalierbarer Test-Suiten (Vitest, Playwright, Jest), die Ihre Release-Zyklen drastisch beschleunigen. Hohe Qualität bei maximaler Geschwindigkeit.",
+        "services.ai.title": "AI-Augmented Engineering",
+        "services.ai.desc": "Integration agentenbasierter Workflows (Claude Code / AI-CLI), um die Produktivität Ihres Teams zu vervielfachen. Nutzen Sie KI als Hebel für Ihre Entwicklung.",
+        "services.cleancode.title": "Clean Code & Best Practices",
+        "services.cleancode.desc": "Aus technischen Schulden wird saubere Architektur. Ich überarbeite bestehende Codebasen nach SOLID & KISS — für weniger Bugs, schnellere Features und zufriedenere Entwickler.",
 
-         // CTA
-         "cta.title": "Bereit für das nächste Level an Code-Qualität?",
-         "cta.subtitle": "Lassen Sie uns besprechen, wie wir Ihre technische Schuld minimieren und Ihre Developer Velocity steigern.",
-         "cta.button": "Projekt anfragen",
+        // CTA
+        "cta.title": "Bereit für das nächste Level an Code-Qualität?",
+        "cta.subtitle": "Lassen Sie uns besprechen, wie wir Ihre technische Schuld minimieren und Ihre Developer Velocity steigern.",
+        "cta.button": "Projekt anfragen",
     },
 } as const;

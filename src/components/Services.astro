@@ -4,7 +4,22 @@ import { useTranslations } from "../i18n/utils";
 const t = useTranslations(Astro.url.pathname);
 ---
 
-<section class="py-24">
+<section
+  class="py-24 relative isolate overflow-hidden"
+  style="background-color: #09090b;"
+>
+  <!-- Pink/Purple Gradient Clouds -->
+  <div
+    class="absolute top-0 right-0 w-[300px] h-[300px] rounded-full blur-[100px] -z-10"
+    style="background: rgba(219, 39, 119, 0.25);"
+  >
+  </div>
+  <div
+    class="absolute bottom-0 left-0 w-[250px] h-[250px] rounded-full blur-[90px] -z-10"
+    style="background: rgba(168, 85, 247, 0.18);"
+  >
+  </div>
+
   <div class="container mx-auto px-6 md:px-12">
     <div class="text-center mb-16 space-y-4">
       <h2 class="text-3xl md:text-5xl font-bold text-white">
@@ -15,7 +30,7 @@ const t = useTranslations(Astro.url.pathname);
       </p>
     </div>
 
-    <div class="grid md:grid-cols-3 gap-8">
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
       <!-- Service 1 -->
       <div
         class="bg-gradient-to-b from-zinc-900 to-zinc-950/50 p-8 rounded-2xl border border-white/10 hover:border-blue-500/50 transition-colors duration-300"
@@ -64,6 +79,23 @@ const t = useTranslations(Astro.url.pathname);
         </h3>
         <p class="text-zinc-400 leading-relaxed">
           {t("services.ai.desc")}
+        </p>
+      </div>
+
+      <!-- Service 4 - Clean Code -->
+      <div
+        class="bg-gradient-to-b from-zinc-900 to-zinc-950/50 p-8 rounded-2xl border border-white/10 hover:border-cyan-500/50 transition-colors duration-300"
+      >
+        <div
+          class="w-12 h-12 bg-cyan-500/20 rounded-lg flex items-center justify-center mb-6 text-2xl"
+        >
+          ⭐
+        </div>
+        <h3 class="text-xl font-bold text-white mb-4">
+          {t("services.cleancode.title")}
+        </h3>
+        <p class="text-zinc-400 leading-relaxed">
+          {t("services.cleancode.desc")}
         </p>
       </div>
     </div>

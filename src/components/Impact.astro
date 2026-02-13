@@ -4,7 +4,7 @@ import { useTranslations } from "../i18n/utils";
 const t = useTranslations(Astro.url.pathname);
 ---
 
-<section class="py-24 relative">
+<section class="py-24 relative" style="background-color: #0d0d12;">
   <div class="absolute inset-0 bg-blue-900/5 -z-10"></div>
   <div class="container mx-auto px-6 md:px-12 text-center">
     <div class="max-w-4xl mx-auto space-y-12">
@@ -34,9 +34,14 @@ const t = useTranslations(Astro.url.pathname);
             {
               t("impact.creator", {
                 vscodeJestRunner: (
-                  <span class="text-white font-semibold">
+                  <a
+                    href="https://marketplace.visualstudio.com/items?itemName=firsttris.vscode-jest-runner"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-white font-semibold underline decoration-blue-500/50 hover:decoration-blue-500 transition-colors"
+                  >
                     vscode-jest-runner
-                  </span>
+                  </a>
                 ),
               })
             }

@@ -4,7 +4,10 @@ import { useTranslations } from "../i18n/utils";
 const t = useTranslations(Astro.url.pathname);
 ---
 
-<section class="py-24 relative overflow-hidden">
+<section
+  class="py-24 relative overflow-hidden"
+  style="background-color: #0d0d12;"
+>
   <!-- Background Glow -->
   <div
     class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[100px] -z-10"

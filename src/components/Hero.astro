@@ -8,7 +8,7 @@ const t = useTranslations(Astro.url.pathname);
 ---
 
 <section
-  class="relative flex flex-col items-center justify-center min-h-[90vh] py-20 overflow-hidden"
+  class="relative isolate flex flex-col items-center justify-center min-h-screen py-20 overflow-hidden"
 >
   <!-- Dynamic Background Glow -->
   <div
@@ -17,6 +17,17 @@ const t = useTranslations(Astro.url.pathname);
   </div>
   <div
     class="absolute top-0 left-1/4 w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[100px] -z-10"
+  >
+  </div>
+  <!-- Pink/Purple Gradient Clouds (NX-style) -->
+  <div
+    class="absolute top-0 right-0 w-[300px] h-[300px] rounded-full blur-[100px] -z-10"
+    style="background: rgba(219, 39, 119, 0.25);"
+  >
+  </div>
+  <div
+    class="absolute bottom-0 left-0 w-[250px] h-[250px] rounded-full blur-[90px] -z-10"
+    style="background: rgba(168, 85, 247, 0.18);"
   >
   </div>
 
