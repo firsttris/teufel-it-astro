@@ -38,7 +38,7 @@ const t = useTranslations(Astro.url.pathname);
 
     <!-- Main Heading -->
     <h1
-      class="text-6xl md:text-8xl font-black tracking-tight text-white max-w-5xl leading-[1.1] animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-100"
+      class="text-6xl md:text-8xl font-black tracking-tight text-white max-w-5xl leading-[1.1] reveal"
     >
       Tristan Teufel
       <br />
@@ -51,7 +51,7 @@ const t = useTranslations(Astro.url.pathname);
 
     <!-- Subheading -->
     <p
-      class="text-xl md:text-2xl text-zinc-400 max-w-2xl font-light leading-relaxed animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-200"
+      class="text-xl md:text-2xl text-zinc-400 max-w-2xl font-light leading-relaxed reveal reveal-delay-2"
     >
       Sustainable Architecture. High-End Test Automation. <br
         class="hidden md:block"
@@ -61,15 +61,13 @@ const t = useTranslations(Astro.url.pathname);
 
     <!-- Quote -->
     <blockquote
-      class="text-lg md:text-xl text-zinc-500 italic max-w-2xl animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-300"
+      class="text-lg md:text-xl text-zinc-500 italic max-w-2xl reveal reveal-delay-3"
     >
       &ldquo;{t("hero.quote")}&rdquo;
     </blockquote>
 
     <!-- CTAs / Links -->
-    <div
-      class="flex flex-wrap justify-center gap-4 pt-4 animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-400"
-    >
+    <div class="flex flex-wrap justify-center gap-4 pt-4 reveal reveal-delay-4">
       <ProfileLink
         name="Github"
         icon="simple-icons:github"
