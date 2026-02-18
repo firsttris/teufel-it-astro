@@ -43,7 +43,7 @@ const t = useTranslations(Astro.url.pathname);
       Tristan Teufel
       <br />
       <span
-        class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600"
+        class="text-transparent bg-clip-text animate-gradient-text"
       >
         Software Architect
       </span>
@@ -95,3 +95,33 @@ const t = useTranslations(Astro.url.pathname);
     </div>
   </div>
 </section>
+
+<style>
+  @keyframes gradientTextFlow {
+    0% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  .animate-gradient-text {
+    display: inline-block;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    background-image: repeating-linear-gradient(
+      90deg,
+      #22d3ee 0%,
+      #3b82f6 34%,
+      #a855f7 50%,
+      #3b82f6 66%,
+      #22d3ee 100%
+    );
+    background-size: 200% 100%;
+    background-repeat: no-repeat;
+    animation: gradientTextFlow 18s ease-in-out infinite alternate;
+  }
+</style>
