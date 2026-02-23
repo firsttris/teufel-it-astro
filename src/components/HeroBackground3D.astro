@@ -44,17 +44,17 @@
     camera.position.set(0, 0, 10);
     camera.lookAt(0, 0, -40);
 
-    const starCount = mobile ? 700 : 1400;
+    const starCount = mobile ? 820 : 1620;
     const starPositions = new Float32Array(starCount * 3);
     const starSpeed = new Float32Array(starCount);
     const starFieldWidth = 170;
-    const starFieldHeight = 100;
+    const starFieldHeight = 150;
     const starFieldDepth = 200;
 
     for (let i = 0; i < starCount; i += 1) {
       const offset = i * 3;
       starPositions[offset] = (Math.random() - 0.5) * starFieldWidth;
-      starPositions[offset + 1] = (Math.random() - 0.35) * starFieldHeight;
+      starPositions[offset + 1] = (Math.random() - 0.5) * starFieldHeight;
       starPositions[offset + 2] = -Math.random() * starFieldDepth;
       starSpeed[i] = mobile ? 4 + Math.random() * 6 : 6 + Math.random() * 9;
     }
@@ -87,10 +87,10 @@
 
     const starTexture = createStarTexture();
     const starsMaterial = new PointsMaterial({
-      color: 0xd9e7ff,
-      size: mobile ? 0.22 : 0.28,
+      color: 0xe6efff,
+      size: mobile ? 0.24 : 0.31,
       transparent: true,
-      opacity: 0.95,
+      opacity: 1,
       depthWrite: false,
       map: starTexture,
       alphaTest: 0.08,
@@ -188,17 +188,20 @@
   .hero-3d-overlay {
     position: absolute;
     inset: 0;
-    background:
-      radial-gradient(circle at 50% 8%, rgba(59, 130, 246, 0.28), transparent 42%),
-      radial-gradient(circle at 85% 15%, rgba(168, 85, 247, 0.2), transparent 36%),
-      linear-gradient(to bottom, rgba(6, 8, 14, 0.1), rgba(6, 8, 14, 0.45));
+    background-color: rgba(6, 8, 14, 0.2);
+    background-image:
+      radial-gradient(circle at 50% 8%, rgba(59, 130, 246, 0.2), transparent 42%),
+      radial-gradient(circle at 85% 15%, rgba(168, 85, 247, 0.12), transparent 36%);
   }
 
   @media (prefers-reduced-motion: reduce) {
     .hero-3d-overlay {
-      background:
-        radial-gradient(circle at 50% 10%, rgba(59, 130, 246, 0.18), transparent 45%),
-        linear-gradient(to bottom, rgba(9, 9, 11, 0.2), rgba(9, 9, 11, 0.8));
+      background-color: rgba(9, 9, 11, 0.28);
+      background-image: radial-gradient(
+        circle at 50% 10%,
+        rgba(59, 130, 246, 0.16),
+        transparent 45%
+      );
     }
   }
 </style>
