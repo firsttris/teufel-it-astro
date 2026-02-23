@@ -1,0 +1,204 @@
+<div class="hero-3d-bg" aria-hidden="true">
+  <canvas class="hero-3d-canvas"></canvas>
+  <div class="hero-3d-overlay"></div>
+</div>
+
+<script>
+  import {
+    BufferAttribute,
+    BufferGeometry,
+    CanvasTexture,
+    Clock,
+    PerspectiveCamera,
+    Points,
+    PointsMaterial,
+    Scene,
+    WebGLRenderer,
+  } from "three";
+
+  const root = document.querySelector(".hero-3d-bg:not([data-mounted])");
+  const canvas = root?.querySelector(".hero-3d-canvas");
+
+  if (!root || !canvas) {
+    console.warn("Hero background root/canvas not found");
+  } else {
+    root.setAttribute("data-mounted", "true");
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const mobile = window.matchMedia("(max-width: 768px)").matches;
+    const maxDpr = mobile ? 1.2 : 1.5;
+    const renderDpr = Math.min(window.devicePixelRatio || 1, maxDpr);
+
+    const renderer = new WebGLRenderer({
+      canvas,
+      antialias: !mobile,
+      alpha: true,
+      powerPreference: "high-performance",
+    });
+    renderer.setPixelRatio(renderDpr);
+    renderer.setClearColor(0x05070f, 1);
+
+    const scene = new Scene();
+
+    const camera = new PerspectiveCamera(58, 1, 0.1, 260);
+    camera.position.set(0, 0, 10);
+    camera.lookAt(0, 0, -40);
+
+    const starCount = mobile ? 700 : 1400;
+    const starPositions = new Float32Array(starCount * 3);
+    const starSpeed = new Float32Array(starCount);
+    const starFieldWidth = 170;
+    const starFieldHeight = 100;
+    const starFieldDepth = 200;
+
+    for (let i = 0; i < starCount; i += 1) {
+      const offset = i * 3;
+      starPositions[offset] = (Math.random() - 0.5) * starFieldWidth;
+      starPositions[offset + 1] = (Math.random() - 0.35) * starFieldHeight;
+      starPositions[offset + 2] = -Math.random() * starFieldDepth;
+      starSpeed[i] = mobile ? 4 + Math.random() * 6 : 6 + Math.random() * 9;
+    }
+
+    const starsGeometry = new BufferGeometry();
+    starsGeometry.setAttribute("position", new BufferAttribute(starPositions, 3));
+
+    const createStarTexture = () => {
+      const starCanvas = document.createElement("canvas");
+      starCanvas.width = 64;
+      starCanvas.height = 64;
+      const context = starCanvas.getContext("2d");
+      if (!context) {
+        return null;
+      }
+
+      const gradient = context.createRadialGradient(32, 32, 2, 32, 32, 30);
+      gradient.addColorStop(0, "rgba(255, 255, 255, 1)");
+      gradient.addColorStop(0.35, "rgba(210, 225, 255, 0.92)");
+      gradient.addColorStop(0.7, "rgba(170, 195, 255, 0.45)");
+      gradient.addColorStop(1, "rgba(170, 195, 255, 0)");
+
+      context.fillStyle = gradient;
+      context.beginPath();
+      context.arc(32, 32, 30, 0, Math.PI * 2);
+      context.fill();
+
+      return new CanvasTexture(starCanvas);
+    };
+
+    const starTexture = createStarTexture();
+    const starsMaterial = new PointsMaterial({
+      color: 0xd9e7ff,
+      size: mobile ? 0.22 : 0.28,
+      transparent: true,
+      opacity: 0.95,
+      depthWrite: false,
+      map: starTexture,
+      alphaTest: 0.08,
+      sizeAttenuation: true,
+    });
+    const stars = new Points(starsGeometry, starsMaterial);
+    scene.add(stars);
+
+    const resize = () => {
+      const { clientWidth, clientHeight } = root;
+      if (!clientWidth || !clientHeight) {
+        return;
+      }
+      renderer.setSize(clientWidth, clientHeight, false);
+      camera.aspect = clientWidth / clientHeight;
+      camera.updateProjectionMatrix();
+    };
+
+    resize();
+
+    let raf = 0;
+    const clock = new Clock();
+    const maxFpsStep = 1 / 30;
+    let elapsed = 0;
+
+    const tick = () => {
+      const step = Math.min(clock.getDelta(), maxFpsStep);
+      elapsed += step;
+      const motionFactor = reducedMotion ? 0.35 : 1;
+
+      const positions = starsGeometry.attributes.position.array;
+      for (let i = 0; i < starCount; i += 1) {
+        const zIndex = i * 3 + 2;
+        positions[zIndex] += starSpeed[i] * step * motionFactor;
+        if (positions[zIndex] > 8) {
+          positions[zIndex] = -starFieldDepth;
+        }
+      }
+      starsGeometry.attributes.position.needsUpdate = true;
+
+      camera.position.x = Math.sin(elapsed * 0.14) * 0.12 * motionFactor;
+      camera.position.y = Math.sin(elapsed * 0.11) * 0.08 * motionFactor;
+      camera.lookAt(camera.position.x * 0.4, camera.position.y * 0.4, -40);
+
+      renderer.render(scene, camera);
+      raf = window.requestAnimationFrame(tick);
+    };
+
+    raf = window.requestAnimationFrame(tick);
+
+    const onVisibilityChange = () => {
+      if (document.hidden) {
+        window.cancelAnimationFrame(raf);
+        return;
+      }
+      clock.getDelta();
+      raf = window.requestAnimationFrame(tick);
+    };
+
+    const onResize = () => resize();
+
+    document.addEventListener("visibilitychange", onVisibilityChange);
+    window.addEventListener("resize", onResize, { passive: true });
+
+    const cleanup = () => {
+      window.cancelAnimationFrame(raf);
+      document.removeEventListener("visibilitychange", onVisibilityChange);
+      window.removeEventListener("resize", onResize);
+      starsGeometry.dispose();
+      starsMaterial.dispose();
+      starTexture?.dispose();
+      renderer.dispose();
+      root.removeAttribute("data-mounted");
+    };
+
+    window.addEventListener("pagehide", cleanup, { once: true });
+  }
+</script>
+
+<style>
+  .hero-3d-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .hero-3d-canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .hero-3d-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 50% 8%, rgba(59, 130, 246, 0.28), transparent 42%),
+      radial-gradient(circle at 85% 15%, rgba(168, 85, 247, 0.2), transparent 36%),
+      linear-gradient(to bottom, rgba(6, 8, 14, 0.1), rgba(6, 8, 14, 0.45));
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-3d-overlay {
+      background:
+        radial-gradient(circle at 50% 10%, rgba(59, 130, 246, 0.18), transparent 45%),
+        linear-gradient(to bottom, rgba(9, 9, 11, 0.2), rgba(9, 9, 11, 0.8));
+    }
+  }
+</style>
