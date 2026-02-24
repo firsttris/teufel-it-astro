@@ -8,11 +8,11 @@
     BufferAttribute,
     BufferGeometry,
     CanvasTexture,
-    Clock,
     PerspectiveCamera,
     Points,
     PointsMaterial,
     Scene,
+    Timer,
     WebGLRenderer,
   } from "three";
 
@@ -121,12 +121,13 @@
     resize();
 
     let raf = 0;
-    const clock = new Clock();
+    const timer = new Timer();
     const maxFpsStep = 1 / 60;
     let elapsed = 0;
 
-    const tick = () => {
-      const step = Math.min(clock.getDelta(), maxFpsStep);
+    const tick = (time: DOMHighResTimeStamp) => {
+      timer.update(time);
+      const step = Math.min(timer.getDelta(), maxFpsStep);
       elapsed += step;
       const motionFactor = reducedMotion ? 0.35 : 1;
 
@@ -159,7 +160,7 @@
         window.cancelAnimationFrame(raf);
         return;
       }
-      clock.getDelta();
+      timer.update();
       raf = window.requestAnimationFrame(tick);
     };
 
