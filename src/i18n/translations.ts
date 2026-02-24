@@ -40,9 +40,9 @@ export const ui = {
         "impact.title": "Open Source, der Standards setzt",
         "impact.installations": "Installs",
         "impact.users": "Tausende Nutzer",
-        "impact.creator": "Schöpfer des {{vscodeJestRunner}} — eine VS Code Erweiterung zum Ausführen und Debuggen von Jest, Vitest, Node, Deno, Bun und Playwright Tests. Ein Tool, das täglich von tausenden Entwicklern weltweit genutzt wird.",
+        "impact.creator": "Schöpfer des {{vscodeJestRunner}} — eine VS-Code Extension zum Ausführen und Debuggen von Jest, Vitest, Node, Deno, Bun und Playwright Tests. Ein Tool, das täglich von tausenden Entwicklern weltweit genutzt wird.",
         "impact.enterprise": "Enterprise Standard",
-        "impact.nx": "Seit 2020 wird meine VS Code Extension von {{nx}} als Empfehlung für Enterprise-Monorepos geführt. Sie unterstützt den parallelen Einsatz mehrerer Test-Runner in einem Projekt.",
+        "impact.nx": "Seit 2020 wird meine VS-Code Extension von {{nx}} als Empfehlung für Enterprise-Monorepos geführt. Sie unterstützt den parallelen Einsatz mehrerer Test-Runner in einem Projekt.",
 
         // Services
         "services.title": "Wobei ich Sie unterstütze",
