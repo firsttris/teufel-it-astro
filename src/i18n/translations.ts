@@ -3,26 +3,16 @@ export const defaultLang = (() => typeof window !== "undefined" && navigator.lan
 export const ui = {
     en: {
         'business-title': 'Software Architect & Developer Experience Expert',
-        'academic-title': 'Business Informatics (B.Sc.)',
         'cv': 'Curriculum Vitae',
-        "source-code": "Source Code",
-        "generated": "Generated at:",
-        "subtitle": "Expert in Clean-Code and Test Automation.",
-        "current": "Currently I work as a freelance software developer and have worked on many exciting {{projects}} in the past 10 years.",
-        "projects": "projects",
-        "in-my-freetime": "In my free time I work on open-source projects on {{github}}.",
-        "best-project": "One of my most successful projects is {{jestRunner}} a VSCode extension for test execution, which has been installed as a recommended extension by {{nx}} since 2020.",
         "hero.quote": "Creator of one of the most widely adopted testing tools in the VS Code ecosystem.",
-        "contactMe": "If you need support in developing software, you can contact me {{contact}}.",
-        "contact": "Contact me",
-        "available": "Available for projects",
 
         // Impact
-        "impact.title": "Open Source with Impact",
-        "impact.installations": "Installations",
+        "impact.title": "Open Source That Sets Standards",
+        "impact.installations": "Installs",
+        "impact.users": "Thousands of users",
         "impact.creator": "Creator of {{vscodeJestRunner}} — a VS Code extension for running and debugging Jest, Vitest, Node, Deno, Bun and Playwright tests. A tool used daily by thousands of developers worldwide.",
         "impact.enterprise": "Enterprise Standard",
-        "impact.nx": "Official recommendation by {{nx}} for enterprise monorepos since 2020. I build tools that set the standard for modern testing.",
+        "impact.nx": "Since 2020, my VS Code extension has been listed by {{nx}} as a recommendation for enterprise monorepos. It supports using multiple test runners in parallel within a single project.",
 
         // Services
         "services.title": "How I can help you",
@@ -43,26 +33,16 @@ export const ui = {
     },
     de: {
         'business-title': 'Software Architekt & Developer Experience-Experte',
-        'academic-title': 'Wirtschaftsinformatik (B.Sc.)',
         'cv': 'Lebenslauf',
-        "source-code": "Quellcode",
-        "generated": "Generiert am:",
-        "subtitle": "Experte für Clean-Code und Testautomatisierung.",
-        "current": "Derzeit arbeite ich als selbständiger Softwareentwickler und habe in den vergangenen 10 Jahren viele spannende {{projects}} realisiert.",
-        "projects": "Projekte",
-        "in-my-freetime": "In meiner Freizeit arbeite ich an Open-Source Projekten auf {{github}}.",
-        "best-project": "Eines meiner erfolgreichstes Projekt ist {{jestRunner}} eine VSCode-Erweiterung zur Testausführung, die seit 2020 als empfohlene Erweiterung von {{nx}} installiert wird.",
         "hero.quote": "Schöpfer eines der meistgenutzten Testing-Tools im VS Code Ökosystem.",
-        "contactMe": "Falls Sie Unterstützung bei der Entwicklung von Software benötigen, können Sie mich gerne {{contact}}.",
-        "contact": "Kontaktieren",
-        "available": "Verfügbar für Projekte",
 
         // Impact
-        "impact.title": "Open Source mit Impact",
-        "impact.installations": "Installations",
+        "impact.title": "Open Source, der Standards setzt",
+        "impact.installations": "Installs",
+        "impact.users": "Tausende Nutzer",
         "impact.creator": "Schöpfer des {{vscodeJestRunner}} — eine VS Code Erweiterung zum Ausführen und Debuggen von Jest, Vitest, Node, Deno, Bun und Playwright Tests. Ein Tool, das täglich von tausenden Entwicklern weltweit genutzt wird.",
         "impact.enterprise": "Enterprise Standard",
-        "impact.nx": "Seit 2020 offizielle Empfehlung von {{nx}} für Enterprise-Monorepos. Ich entwickle Tools, die den Standard für modernes Testing setzen.",
+        "impact.nx": "Seit 2020 wird meine VS Code Extension von {{nx}} als Empfehlung für Enterprise-Monorepos geführt. Sie unterstützt den parallelen Einsatz mehrerer Test-Runner in einem Projekt.",
 
         // Services
         "services.title": "Wobei ich Sie unterstütze",
