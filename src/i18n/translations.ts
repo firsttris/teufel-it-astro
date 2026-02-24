@@ -20,7 +20,7 @@ export const ui = {
         // Impact
         "impact.title": "Open Source with Impact",
         "impact.installations": "Installations",
-        "impact.creator": "Creator of {{vscodeJestRunner}} — a VS Code extension for running and debugging Jest, Vitest, and Playwright tests. A tool used daily by thousands of developers worldwide.",
+        "impact.creator": "Creator of {{vscodeJestRunner}} — a VS Code extension for running and debugging Jest, Vitest, Node, Deno, Bun and Playwright tests. A tool used daily by thousands of developers worldwide.",
         "impact.enterprise": "Enterprise Standard",
         "impact.nx": "Official recommendation by {{nx}} for enterprise monorepos since 2020. I build tools that set the standard for modern testing.",
 
@@ -60,7 +60,7 @@ export const ui = {
         // Impact
         "impact.title": "Open Source mit Impact",
         "impact.installations": "Installations",
-        "impact.creator": "Schöpfer des {{vscodeJestRunner}} — eine VS Code Erweiterung zum Ausführen und Debuggen von Jest, Vitest und Playwright Tests. Ein Tool, das täglich von tausenden Entwicklern weltweit genutzt wird.",
+        "impact.creator": "Schöpfer des {{vscodeJestRunner}} — eine VS Code Erweiterung zum Ausführen und Debuggen von Jest, Vitest, Node, Deno, Bun und Playwright Tests. Ein Tool, das täglich von tausenden Entwicklern weltweit genutzt wird.",
         "impact.enterprise": "Enterprise Standard",
         "impact.nx": "Seit 2020 offizielle Empfehlung von {{nx}} für Enterprise-Monorepos. Ich entwickle Tools, die den Standard für modernes Testing setzen.",
 

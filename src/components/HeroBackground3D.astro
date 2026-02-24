@@ -29,14 +29,23 @@
     const maxDpr = mobile ? 1.2 : 1.5;
     const renderDpr = Math.min(window.devicePixelRatio || 1, maxDpr);
 
-    const renderer = new WebGLRenderer({
-      canvas,
-      antialias: !mobile,
-      alpha: true,
-      powerPreference: "high-performance",
-    });
-    renderer.setPixelRatio(renderDpr);
-    renderer.setClearColor(0x05070f, 1);
+    let renderer;
+    try {
+      renderer = new WebGLRenderer({
+        canvas,
+        antialias: !mobile,
+        alpha: true,
+        powerPreference: "high-performance",
+      });
+    } catch (error) {
+      console.warn("WebGL renderer could not be created", error);
+      root.classList.add("hero-3d-fallback");
+    }
+    if (!renderer) {
+      root.removeAttribute("data-mounted");
+    } else {
+      renderer.setPixelRatio(renderDpr);
+      renderer.setClearColor(0x05070f, 1);
 
     const scene = new Scene();
 
@@ -44,19 +53,19 @@
     camera.position.set(0, 0, 10);
     camera.lookAt(0, 0, -40);
 
-    const starCount = mobile ? 820 : 1620;
+    const starCount = mobile ? 1400 : 2800;
     const starPositions = new Float32Array(starCount * 3);
     const starSpeed = new Float32Array(starCount);
     const starFieldWidth = 170;
     const starFieldHeight = 150;
-    const starFieldDepth = 200;
+    const starFieldDepth = 320;
 
     for (let i = 0; i < starCount; i += 1) {
       const offset = i * 3;
       starPositions[offset] = (Math.random() - 0.5) * starFieldWidth;
       starPositions[offset + 1] = (Math.random() - 0.5) * starFieldHeight;
       starPositions[offset + 2] = -Math.random() * starFieldDepth;
-      starSpeed[i] = mobile ? 4 + Math.random() * 6 : 6 + Math.random() * 9;
+      starSpeed[i] = mobile ? 3.6 + Math.random() * 5.4 : 5 + Math.random() * 8;
     }
 
     const starsGeometry = new BufferGeometry();
@@ -113,7 +122,7 @@
 
     let raf = 0;
     const clock = new Clock();
-    const maxFpsStep = 1 / 30;
+    const maxFpsStep = 1 / 60;
     let elapsed = 0;
 
     const tick = () => {
@@ -126,7 +135,11 @@
         const zIndex = i * 3 + 2;
         positions[zIndex] += starSpeed[i] * step * motionFactor;
         if (positions[zIndex] > 8) {
-          positions[zIndex] = -starFieldDepth;
+          positions[zIndex] = -starFieldDepth - Math.random() * 26;
+          const xIndex = i * 3;
+          const yIndex = xIndex + 1;
+          positions[xIndex] = (Math.random() - 0.5) * starFieldWidth;
+          positions[yIndex] = (Math.random() - 0.5) * starFieldHeight;
         }
       }
       starsGeometry.attributes.position.needsUpdate = true;
@@ -166,7 +179,8 @@
       root.removeAttribute("data-mounted");
     };
 
-    window.addEventListener("pagehide", cleanup, { once: true });
+      window.addEventListener("pagehide", cleanup, { once: true });
+    }
   }
 </script>
 
@@ -177,9 +191,12 @@
     z-index: 0;
     pointer-events: none;
     overflow: hidden;
+    background-color: #05070f;
   }
 
   .hero-3d-canvas {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     display: block;
@@ -188,10 +205,10 @@
   .hero-3d-overlay {
     position: absolute;
     inset: 0;
-    background-color: rgba(6, 8, 14, 0.2);
+    background-color: rgba(6, 8, 14, 0.06);
     background-image:
-      radial-gradient(circle at 50% 8%, rgba(59, 130, 246, 0.2), transparent 42%),
-      radial-gradient(circle at 85% 15%, rgba(168, 85, 247, 0.12), transparent 36%);
+      radial-gradient(circle at 50% 8%, rgba(59, 130, 246, 0.18), transparent 44%),
+      radial-gradient(circle at 85% 15%, rgba(168, 85, 247, 0.1), transparent 38%);
   }
 
   @media (prefers-reduced-motion: reduce) {

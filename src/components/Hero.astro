@@ -1,6 +1,5 @@
 ---
 import ProfileLink from "./ProfileLink.astro";
-import HeroBackground3D from "./HeroBackground3D.astro";
 import { useTranslations } from "./../i18n/utils";
 
 const t = useTranslations(Astro.url.pathname);
@@ -9,8 +8,6 @@ const t = useTranslations(Astro.url.pathname);
 <section
   class="relative isolate flex flex-col items-center justify-center min-h-screen py-20 overflow-hidden"
 >
-  <HeroBackground3D />
-
   <div
     class="relative z-10 container mx-auto px-6 md:px-12 flex flex-col items-center text-center gap-10"
   >
@@ -33,9 +30,6 @@ const t = useTranslations(Astro.url.pathname);
     <p
       class="text-xl md:text-2xl text-zinc-400 max-w-2xl font-light leading-relaxed reveal reveal-delay-2"
     >
-      Sustainable Architecture. High-End Test Automation. <br
-        class="hidden md:block"
-      />
       Building the foundation for your developer experience.
     </p>
 
