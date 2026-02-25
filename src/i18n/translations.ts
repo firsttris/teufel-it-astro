@@ -7,7 +7,7 @@ export const ui = {
         "hero.quote": "Creator of one of the most widely adopted testing tools in the VS Code ecosystem.",
 
         // Impact
-        "impact.title": "Open Source That Sets Standards",
+        "impact.title": "Open Source Sets Standards",
         "impact.installations": "Installs",
         "impact.users": "Thousands of users",
         "impact.creator": "Creator of {{vscodeJestRunner}} — a VS Code extension for running and debugging Jest, Vitest, Node, Deno, Bun and Playwright tests. A tool used daily by thousands of developers worldwide.",
@@ -37,7 +37,7 @@ export const ui = {
         "hero.quote": "Schöpfer eines der meistgenutzten Testing-Tools im VS Code Ökosystem.",
 
         // Impact
-        "impact.title": "Open Source, der Standards setzt",
+        "impact.title": "Open Source, setzt Standards ",
         "impact.installations": "Installs",
         "impact.users": "Tausende Nutzer",
         "impact.creator": "Schöpfer des {{vscodeJestRunner}} — eine VS-Code Extension zum Ausführen und Debuggen von Jest, Vitest, Node, Deno, Bun und Playwright Tests. Ein Tool, das täglich von tausenden Entwicklern weltweit genutzt wird.",
