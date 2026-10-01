@@ -58,6 +58,7 @@
   const planetFragmentShader = /* glsl */ `
     uniform float uExtent;
     uniform float uRotation;
+    uniform float uOpacity;
     uniform vec3 uLightDirection;
 
     varying vec2 vUv;
@@ -100,7 +101,9 @@
       if (r > 1.0) {
         float facing = clamp(dot(normalize(p), normalize(light.xy)) * 0.5 + 0.5, 0.0, 1.0);
         float glow = exp(-(r - 1.0) * 28.0) * (0.08 + 0.5 * facing * facing);
-        gl_FragColor = vec4(mix(purple, cyan, facing), glow * 0.45);
+        float alpha = glow * 0.45 * uOpacity;
+        if (alpha < 0.02) discard;
+        gl_FragColor = vec4(mix(purple, cyan, facing), alpha);
         #include <colorspace_fragment>
         return;
       }
@@ -119,7 +122,7 @@
 
       vec3 color = surface * (0.06 + 0.94 * diffuse) + rimColor * rim * diffuse * 0.55;
       float edge = 1.0 - smoothstep(0.985, 1.0, r);
-      gl_FragColor = vec4(color, edge);
+      gl_FragColor = vec4(color, edge * uOpacity);
       #include <colorspace_fragment>
     }
   `;
@@ -251,23 +254,25 @@
       depthWrite: false,
     });
 
-    // A distant planet behind the star field, lit from the upper left.
-    const planetDistance = fieldDepth + 40;
+    // A planet that now and then appears far away and drifts past while we fly towards it.
     const planetExtent = 1.25; // quad size relative to the planet radius, leaves room for the glow
     const planetGeometry = new PlaneGeometry(2 * planetExtent, 2 * planetExtent);
     const planetMaterial = new ShaderMaterial({
       uniforms: {
         uExtent: { value: planetExtent },
         uRotation: { value: 0 },
+        uOpacity: { value: 0 },
         uLightDirection: { value: new Vector3(-0.65, 0.55, 0.5) },
       },
       vertexShader: planetVertexShader,
       fragmentShader: planetFragmentShader,
       transparent: true,
-      depthWrite: false,
     });
     const planet = new Mesh(planetGeometry, planetMaterial);
+    // Drawn first and writing depth, so stars behind it are hidden while it passes through the field.
     planet.renderOrder = -1;
+    planet.scale.setScalar(5);
+    planet.visible = false;
     scene.add(planet);
 
     const stars = new Points(geometry, material);
@@ -330,30 +335,44 @@
       shootingStarMaterial.uniforms.uOpacity.value = Math.sin(Math.PI * Math.min(t * 1.4, 1));
     };
 
-    // The planet slowly orbits on a tilted ellipse far behind the star field. It is
-    // farther away on the upper part of the orbit, so it looks smaller there.
-    const orbitPeriod = 240; // seconds per full orbit
-    let orbitAngle = Math.random() * Math.PI * 2;
-    const placePlanet = () => {
-      const tanHalfFov = Math.tan((camera.fov * Math.PI) / 360);
-      const depth = planetDistance + 70 + Math.sin(orbitAngle) * 70;
-      const halfHeight = tanHalfFov * (depth + camera.position.z);
-      const halfWidth = halfHeight * camera.aspect;
+    const flyBy = {
+      active: false,
+      progress: 0,
+      duration: 0,
+      nextAt: 8 + Math.random() * 6,
+      startDepth: 520,
+      endDepth: 30,
+      x: 0,
+      y: 0,
+    };
 
-      // Around the hero text on wide screens, below the buttons on portrait screens.
-      const portrait = camera.aspect < 1;
-      const tilt = portrait ? -0.08 : -0.18;
-      const ex = Math.cos(orbitAngle) * (portrait ? 0.78 : 0.88);
-      const ey = portrait ? -0.83 + Math.sin(orbitAngle) * 0.09 : -0.03 + Math.sin(orbitAngle) * 0.56;
-      planet.position.set(
-        (ex * Math.cos(tilt) - ey * Math.sin(tilt)) * halfWidth,
-        (ex * Math.sin(tilt) + ey * Math.cos(tilt)) * halfHeight,
-        -depth,
-      );
+    const startFlyBy = () => {
+      // Start slightly off-centre; perspective then carries it outwards as it gets closer.
+      const side = Math.random() < 0.5 ? -1 : 1;
+      const halfHeight = Math.tan((camera.fov * Math.PI) / 360) * (flyBy.startDepth + camera.position.z);
+      flyBy.x = side * (0.1 + Math.random() * 0.1) * halfHeight * camera.aspect;
+      flyBy.y = (Math.random() - 0.5) * 0.3 * halfHeight;
+      flyBy.duration = 45 + Math.random() * 15;
+      flyBy.progress = 0;
+      flyBy.active = true;
+      planet.visible = true;
+    };
 
-      // Constant world size, so perspective alone changes how big it looks.
-      const baseHalfHeight = tanHalfFov * (planetDistance + camera.position.z);
-      planet.scale.setScalar(Math.min(baseHalfHeight * 0.09, baseHalfHeight * camera.aspect * 0.16));
+    const updateFlyBy = (now: number, step: number) => {
+      if (!flyBy.active) {
+        if (now < flyBy.nextAt) return;
+        startFlyBy();
+      }
+      flyBy.progress += step / flyBy.duration;
+      if (flyBy.progress >= 1) {
+        flyBy.active = false;
+        planet.visible = false;
+        flyBy.nextAt = now + 90 + Math.random() * 60;
+        return;
+      }
+      const depth = flyBy.startDepth + (flyBy.endDepth - flyBy.startDepth) * flyBy.progress;
+      planet.position.set(flyBy.x, flyBy.y, -depth);
+      planetMaterial.uniforms.uOpacity.value = Math.min(flyBy.progress * 8, 1);
     };
 
     const render = () => renderer.render(scene, camera);
@@ -365,7 +384,6 @@
       camera.aspect = clientWidth / clientHeight;
       camera.updateProjectionMatrix();
       uniforms.uScale.value = (clientHeight * pixelRatio) / 2;
-      placePlanet();
       if (reducedMotion) render();
     };
 
@@ -397,10 +415,9 @@
 
       uniforms.uTravel.value += dt * (1 + warp);
 
-      // The planet spins around its own axis while it slowly follows its orbit.
+      // The planet spins slowly and, like the stars, comes closer faster during a warp.
       planetMaterial.uniforms.uRotation.value += dt * 0.08;
-      orbitAngle += (dt * Math.PI * 2) / orbitPeriod;
-      placePlanet();
+      updateFlyBy(elapsed, dt * (1 + warp));
 
       updateShootingStar(elapsed);
 
