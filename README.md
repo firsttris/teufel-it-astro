@@ -12,7 +12,7 @@
 
 - 🌍 Deutsch & Englisch (`/de/`, `/en/`), Startseite leitet anhand der Browsersprache weiter
 - 🚀 Statische Seite, nahezu ohne JavaScript
-- 🌌 Sternenfeld-Hintergrund mit three.js (GPU-Shader, Scroll-Warp, Maus-Parallax, `prefers-reduced-motion`)
+- 🌌 Sternenfeld-Hintergrund mit three.js: gelegentlich vorbeiziehender Planet, seltene Sternschnuppen, Scroll-Warp, Maus-Parallax, `prefers-reduced-motion`
 - 🎨 Styling mit Tailwind CSS 4
 - ⚖️ Impressum & Datenschutzerklärung
 
