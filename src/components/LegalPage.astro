@@ -1,0 +1,53 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { localizedPath, useTranslations, type Lang } from "../i18n/utils";
+
+interface Props {
+  lang: Lang;
+  path: string;
+  title: string;
+}
+
+const { lang, path, title } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<Layout lang={lang} path={path} title={title} noindex>
+  <article class="legal container mx-auto max-w-3xl px-6 pt-28 pb-24 md:px-12">
+    <a href={localizedPath(lang)} class="text-sm text-zinc-400 transition-colors hover:text-white">
+      ← {t("legal.back")}
+    </a>
+    <h1 class="mt-6 mb-10 text-4xl font-bold text-white md:text-5xl">{title}</h1>
+    <slot />
+  </article>
+</Layout>
+
+<style>
+  .legal :global(h2) {
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: white;
+  }
+
+  .legal :global(p),
+  .legal :global(address),
+  .legal :global(ul) {
+    margin-bottom: 1rem;
+    font-style: normal;
+    line-height: 1.75;
+    color: var(--color-zinc-300);
+  }
+
+  .legal :global(ul) {
+    padding-left: 1.25rem;
+    list-style: disc;
+  }
+
+  .legal :global(a) {
+    color: white;
+    text-decoration: underline;
+    text-decoration-color: rgb(59 130 246 / 0.5);
+  }
+</style>

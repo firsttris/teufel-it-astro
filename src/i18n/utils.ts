@@ -1,33 +1,14 @@
-import type { JSX } from 'astro/jsx-runtime';
-import { ui, defaultLang } from './translations';
+import { ui, type TranslationKey } from "./translations";
 
-export const getLangFromUrl = (pathname: string) => {
-  const lang = pathname.includes('/de') ? 'de' : 'en';
-  if (lang in ui) return lang as keyof typeof ui;
-  return defaultLang;
-}
+export const languages = ["de", "en"] as const;
+export type Lang = (typeof languages)[number];
+export const defaultLang: Lang = "de";
 
-export const useTranslations = (pathname: string) => {
-  const lang = getLangFromUrl(pathname);
-  return (
-    key: keyof typeof ui['en'],
-    params?: Record<string, string | JSX.Element>
-  ): (string | JSX.Element)[] | string => {
-    const translation = ui[lang][key] || ui[defaultLang][key];
+export const getStaticLangPaths = () =>
+  languages.map((lang) => ({ params: { lang } }));
 
-    if (!params) {
-      return translation;
-    }
+export const otherLang = (lang: Lang): Lang => (lang === "de" ? "en" : "de");
 
-    // Teile den String an den Platzhaltern, die mit {{ platsholder }} definiert sind.
-    const parts = translation
-      .split(/({{\s*\w+\s*}})/g)
-      .filter(Boolean)
-      .map(part => {
-        const match = part.match(/{{\s*(\w+)\s*}}/);
-        return match ? params[match[1]] : part;
-      });
+export const localizedPath = (lang: Lang, path = "/") => `/${lang}${path}`;
 
-    return parts;
-  }
-}
+export const useTranslations = (lang: Lang) => (key: TranslationKey) => ui[lang][key];

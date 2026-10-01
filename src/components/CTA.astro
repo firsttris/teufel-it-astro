@@ -1,13 +1,14 @@
 ---
-import { useTranslations } from "../i18n/utils";
+import { useTranslations, type Lang } from "../i18n/utils";
 
-const t = useTranslations(Astro.url.pathname);
+interface Props {
+  lang: Lang;
+}
+
+const t = useTranslations(Astro.props.lang);
 ---
 
-<section
-  class="py-24 relative"
->
-
+<section class="py-24 relative">
   <div class="container mx-auto px-6 md:px-12 text-center">
     <div class="max-w-3xl mx-auto space-y-8">
       <h2 class="text-4xl md:text-5xl font-bold text-white tracking-tight">

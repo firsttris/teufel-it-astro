@@ -9,21 +9,17 @@ interface Props {
 }
 
 const { name, link, icon, class: className }: Props = Astro.props;
+const external = link.startsWith("http");
 ---
 
 <a
   href={link}
-  target="_blank"
-  rel="noopener noreferrer"
+  {...external && { target: "_blank", rel: "noopener noreferrer" }}
   class:list={[
-    "w-35 flex items-center justify-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 group no-underline border",
-    className ||
-      "bg-gray-800/50 hover:bg-gray-700 text-gray-300 border-gray-700 hover:border-blue-500",
+    "w-36 flex items-center justify-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 group no-underline border",
+    className,
   ]}
 >
-  <Icon
-    name={icon}
-    class="w-5 h-5 group-hover:text-blue-400 transition-colors"
-  />
+  <Icon name={icon} class="w-5 h-5 group-hover:text-blue-400 transition-colors" aria-hidden="true" />
   <span class="text-sm font-medium">{name}</span>
 </a>

@@ -1,0 +1,51 @@
+---
+import { Image } from "astro:assets";
+import portrait from "../assets/portrait.jpg";
+import { useTranslations, type Lang } from "../i18n/utils";
+
+interface Props {
+  lang: Lang;
+}
+
+const t = useTranslations(Astro.props.lang);
+---
+
+<section class="relative py-24">
+  <div
+    class="container mx-auto flex max-w-4xl flex-col items-center gap-10 px-6 text-center md:flex-row md:items-start md:text-left md:px-12"
+  >
+    <Image
+      src={portrait}
+      alt={t("about.photoAlt")}
+      width={144}
+      height={144}
+      densities={[1, 2]}
+      class="portrait size-36 shrink-0 rounded-full object-cover ring-1 ring-white/15"
+    />
+    <div class="space-y-4">
+      <h2 class="text-2xl font-bold text-white md:text-4xl">{t("about.title")}</h2>
+      <p class="text-lg leading-relaxed text-zinc-300">{t("about.p1")}</p>
+      <p class="text-lg leading-relaxed text-zinc-300">{t("about.p2")}</p>
+      <p class="text-lg leading-relaxed text-zinc-300">
+        {t("about.p3")}{" "}
+        <a
+          href="https://github.com/firsttris"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="font-semibold text-white underline decoration-blue-500/50 transition-colors hover:decoration-blue-500"
+        >GitHub</a>.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .portrait {
+    filter: grayscale(1) contrast(1.05);
+    transition: filter 0.5s ease;
+  }
+
+  .portrait:hover {
+    filter: grayscale(0);
+  }
+</style>

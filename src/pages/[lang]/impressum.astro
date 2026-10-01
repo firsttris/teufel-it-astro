@@ -1,0 +1,53 @@
+---
+import LegalPage from "../../components/LegalPage.astro";
+import { owner } from "../../data/legal";
+import { getStaticLangPaths, useTranslations, type Lang } from "../../i18n/utils";
+
+export const getStaticPaths = getStaticLangPaths;
+
+const lang = Astro.params.lang as Lang;
+const t = useTranslations(lang);
+const de = lang === "de";
+---
+
+<LegalPage lang={lang} path="/impressum/" title={t("imprint.title")}>
+  <h2>{de ? "Angaben gemäß § 5 DDG" : "Information pursuant to Section 5 DDG (German Digital Services Act)"}</h2>
+  <address>
+    {owner.company}<br />
+    {de ? "Inhaber" : "Owner"}: {owner.name}<br />
+    {owner.street}<br />
+    {owner.city}<br />
+    {owner.country[lang]}
+  </address>
+
+  <h2>{de ? "Kontakt" : "Contact"}</h2>
+  <p>
+    {de ? "Telefon" : "Phone"}: <a href={owner.phoneHref}>{owner.phone}</a><br />
+    {de ? "E-Mail" : "Email"}: <a href={`mailto:${owner.email}`}>{owner.email}</a>
+  </p>
+
+  <h2>{de ? "Umsatzsteuer-ID" : "VAT ID"}</h2>
+  <p>
+    {
+      de
+        ? "Umsatzsteuer-Identifikationsnummer gemäß § 27a Umsatzsteuergesetz:"
+        : "VAT identification number pursuant to Section 27a of the German VAT Act:"
+    }
+    <br />
+    {owner.vatId}
+  </p>
+
+  <h2>{de ? "Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV" : "Responsible for content pursuant to Section 18 (2) MStV"}</h2>
+  <p>
+    {owner.name}, {owner.street}, {owner.city}
+  </p>
+
+  <h2>{de ? "Verbraucherstreitbeilegung" : "Consumer dispute resolution"}</h2>
+  <p>
+    {
+      de
+        ? "Ich bin nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen."
+        : "I am neither willing nor obliged to participate in dispute resolution proceedings before a consumer arbitration board."
+    }
+  </p>
+</LegalPage>
