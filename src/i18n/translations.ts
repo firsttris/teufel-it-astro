@@ -15,7 +15,7 @@ const de = {
   "about.p1":
     "Ich bin Tristan, selbständiger Software Craftsman mit über 10 Jahren Erfahrung. Gute Software ist für mich Handwerk: lesbarer Code, schnelle Feedback-Schleifen und Werkzeuge, die Entwicklern die Arbeit leichter machen.",
   "about.p2":
-    "In meinen Projekten bewege ich mich durch den ganzen Stack – vom Frontend über Backend-Services bis zum Linux-Server. Was dabei an nützlichen Werkzeugen entsteht, veröffentliche ich oft als Open Source auf {{github}}.",
+    "Schauen Sie sich gern meine Projekte auf {{github}} an.",
   "about.p3": "Eine Übersicht meiner bisherigen Projekte finden Sie in meinem {{cv}}.",
 
 
@@ -69,7 +69,7 @@ const en: Translations = {
   "about.p1":
     "I'm Tristan, a freelance software craftsman with more than 10 years of experience. To me, good software is a craft: readable code, fast feedback loops and tools that make developers' lives easier.",
   "about.p2":
-    "My projects take me across the whole stack – from the frontend through backend services down to the Linux server. Useful tools that come out of that work often end up as open source on {{github}}.",
+    "Feel free to take a look at my projects on {{github}}.",
   "about.p3": "You can find an overview of my previous projects in my {{cv}}.",
 
 
