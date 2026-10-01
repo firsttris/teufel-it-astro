@@ -1,11 +1,11 @@
 const de = {
   "meta.title": "Tristan Teufel – Software Craftsman",
   "meta.description":
-    "Tristan Teufel – selbständiger Software Craftsman für Developer Experience, Test-Infrastruktur und Clean Code. Entwickler von vscode-jest-runner mit über 2 Mio. Installationen.",
+    "Tristan Teufel – selbständiger Software Craftsman mit über 10 Jahren Erfahrung. Sauberer Code, verlässliche Tests und Werkzeuge, die Teams schneller machen.",
 
   "hero.role": "Software Craftsman",
   "hero.tagline":
-    "Developer Experience, Test-Tooling und sauberer Code – damit Ihr Team schneller und sicherer liefert.",
+    "Sauberer Code, durchdachte Architektur und Werkzeuge, die Teams schneller machen.",
   "links.cv": "Lebenslauf",
   "links.email": "E-Mail",
 
@@ -13,20 +13,11 @@ const de = {
   "about.title": "Über mich",
   "about.photoAlt": "Porträt von Tristan Teufel",
   "about.p1":
-    "Ich bin Tristan, selbständiger Software Craftsman aus Bühl in Baden. Seit über 10 Jahren entwickle ich Webanwendungen und Developer-Tooling – mit Schwerpunkt auf TypeScript, React, Node.js und automatisierten Tests.",
+    "Ich bin Tristan, selbständiger Software Craftsman mit über 10 Jahren Erfahrung. Gute Software ist für mich Handwerk: lesbarer Code, schnelle Feedback-Schleifen und Werkzeuge, die Entwicklern die Arbeit leichter machen.",
   "about.p2":
-    "Gute Software ist für mich Handwerk: lesbarer Code, schnelle Feedback-Schleifen und Werkzeuge, die Entwicklern die Arbeit leichter machen. Genau daraus ist mein Open-Source-Projekt {{jestRunner}} entstanden.",
+    "Dabei lege ich mich nicht auf einen Bereich fest – ob Frontend, Backend, Tooling oder Linux-Systeme: Ich entwickle, was das Projekt braucht. Vieles davon teile ich als Open Source auf {{github}}.",
   "about.p3": "Eine Übersicht meiner bisherigen Projekte finden Sie in meinem {{cv}}.",
 
-  // Impact
-  "impact.title": "Open Source, das Standards setzt",
-  "impact.installs.label": "Installationen im VS Code Marketplace",
-  "impact.installs.desc":
-    "Ich habe {{vscodeJestRunner}} entwickelt – eine VS-Code-Extension zum Ausführen und Debuggen von Jest-, Vitest-, Node-, Deno-, Bun- und Playwright-Tests direkt im Editor. Tausende Entwickler nutzen sie täglich.",
-  "impact.nx.value": "Nx-Empfehlung",
-  "impact.nx.label": "Seit 2020",
-  "impact.nx.desc":
-    "{{nx}} empfiehlt die Extension seit 2020 für Nx-Monorepos. Sie kann mehrere Test-Runner parallel in einem Projekt verwenden.",
 
   // Services
   "services.title": "Wobei ich Sie unterstütze",
@@ -64,11 +55,11 @@ type Translations = Record<keyof typeof de, string>;
 const en: Translations = {
   "meta.title": "Tristan Teufel – Software Craftsman",
   "meta.description":
-    "Tristan Teufel – freelance software craftsman for developer experience, test infrastructure and clean code. Author of vscode-jest-runner with more than 2 million installs.",
+    "Tristan Teufel – freelance software craftsman with more than 10 years of experience. Clean code, reliable tests and tools that make teams faster.",
 
   "hero.role": "Software Craftsman",
   "hero.tagline":
-    "Developer experience, test tooling and clean code – so your team ships faster and with confidence.",
+    "Clean code, thoughtful architecture and tools that make teams faster.",
   "links.cv": "CV",
   "links.email": "Email",
 
@@ -76,20 +67,11 @@ const en: Translations = {
   "about.title": "About me",
   "about.photoAlt": "Portrait of Tristan Teufel",
   "about.p1":
-    "I'm Tristan, a freelance software craftsman based in Bühl, Germany. For more than 10 years I have been building web applications and developer tooling – with a focus on TypeScript, React, Node.js and automated testing.",
+    "I'm Tristan, a freelance software craftsman with more than 10 years of experience. To me, good software is a craft: readable code, fast feedback loops and tools that make developers' lives easier.",
   "about.p2":
-    "To me, good software is a craft: readable code, fast feedback loops and tools that make developers' lives easier. That's exactly how my open source project {{jestRunner}} came about.",
+    "I don't limit myself to one area – frontend, backend, tooling or Linux systems: I build whatever the project needs. Much of it I share as open source on {{github}}.",
   "about.p3": "You can find an overview of my previous projects in my {{cv}}.",
 
-  // Impact
-  "impact.title": "Open source that sets standards",
-  "impact.installs.label": "installs on the VS Code Marketplace",
-  "impact.installs.desc":
-    "I built {{vscodeJestRunner}} – a VS Code extension for running and debugging Jest, Vitest, Node, Deno, Bun and Playwright tests right inside the editor. Thousands of developers use it every day.",
-  "impact.nx.value": "Recommended by Nx",
-  "impact.nx.label": "Since 2020",
-  "impact.nx.desc":
-    "{{nx}} has recommended the extension for Nx monorepos since 2020. It can use multiple test runners side by side in a single project.",
 
   // Services
   "services.title": "How I can help you",

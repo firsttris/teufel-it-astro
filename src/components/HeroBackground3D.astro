@@ -6,18 +6,14 @@
 <script>
   const vertexShader = /* glsl */ `
     attribute float aSpeed;
-    attribute float aSeed;
-    attribute vec3 aColor;
 
     uniform float uTravel;
-    uniform float uTime;
     uniform float uDepth;
     uniform float uNear;
     uniform float uSize;
     uniform float uScale;
 
-    varying vec3 vColor;
-    varying float vAlpha;
+    varying float vFade;
 
     void main() {
       // Stars move along +z and wrap around, so the whole flight happens on the GPU.
@@ -26,43 +22,54 @@
 
       vec4 mvPosition = modelViewMatrix * vec4(position.xy, z, 1.0);
       gl_Position = projectionMatrix * mvPosition;
-      gl_PointSize = min(uSize * uScale / -mvPosition.z, 48.0);
+      gl_PointSize = uSize * uScale / -mvPosition.z;
 
-      float fadeIn = smoothstep(-uDepth, -uDepth + 90.0, z);
-      float fadeOut = 1.0 - smoothstep(uNear - 6.0, uNear, z);
-      float twinkle = 0.78 + 0.22 * sin(uTime * (0.8 + aSeed * 2.4) + aSeed * 6.2831);
-
-      vAlpha = fadeIn * fadeOut * twinkle;
-      vColor = aColor;
+      // Fade stars in at the far end and out right before they pass the camera.
+      vFade = smoothstep(-uDepth, -uDepth + 60.0, z) * (1.0 - smoothstep(uNear - 4.0, uNear, z));
     }
   `;
 
   const fragmentShader = /* glsl */ `
-    varying vec3 vColor;
-    varying float vAlpha;
+    uniform sampler2D uMap;
+    uniform vec3 uColor;
+
+    varying float vFade;
 
     void main() {
-      float d = length(gl_PointCoord - 0.5);
-      float halo = smoothstep(0.5, 0.0, d);
-      float core = smoothstep(0.16, 0.0, d);
-      float alpha = (halo * halo * 0.7 + core * 0.6) * vAlpha;
-      if (alpha < 0.01) discard;
-      gl_FragColor = vec4(mix(vColor, vec3(1.0), core), alpha);
+      vec4 texel = texture2D(uMap, gl_PointCoord);
+      float alpha = texel.a * vFade;
+      if (alpha < 0.08) discard;
+      gl_FragColor = vec4(uColor * texel.rgb, alpha);
+      #include <colorspace_fragment>
     }
   `;
 
-  // Star tints matching the gradient in the hero headline.
-  const palette = [
-    [0.9, 0.94, 1.0],
-    [0.55, 0.88, 0.96],
-    [0.56, 0.72, 1.0],
-    [0.8, 0.62, 1.0],
-  ];
+  const createStarTexture = (CanvasTexture: typeof import("three").CanvasTexture) => {
+    const starCanvas = document.createElement("canvas");
+    starCanvas.width = 64;
+    starCanvas.height = 64;
+    const context = starCanvas.getContext("2d");
+    if (!context) return null;
+
+    const gradient = context.createRadialGradient(32, 32, 2, 32, 32, 30);
+    gradient.addColorStop(0, "rgba(255, 255, 255, 1)");
+    gradient.addColorStop(0.35, "rgba(210, 225, 255, 0.92)");
+    gradient.addColorStop(0.7, "rgba(170, 195, 255, 0.45)");
+    gradient.addColorStop(1, "rgba(170, 195, 255, 0)");
+
+    context.fillStyle = gradient;
+    context.beginPath();
+    context.arc(32, 32, 30, 0, Math.PI * 2);
+    context.fill();
+
+    return new CanvasTexture(starCanvas);
+  };
 
   const mount = async (root: HTMLElement, canvas: HTMLCanvasElement) => {
     const {
-      AdditiveBlending,
       BufferAttribute,
+      CanvasTexture,
+      Color,
       BufferGeometry,
       PerspectiveCamera,
       Points,
@@ -78,7 +85,7 @@
 
     let renderer: InstanceType<typeof WebGLRenderer>;
     try {
-      renderer = new WebGLRenderer({ canvas, antialias: false, alpha: false });
+      renderer = new WebGLRenderer({ canvas, antialias: !mobile, alpha: false });
     } catch (error) {
       console.warn("WebGL renderer could not be created", error);
       return;
@@ -98,34 +105,34 @@
 
     const positions = new Float32Array(starCount * 3);
     const speeds = new Float32Array(starCount);
-    const seeds = new Float32Array(starCount);
-    const colors = new Float32Array(starCount * 3);
 
     for (let i = 0; i < starCount; i += 1) {
       positions[i * 3] = (Math.random() - 0.5) * fieldWidth;
       positions[i * 3 + 1] = (Math.random() - 0.5) * fieldHeight;
       positions[i * 3 + 2] = Math.random() * (fieldDepth + near);
       speeds[i] = mobile ? 3.6 + Math.random() * 5.4 : 5 + Math.random() * 8;
-      seeds[i] = Math.random();
-      const tint = Math.random() < 0.72 ? palette[0] : palette[1 + Math.floor(Math.random() * 3)];
-      colors.set(tint, i * 3);
     }
 
     const geometry = new BufferGeometry();
     geometry.setAttribute("position", new BufferAttribute(positions, 3));
     geometry.setAttribute("aSpeed", new BufferAttribute(speeds, 1));
-    geometry.setAttribute("aSeed", new BufferAttribute(seeds, 1));
-    geometry.setAttribute("aColor", new BufferAttribute(colors, 3));
     // Positions are displaced in the shader, so the CPU-side bounds would be wrong.
     geometry.boundingSphere = null;
 
+    const starTexture = createStarTexture(CanvasTexture);
+    if (!starTexture) {
+      renderer.dispose();
+      return;
+    }
+
     const uniforms = {
       uTravel: { value: 0 },
-      uTime: { value: 0 },
       uDepth: { value: fieldDepth },
       uNear: { value: near },
-      uSize: { value: mobile ? 0.3 : 0.38 },
+      uSize: { value: mobile ? 0.24 : 0.31 },
       uScale: { value: 1 },
+      uMap: { value: starTexture },
+      uColor: { value: new Color(0xe6efff) },
     };
 
     const material = new ShaderMaterial({
@@ -134,7 +141,6 @@
       fragmentShader,
       transparent: true,
       depthWrite: false,
-      blending: AdditiveBlending,
     });
 
     const stars = new Points(geometry, material);
@@ -180,7 +186,6 @@
       warp += (warpTarget - warp) * (1 - Math.exp(-dt * (warpTarget > warp ? 6 : 2)));
 
       uniforms.uTravel.value += dt * (1 + warp);
-      uniforms.uTime.value = elapsed;
 
       // Slow idle drift plus a subtle parallax towards the mouse.
       const ease = 1 - Math.exp(-dt * 2.5);
@@ -221,6 +226,7 @@
       window.removeEventListener("pagehide", onPageHide);
       geometry.dispose();
       material.dispose();
+      starTexture.dispose();
       renderer.dispose();
     };
 
