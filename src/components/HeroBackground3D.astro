@@ -292,7 +292,6 @@
     const shootingStarDepth = 120;
     const shot = { start: 0, duration: 0, from: new Vector3(), direction: new Vector3(), speed: 0, length: 0 };
     let nextShot = 4 + Math.random() * 4;
-    const view = { halfWidth: 1, halfHeight: 1 };
 
     const spawnShootingStar = (now: number) => {
       const halfHeight = Math.tan((camera.fov * Math.PI) / 360) * (shootingStarDepth + camera.position.z);
@@ -331,17 +330,30 @@
       shootingStarMaterial.uniforms.uOpacity.value = Math.sin(Math.PI * Math.min(t * 1.4, 1));
     };
 
-    // Keeps the planet half cut off in the lower right corner, whatever the viewport.
-    let scrollProgress = 0;
+    // The planet slowly orbits on a tilted ellipse far behind the star field. It is
+    // farther away on the upper part of the orbit, so it looks smaller there.
+    const orbitPeriod = 240; // seconds per full orbit
+    let orbitAngle = Math.random() * Math.PI * 2;
     const placePlanet = () => {
-      const { halfWidth, halfHeight } = view;
-      const radius = Math.min(halfHeight * 0.32, halfWidth * 0.45);
-      planet.scale.setScalar(radius);
+      const tanHalfFov = Math.tan((camera.fov * Math.PI) / 360);
+      const depth = planetDistance + 70 + Math.sin(orbitAngle) * 70;
+      const halfHeight = tanHalfFov * (depth + camera.position.z);
+      const halfWidth = halfHeight * camera.aspect;
+
+      // Around the hero text on wide screens, below the buttons on portrait screens.
+      const portrait = camera.aspect < 1;
+      const tilt = portrait ? -0.08 : -0.18;
+      const ex = Math.cos(orbitAngle) * (portrait ? 0.78 : 0.88);
+      const ey = portrait ? -0.83 + Math.sin(orbitAngle) * 0.09 : -0.03 + Math.sin(orbitAngle) * 0.56;
       planet.position.set(
-        halfWidth - radius * 0.75,
-        -halfHeight + radius * 0.8 + scrollProgress * halfHeight * 0.3,
-        -planetDistance,
+        (ex * Math.cos(tilt) - ey * Math.sin(tilt)) * halfWidth,
+        (ex * Math.sin(tilt) + ey * Math.cos(tilt)) * halfHeight,
+        -depth,
       );
+
+      // Constant world size, so perspective alone changes how big it looks.
+      const baseHalfHeight = tanHalfFov * (planetDistance + camera.position.z);
+      planet.scale.setScalar(Math.min(baseHalfHeight * 0.09, baseHalfHeight * camera.aspect * 0.16));
     };
 
     const render = () => renderer.render(scene, camera);
@@ -353,8 +365,6 @@
       camera.aspect = clientWidth / clientHeight;
       camera.updateProjectionMatrix();
       uniforms.uScale.value = (clientHeight * pixelRatio) / 2;
-      view.halfHeight = Math.tan((camera.fov * Math.PI) / 360) * (planetDistance + camera.position.z);
-      view.halfWidth = view.halfHeight * camera.aspect;
       placePlanet();
       if (reducedMotion) render();
     };
@@ -387,10 +397,9 @@
 
       uniforms.uTravel.value += dt * (1 + warp);
 
-      // The planet turns very slowly and rises a little while scrolling down the page.
-      planetMaterial.uniforms.uRotation.value += dt * 0.02;
-      const maxScroll = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
-      scrollProgress += (Math.min(window.scrollY / maxScroll, 1) - scrollProgress) * (1 - Math.exp(-dt * 3));
+      // The planet spins around its own axis while it slowly follows its orbit.
+      planetMaterial.uniforms.uRotation.value += dt * 0.08;
+      orbitAngle += (dt * Math.PI * 2) / orbitPeriod;
       placePlanet();
 
       updateShootingStar(elapsed);
