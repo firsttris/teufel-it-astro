@@ -4,8 +4,6 @@ const de = {
     "Tristan Teufel – selbständiger Software Craftsman mit über 15 Jahren Erfahrung. Sauberer Code, verlässliche Tests und Werkzeuge, die Teams schneller machen.",
 
   "hero.role": "Software Craftsman",
-  "hero.tagline":
-    "Sauberer Code, durchdachte Architektur und Werkzeuge, die Teams schneller machen.",
   "links.cv": "Lebenslauf",
   "links.email": "E-Mail",
 
@@ -59,8 +57,6 @@ const en: Translations = {
     "Tristan Teufel – freelance software craftsman with more than 15 years of experience. Clean code, reliable tests and tools that make teams faster.",
 
   "hero.role": "Software Craftsman",
-  "hero.tagline":
-    "Clean code, thoughtful architecture and tools that make teams faster.",
   "links.cv": "CV",
   "links.email": "Email",
 
