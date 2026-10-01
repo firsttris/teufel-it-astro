@@ -14,9 +14,7 @@ const de = {
   "about.photoAlt": "Porträt von Tristan Teufel",
   "about.p1":
     "Ich bin Tristan, selbständiger Software Craftsman mit über 10 Jahren Erfahrung. Gute Software ist für mich Handwerk: lesbarer Code, schnelle Feedback-Schleifen und Werkzeuge, die Entwicklern die Arbeit leichter machen.",
-  "about.p2":
-    "Schauen Sie sich gern meine Projekte auf {{github}} an.",
-  "about.p3": "Eine Übersicht meiner bisherigen Projekte finden Sie in meinem {{cv}}.",
+  "about.p2": "Meine Open-Source-Projekte finden Sie auf {{github}}, eine Übersicht meiner Kundenprojekte im {{cv}}.",
 
 
   // Services
@@ -68,9 +66,7 @@ const en: Translations = {
   "about.photoAlt": "Portrait of Tristan Teufel",
   "about.p1":
     "I'm Tristan, a freelance software craftsman with more than 10 years of experience. To me, good software is a craft: readable code, fast feedback loops and tools that make developers' lives easier.",
-  "about.p2":
-    "Feel free to take a look at my projects on {{github}}.",
-  "about.p3": "You can find an overview of my previous projects in my {{cv}}.",
+  "about.p2": "You'll find my open source projects on {{github}} and an overview of my client work in my {{cv}}.",
 
 
   // Services
