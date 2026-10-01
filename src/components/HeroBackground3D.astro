@@ -44,6 +44,110 @@
     }
   `;
 
+  const planetVertexShader = /* glsl */ `
+    varying vec2 vUv;
+
+    void main() {
+      vUv = uv;
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    }
+  `;
+
+  // The planet is drawn on a camera-facing quad, so it stays perfectly round even
+  // near the edge of the screen where a real sphere would be stretched by perspective.
+  const planetFragmentShader = /* glsl */ `
+    uniform float uExtent;
+    uniform float uRotation;
+    uniform vec3 uLightDirection;
+
+    varying vec2 vUv;
+
+    float hash(vec3 p) {
+      return fract(sin(dot(p, vec3(127.1, 311.7, 74.7))) * 43758.5453);
+    }
+
+    float noise(vec3 p) {
+      vec3 i = floor(p);
+      vec3 f = fract(p);
+      f = f * f * (3.0 - 2.0 * f);
+      return mix(
+        mix(mix(hash(i), hash(i + vec3(1, 0, 0)), f.x), mix(hash(i + vec3(0, 1, 0)), hash(i + vec3(1, 1, 0)), f.x), f.y),
+        mix(mix(hash(i + vec3(0, 0, 1)), hash(i + vec3(1, 0, 1)), f.x), mix(hash(i + vec3(0, 1, 1)), hash(i + vec3(1, 1, 1)), f.x), f.y),
+        f.z
+      );
+    }
+
+    vec3 rotateY(vec3 p, float a) {
+      float c = cos(a);
+      float s = sin(a);
+      return vec3(c * p.x + s * p.z, p.y, -s * p.x + c * p.z);
+    }
+
+    vec3 rotateZ(vec3 p, float a) {
+      float c = cos(a);
+      float s = sin(a);
+      return vec3(c * p.x - s * p.y, s * p.x + c * p.y, p.z);
+    }
+
+    void main() {
+      vec2 p = (vUv - 0.5) * 2.0 * uExtent;
+      float r = length(p);
+      vec3 light = normalize(uLightDirection);
+      vec3 purple = vec3(0.66, 0.33, 0.97);
+      vec3 cyan = vec3(0.13, 0.83, 0.93);
+
+      // Thin atmosphere glow around the lit side.
+      if (r > 1.0) {
+        float facing = clamp(dot(normalize(p), normalize(light.xy)) * 0.5 + 0.5, 0.0, 1.0);
+        float glow = exp(-(r - 1.0) * 28.0) * (0.08 + 0.5 * facing * facing);
+        gl_FragColor = vec4(mix(purple, cyan, facing), glow * 0.45);
+        #include <colorspace_fragment>
+        return;
+      }
+
+      vec3 normal = vec3(p, sqrt(1.0 - r * r));
+      vec3 q = rotateY(rotateZ(normal, -0.35), uRotation);
+
+      // Soft gas-giant bands, distorted by noise.
+      float bands = sin(q.y * 12.0 + noise(q * 2.5) * 3.0) * 0.5 + 0.5;
+      bands = mix(bands, noise(q * 7.0), 0.35);
+      vec3 surface = mix(vec3(0.005, 0.006, 0.016), vec3(0.03, 0.022, 0.07), bands);
+
+      float diffuse = max(dot(normal, light), 0.0);
+      float rim = pow(1.0 - normal.z, 3.0);
+      vec3 rimColor = mix(purple, cyan, clamp(dot(normalize(p + 1e-4), normalize(light.xy)) * 0.5 + 0.5, 0.0, 1.0));
+
+      vec3 color = surface * (0.06 + 0.94 * diffuse) + rimColor * rim * diffuse * 0.55;
+      float edge = 1.0 - smoothstep(0.985, 1.0, r);
+      gl_FragColor = vec4(color, edge);
+      #include <colorspace_fragment>
+    }
+  `;
+
+  const shootingStarVertexShader = /* glsl */ `
+    varying vec2 vUv;
+
+    void main() {
+      vUv = uv;
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    }
+  `;
+
+  const shootingStarFragmentShader = /* glsl */ `
+    uniform float uOpacity;
+
+    varying vec2 vUv;
+
+    void main() {
+      // Bright head on the right, tail fading out to the left, soft across its width.
+      float along = pow(vUv.x, 2.5);
+      float across = 1.0 - abs(vUv.y - 0.5) * 2.0;
+      float alpha = along * across * across * uOpacity;
+      gl_FragColor = vec4(vec3(0.9, 0.94, 1.0), alpha);
+      #include <colorspace_fragment>
+    }
+  `;
+
   const createStarTexture = (CanvasTexture: typeof import("three").CanvasTexture) => {
     const starCanvas = document.createElement("canvas");
     starCanvas.width = 64;
@@ -67,15 +171,19 @@
 
   const mount = async (root: HTMLElement, canvas: HTMLCanvasElement) => {
     const {
+      AdditiveBlending,
       BufferAttribute,
+      BufferGeometry,
       CanvasTexture,
       Color,
-      BufferGeometry,
+      Mesh,
       PerspectiveCamera,
+      PlaneGeometry,
       Points,
       Scene,
       ShaderMaterial,
       Timer,
+      Vector3,
       WebGLRenderer,
     } = await import("three");
 
@@ -94,7 +202,7 @@
     renderer.setClearColor(0x05070f, 1);
 
     const scene = new Scene();
-    const camera = new PerspectiveCamera(58, 1, 0.1, 400);
+    const camera = new PerspectiveCamera(58, 1, 0.1, 700);
     camera.position.set(0, 0, 10);
 
     const starCount = mobile ? 1400 : 2800;
@@ -143,9 +251,98 @@
       depthWrite: false,
     });
 
+    // A distant planet behind the star field, lit from the upper left.
+    const planetDistance = fieldDepth + 40;
+    const planetExtent = 1.25; // quad size relative to the planet radius, leaves room for the glow
+    const planetGeometry = new PlaneGeometry(2 * planetExtent, 2 * planetExtent);
+    const planetMaterial = new ShaderMaterial({
+      uniforms: {
+        uExtent: { value: planetExtent },
+        uRotation: { value: 0 },
+        uLightDirection: { value: new Vector3(-0.65, 0.55, 0.5) },
+      },
+      vertexShader: planetVertexShader,
+      fragmentShader: planetFragmentShader,
+      transparent: true,
+      depthWrite: false,
+    });
+    const planet = new Mesh(planetGeometry, planetMaterial);
+    planet.renderOrder = -1;
+    scene.add(planet);
+
     const stars = new Points(geometry, material);
     stars.frustumCulled = false;
     scene.add(stars);
+
+    // A single reusable shooting star that shows up every now and then.
+    const shootingStarMaterial = new ShaderMaterial({
+      uniforms: { uOpacity: { value: 0 } },
+      vertexShader: shootingStarVertexShader,
+      fragmentShader: shootingStarFragmentShader,
+      transparent: true,
+      depthWrite: false,
+      blending: AdditiveBlending,
+    });
+    const shootingStarGeometry = new PlaneGeometry(1, 1);
+    shootingStarGeometry.translate(-0.5, 0, 0); // origin at the head
+    const shootingStar = new Mesh(shootingStarGeometry, shootingStarMaterial);
+    shootingStar.visible = false;
+    scene.add(shootingStar);
+
+    const shootingStarDepth = 120;
+    const shot = { start: 0, duration: 0, from: new Vector3(), direction: new Vector3(), speed: 0, length: 0 };
+    let nextShot = 4 + Math.random() * 4;
+    const view = { halfWidth: 1, halfHeight: 1 };
+
+    const spawnShootingStar = (now: number) => {
+      const halfHeight = Math.tan((camera.fov * Math.PI) / 360) * (shootingStarDepth + camera.position.z);
+      const halfWidth = halfHeight * camera.aspect;
+      const goingLeft = Math.random() < 0.5;
+      const angle = (0.35 + Math.random() * 0.25) * (goingLeft ? 1 : -1);
+      shot.from.set(
+        (goingLeft ? 0.2 + Math.random() * 0.6 : -0.8 + Math.random() * 0.6) * halfWidth,
+        (0.3 + Math.random() * 0.55) * halfHeight,
+        -shootingStarDepth,
+      );
+      shot.direction.set(goingLeft ? -Math.cos(angle) : Math.cos(angle), -Math.abs(Math.sin(angle)), 0);
+      shot.speed = halfWidth * (0.9 + Math.random() * 0.5);
+      shot.length = halfWidth * (0.12 + Math.random() * 0.08);
+      shot.duration = 0.9 + Math.random() * 0.4;
+      shot.start = now;
+      shootingStar.rotation.z = Math.atan2(shot.direction.y, shot.direction.x);
+      shootingStar.visible = true;
+    };
+
+    const updateShootingStar = (now: number) => {
+      if (!shootingStar.visible) {
+        if (now >= nextShot) spawnShootingStar(now);
+        return;
+      }
+      const t = (now - shot.start) / shot.duration;
+      if (t >= 1) {
+        shootingStar.visible = false;
+        nextShot = now + 10 + Math.random() * 10;
+        return;
+      }
+      const travelled = shot.speed * shot.duration * t;
+      shootingStar.position.copy(shot.from).addScaledVector(shot.direction, travelled);
+      // The tail grows quickly, then the whole streak fades out.
+      shootingStar.scale.set(shot.length * Math.min(t * 4, 1), 0.3, 1);
+      shootingStarMaterial.uniforms.uOpacity.value = Math.sin(Math.PI * Math.min(t * 1.4, 1));
+    };
+
+    // Keeps the planet half cut off in the lower right corner, whatever the viewport.
+    let scrollProgress = 0;
+    const placePlanet = () => {
+      const { halfWidth, halfHeight } = view;
+      const radius = Math.min(halfHeight * 0.32, halfWidth * 0.45);
+      planet.scale.setScalar(radius);
+      planet.position.set(
+        halfWidth - radius * 0.75,
+        -halfHeight + radius * 0.8 + scrollProgress * halfHeight * 0.3,
+        -planetDistance,
+      );
+    };
 
     const render = () => renderer.render(scene, camera);
 
@@ -156,6 +353,9 @@
       camera.aspect = clientWidth / clientHeight;
       camera.updateProjectionMatrix();
       uniforms.uScale.value = (clientHeight * pixelRatio) / 2;
+      view.halfHeight = Math.tan((camera.fov * Math.PI) / 360) * (planetDistance + camera.position.z);
+      view.halfWidth = view.halfHeight * camera.aspect;
+      placePlanet();
       if (reducedMotion) render();
     };
 
@@ -186,6 +386,14 @@
       warp += (warpTarget - warp) * (1 - Math.exp(-dt * (warpTarget > warp ? 6 : 2)));
 
       uniforms.uTravel.value += dt * (1 + warp);
+
+      // The planet turns very slowly and rises a little while scrolling down the page.
+      planetMaterial.uniforms.uRotation.value += dt * 0.02;
+      const maxScroll = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
+      scrollProgress += (Math.min(window.scrollY / maxScroll, 1) - scrollProgress) * (1 - Math.exp(-dt * 3));
+      placePlanet();
+
+      updateShootingStar(elapsed);
 
       // Slow idle drift plus a subtle parallax towards the mouse.
       const ease = 1 - Math.exp(-dt * 2.5);
@@ -227,6 +435,10 @@
       geometry.dispose();
       material.dispose();
       starTexture.dispose();
+      planetGeometry.dispose();
+      planetMaterial.dispose();
+      shootingStarGeometry.dispose();
+      shootingStarMaterial.dispose();
       renderer.dispose();
     };
 
