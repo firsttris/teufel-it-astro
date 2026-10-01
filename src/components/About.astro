@@ -26,6 +26,15 @@ const t = useTranslations(Astro.props.lang);
       <h2 class="text-2xl font-bold text-white md:text-4xl">{t("about.title")}</h2>
       <p class="text-lg leading-relaxed text-zinc-300">{t("about.p1")}</p>
       <p class="text-lg leading-relaxed text-zinc-300">{t("about.p2")}</p>
+      <p class="text-lg leading-relaxed text-zinc-300">
+        {t("about.p3")}{" "}
+        <a
+          href="https://github.com/firsttris"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="font-semibold text-white underline decoration-blue-500/50 transition-colors hover:decoration-blue-500"
+        >GitHub</a>.
+      </p>
     </div>
   </div>
 </section>

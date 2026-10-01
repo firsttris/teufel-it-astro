@@ -13,9 +13,11 @@ const de = {
   "about.title": "Über mich",
   "about.photoAlt": "Porträt von Tristan Teufel",
   "about.p1":
-    "Ich bin Tristan, Software Craftsman aus Bühl in Baden. Seit über 15 Jahren entwickle ich Software, seit 2016 selbständig.",
+    "Ich bin Tristan, selbständiger Software Craftsman aus Bühl in Baden. Seit über 15 Jahren entwickle ich Software.",
   "about.p2":
     "Gute Software ist für mich Handwerk: lesbarer Code, schnelle Feedback-Schleifen und Werkzeuge, die Entwicklern die Arbeit leichter machen.",
+  // Followed by a link to GitHub.
+  "about.p3": "Eine Übersicht meiner aktuellen Projekte finden Sie auf",
 
 
   // Services
@@ -66,9 +68,11 @@ const en: Translations = {
   "about.title": "About me",
   "about.photoAlt": "Portrait of Tristan Teufel",
   "about.p1":
-    "I'm Tristan, a software craftsman based in Bühl, Germany. I've been developing software for more than 15 years, and working freelance since 2016.",
+    "I'm Tristan, a freelance software craftsman based in Bühl, Germany. I've been developing software for more than 15 years.",
   "about.p2":
     "To me, good software is a craft: readable code, fast feedback loops and tools that make developers' lives easier.",
+  // Followed by a link to GitHub.
+  "about.p3": "You'll find an overview of my current projects on",
 
 
   // Services
