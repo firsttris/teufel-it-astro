@@ -1,0 +1,148 @@
+---
+import LegalPage from "../../components/LegalPage.astro";
+import { owner } from "../../data/legal";
+import { getStaticLangPaths, useTranslations, type Lang } from "../../i18n/utils";
+
+export const getStaticPaths = getStaticLangPaths;
+
+const lang = Astro.params.lang as Lang;
+const t = useTranslations(lang);
+
+const githubPrivacy = "https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement";
+const supervisoryAuthority = "https://www.baden-wuerttemberg.datenschutz.de/";
+---
+
+<LegalPage lang={lang} path="/datenschutz/" title={t("privacy.title")}>
+  {
+    lang === "de" ? (
+      <>
+        <h2>1. Verantwortlicher</h2>
+        <p>Verantwortlich für die Datenverarbeitung auf dieser Website ist:</p>
+        <address>
+          {owner.company}, {owner.name}<br />
+          {owner.street}, {owner.city}<br />
+          <a href={owner.phoneHref}>{owner.phone}</a> · <a href={`mailto:${owner.email}`}>{owner.email}</a>
+        </address>
+
+        <h2>2. Überblick</h2>
+        <p>
+          Diese Website ist eine rein statische Seite. Es werden keine Cookies gesetzt, keine Analyse- oder
+          Tracking-Dienste eingesetzt und keine Inhalte von Drittanbietern nachgeladen. Schriftarten und alle
+          sonstigen Dateien werden direkt von diesem Server ausgeliefert.
+        </p>
+
+        <h2>3. Hosting und Server-Logfiles</h2>
+        <p>
+          Die Website wird über GitHub Pages gehostet (GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco,
+          CA 94107, USA). Beim Aufruf der Seite verarbeitet GitHub technisch notwendige Daten, insbesondere Ihre
+          IP-Adresse, Datum und Uhrzeit des Zugriffs, die aufgerufene Seite sowie Browser- und
+          Betriebssysteminformationen. Dies dient der sicheren und stabilen Auslieferung der Website.
+        </p>
+        <p>
+          Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO; mein berechtigtes Interesse liegt im zuverlässigen
+          Betrieb dieser Website. Eine Übermittlung in die USA ist möglich. GitHub ist nach dem EU-US Data Privacy
+          Framework zertifiziert. Weitere Informationen finden Sie in der{" "}
+          <a href={githubPrivacy} target="_blank" rel="noopener noreferrer">Datenschutzerklärung von GitHub</a>.
+        </p>
+
+        <h2>4. Kontaktaufnahme</h2>
+        <p>
+          Wenn Sie mich per E-Mail oder Telefon kontaktieren, verarbeite ich Ihre Angaben (z. B. Name,
+          E-Mail-Adresse, Inhalt der Anfrage) zur Bearbeitung Ihres Anliegens. Rechtsgrundlage ist Art. 6 Abs. 1
+          lit. b DSGVO, sofern Ihre Anfrage auf einen Vertrag abzielt, ansonsten Art. 6 Abs. 1 lit. f DSGVO. Die
+          Daten werden gelöscht, sobald sie nicht mehr erforderlich sind und keine gesetzlichen
+          Aufbewahrungspflichten entgegenstehen.
+        </p>
+
+        <h2>5. Externe Links</h2>
+        <p>
+          Diese Website verlinkt auf externe Angebote wie GitHub, LinkedIn oder den VS Code Marketplace. Erst wenn
+          Sie einen solchen Link anklicken, werden Daten an den jeweiligen Anbieter übertragen. Dort gelten dessen
+          Datenschutzbestimmungen.
+        </p>
+
+        <h2>6. Ihre Rechte</h2>
+        <p>Sie haben jederzeit das Recht auf:</p>
+        <ul>
+          <li>Auskunft über Ihre gespeicherten Daten (Art. 15 DSGVO)</li>
+          <li>Berichtigung (Art. 16 DSGVO) und Löschung (Art. 17 DSGVO)</li>
+          <li>Einschränkung der Verarbeitung (Art. 18 DSGVO)</li>
+          <li>Datenübertragbarkeit (Art. 20 DSGVO)</li>
+          <li>Widerspruch gegen die Verarbeitung (Art. 21 DSGVO)</li>
+        </ul>
+        <p>
+          Außerdem haben Sie das Recht, sich bei einer Datenschutz-Aufsichtsbehörde zu beschweren, zum Beispiel beim{" "}
+          <a href={supervisoryAuthority} target="_blank" rel="noopener noreferrer">
+            Landesbeauftragten für den Datenschutz und die Informationsfreiheit Baden-Württemberg
+          </a>
+          .
+        </p>
+
+        <p class="text-sm text-zinc-500">Stand: Oktober 2026</p>
+      </>
+    ) : (
+      <>
+        <h2>1. Controller</h2>
+        <p>The controller responsible for data processing on this website is:</p>
+        <address>
+          {owner.company}, {owner.name}<br />
+          {owner.street}, {owner.city}<br />
+          <a href={owner.phoneHref}>{owner.phone}</a> · <a href={`mailto:${owner.email}`}>{owner.email}</a>
+        </address>
+
+        <h2>2. Overview</h2>
+        <p>
+          This website is a purely static site. It sets no cookies, uses no analytics or tracking services and loads
+          no third-party content. Fonts and all other files are served directly from this server.
+        </p>
+
+        <h2>3. Hosting and server log files</h2>
+        <p>
+          This website is hosted on GitHub Pages (GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA
+          94107, USA). When you visit the site, GitHub processes technically necessary data, in particular your IP
+          address, the date and time of access, the requested page and browser and operating system information. This
+          is required to deliver the website securely and reliably.
+        </p>
+        <p>
+          The legal basis is Art. 6 (1) (f) GDPR; my legitimate interest is the reliable operation of this website.
+          Data may be transferred to the USA. GitHub is certified under the EU-US Data Privacy Framework. For more
+          information, see the{" "}
+          <a href={githubPrivacy} target="_blank" rel="noopener noreferrer">GitHub privacy statement</a>.
+        </p>
+
+        <h2>4. Contacting me</h2>
+        <p>
+          If you contact me by email or phone, I process the information you provide (e.g. name, email address,
+          content of your request) to handle your request. The legal basis is Art. 6 (1) (b) GDPR if your request
+          relates to a contract, otherwise Art. 6 (1) (f) GDPR. The data is deleted as soon as it is no longer needed
+          and no statutory retention obligations apply.
+        </p>
+
+        <h2>5. External links</h2>
+        <p>
+          This website links to external services such as GitHub, LinkedIn or the VS Code Marketplace. Data is only
+          transferred to the respective provider once you click such a link; their privacy policies apply there.
+        </p>
+
+        <h2>6. Your rights</h2>
+        <p>You have the right at any time to:</p>
+        <ul>
+          <li>access your stored data (Art. 15 GDPR)</li>
+          <li>rectification (Art. 16 GDPR) and erasure (Art. 17 GDPR)</li>
+          <li>restriction of processing (Art. 18 GDPR)</li>
+          <li>data portability (Art. 20 GDPR)</li>
+          <li>object to processing (Art. 21 GDPR)</li>
+        </ul>
+        <p>
+          You also have the right to lodge a complaint with a data protection supervisory authority, for example the{" "}
+          <a href={supervisoryAuthority} target="_blank" rel="noopener noreferrer">
+            State Commissioner for Data Protection and Freedom of Information Baden-Württemberg
+          </a>
+          .
+        </p>
+
+        <p class="text-sm text-zinc-500">Last updated: October 2026</p>
+      </>
+    )
+  }
+</LegalPage>

@@ -1,0 +1,22 @@
+---
+import { localizedPath, otherLang, type Lang } from "../i18n/utils";
+
+interface Props {
+  lang: Lang;
+  path: string;
+}
+
+const { lang, path } = Astro.props;
+const target = otherLang(lang);
+---
+
+<nav class="absolute top-0 right-0 z-20 p-4 md:p-6">
+  <a
+    href={localizedPath(target, path)}
+    hreflang={target}
+    lang={target}
+    class="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-semibold tracking-wider text-zinc-300 uppercase transition-colors hover:border-white/30 hover:text-white"
+  >
+    {target}
+  </a>
+</nav>

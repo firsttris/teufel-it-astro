@@ -1,0 +1,27 @@
+---
+import { localizedPath, useTranslations, type Lang } from "../i18n/utils";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-white/5">
+  <div
+    class="container mx-auto flex flex-col items-center justify-between gap-4 px-6 py-8 text-sm text-zinc-500 md:flex-row md:px-12"
+  >
+    <p>© {year} Tristan Teufel · Teufel-IT</p>
+    <nav class="flex gap-6">
+      <a href={localizedPath(lang, "/impressum/")} class="transition-colors hover:text-white">
+        {t("footer.imprint")}
+      </a>
+      <a href={localizedPath(lang, "/datenschutz/")} class="transition-colors hover:text-white">
+        {t("footer.privacy")}
+      </a>
+    </nav>
+  </div>
+</footer>

@@ -10,7 +10,7 @@ export default defineConfig({
   },
   integrations: [icon({
     include: {
-      mdi: ['email', 'menu', 'close', 'arrow-right', 'file-account'],
+      mdi: ['email', 'file-account', 'hammer-wrench', 'test-tube', 'source-branch-refresh', 'robot-outline'],
       'simple-icons': ['github', 'linkedin'],
     },
   })]

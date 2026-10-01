@@ -4,183 +4,253 @@
 </div>
 
 <script>
-  import {
-    BufferAttribute,
-    BufferGeometry,
-    CanvasTexture,
-    PerspectiveCamera,
-    Points,
-    PointsMaterial,
-    Scene,
-    Timer,
-    WebGLRenderer,
-  } from "three";
+  const vertexShader = /* glsl */ `
+    attribute float aSpeed;
+    attribute float aSeed;
+    attribute vec3 aColor;
 
-  const root = document.querySelector(".hero-3d-bg:not([data-mounted])");
-  const canvas = root?.querySelector(".hero-3d-canvas");
+    uniform float uTravel;
+    uniform float uTime;
+    uniform float uDepth;
+    uniform float uNear;
+    uniform float uSize;
+    uniform float uScale;
 
-  if (!root || !canvas) {
-    console.warn("Hero background root/canvas not found");
-  } else {
-    root.setAttribute("data-mounted", "true");
+    varying vec3 vColor;
+    varying float vAlpha;
+
+    void main() {
+      // Stars move along +z and wrap around, so the whole flight happens on the GPU.
+      float span = uDepth + uNear;
+      float z = mod(position.z + uTravel * aSpeed, span) - uDepth;
+
+      vec4 mvPosition = modelViewMatrix * vec4(position.xy, z, 1.0);
+      gl_Position = projectionMatrix * mvPosition;
+      gl_PointSize = min(uSize * uScale / -mvPosition.z, 48.0);
+
+      float fadeIn = smoothstep(-uDepth, -uDepth + 90.0, z);
+      float fadeOut = 1.0 - smoothstep(uNear - 6.0, uNear, z);
+      float twinkle = 0.78 + 0.22 * sin(uTime * (0.8 + aSeed * 2.4) + aSeed * 6.2831);
+
+      vAlpha = fadeIn * fadeOut * twinkle;
+      vColor = aColor;
+    }
+  `;
+
+  const fragmentShader = /* glsl */ `
+    varying vec3 vColor;
+    varying float vAlpha;
+
+    void main() {
+      float d = length(gl_PointCoord - 0.5);
+      float halo = smoothstep(0.5, 0.0, d);
+      float core = smoothstep(0.16, 0.0, d);
+      float alpha = (halo * halo * 0.7 + core * 0.6) * vAlpha;
+      if (alpha < 0.01) discard;
+      gl_FragColor = vec4(mix(vColor, vec3(1.0), core), alpha);
+    }
+  `;
+
+  // Star tints matching the gradient in the hero headline.
+  const palette = [
+    [0.9, 0.94, 1.0],
+    [0.55, 0.88, 0.96],
+    [0.56, 0.72, 1.0],
+    [0.8, 0.62, 1.0],
+  ];
+
+  const mount = async (root: HTMLElement, canvas: HTMLCanvasElement) => {
+    const {
+      AdditiveBlending,
+      BufferAttribute,
+      BufferGeometry,
+      PerspectiveCamera,
+      Points,
+      Scene,
+      ShaderMaterial,
+      Timer,
+      WebGLRenderer,
+    } = await import("three");
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const mobile = window.matchMedia("(max-width: 768px)").matches;
-    const maxDpr = mobile ? 1.2 : 1.5;
-    const renderDpr = Math.min(window.devicePixelRatio || 1, maxDpr);
+    const pixelRatio = Math.min(window.devicePixelRatio || 1, mobile ? 1.2 : 1.5);
 
-    let renderer;
+    let renderer: InstanceType<typeof WebGLRenderer>;
     try {
-      renderer = new WebGLRenderer({
-        canvas,
-        antialias: !mobile,
-        alpha: true,
-        powerPreference: "high-performance",
-      });
+      renderer = new WebGLRenderer({ canvas, antialias: false, alpha: false });
     } catch (error) {
       console.warn("WebGL renderer could not be created", error);
-      root.classList.add("hero-3d-fallback");
+      return;
     }
-    if (!renderer) {
-      root.removeAttribute("data-mounted");
-    } else {
-      renderer.setPixelRatio(renderDpr);
-      renderer.setClearColor(0x05070f, 1);
+    renderer.setPixelRatio(pixelRatio);
+    renderer.setClearColor(0x05070f, 1);
 
     const scene = new Scene();
-
-    const camera = new PerspectiveCamera(58, 1, 0.1, 260);
+    const camera = new PerspectiveCamera(58, 1, 0.1, 400);
     camera.position.set(0, 0, 10);
-    camera.lookAt(0, 0, -40);
 
     const starCount = mobile ? 1400 : 2800;
-    const starPositions = new Float32Array(starCount * 3);
-    const starSpeed = new Float32Array(starCount);
-    const starFieldWidth = 170;
-    const starFieldHeight = 150;
-    const starFieldDepth = 320;
+    const fieldWidth = 170;
+    const fieldHeight = 150;
+    const fieldDepth = 320;
+    const near = 8;
+
+    const positions = new Float32Array(starCount * 3);
+    const speeds = new Float32Array(starCount);
+    const seeds = new Float32Array(starCount);
+    const colors = new Float32Array(starCount * 3);
 
     for (let i = 0; i < starCount; i += 1) {
-      const offset = i * 3;
-      starPositions[offset] = (Math.random() - 0.5) * starFieldWidth;
-      starPositions[offset + 1] = (Math.random() - 0.5) * starFieldHeight;
-      starPositions[offset + 2] = -Math.random() * starFieldDepth;
-      starSpeed[i] = mobile ? 3.6 + Math.random() * 5.4 : 5 + Math.random() * 8;
+      positions[i * 3] = (Math.random() - 0.5) * fieldWidth;
+      positions[i * 3 + 1] = (Math.random() - 0.5) * fieldHeight;
+      positions[i * 3 + 2] = Math.random() * (fieldDepth + near);
+      speeds[i] = mobile ? 3.6 + Math.random() * 5.4 : 5 + Math.random() * 8;
+      seeds[i] = Math.random();
+      const tint = Math.random() < 0.72 ? palette[0] : palette[1 + Math.floor(Math.random() * 3)];
+      colors.set(tint, i * 3);
     }
 
-    const starsGeometry = new BufferGeometry();
-    starsGeometry.setAttribute("position", new BufferAttribute(starPositions, 3));
+    const geometry = new BufferGeometry();
+    geometry.setAttribute("position", new BufferAttribute(positions, 3));
+    geometry.setAttribute("aSpeed", new BufferAttribute(speeds, 1));
+    geometry.setAttribute("aSeed", new BufferAttribute(seeds, 1));
+    geometry.setAttribute("aColor", new BufferAttribute(colors, 3));
+    // Positions are displaced in the shader, so the CPU-side bounds would be wrong.
+    geometry.boundingSphere = null;
 
-    const createStarTexture = () => {
-      const starCanvas = document.createElement("canvas");
-      starCanvas.width = 64;
-      starCanvas.height = 64;
-      const context = starCanvas.getContext("2d");
-      if (!context) {
-        return null;
-      }
-
-      const gradient = context.createRadialGradient(32, 32, 2, 32, 32, 30);
-      gradient.addColorStop(0, "rgba(255, 255, 255, 1)");
-      gradient.addColorStop(0.35, "rgba(210, 225, 255, 0.92)");
-      gradient.addColorStop(0.7, "rgba(170, 195, 255, 0.45)");
-      gradient.addColorStop(1, "rgba(170, 195, 255, 0)");
-
-      context.fillStyle = gradient;
-      context.beginPath();
-      context.arc(32, 32, 30, 0, Math.PI * 2);
-      context.fill();
-
-      return new CanvasTexture(starCanvas);
+    const uniforms = {
+      uTravel: { value: 0 },
+      uTime: { value: 0 },
+      uDepth: { value: fieldDepth },
+      uNear: { value: near },
+      uSize: { value: mobile ? 0.3 : 0.38 },
+      uScale: { value: 1 },
     };
 
-    const starTexture = createStarTexture();
-    const starsMaterial = new PointsMaterial({
-      color: 0xe6efff,
-      size: mobile ? 0.24 : 0.31,
+    const material = new ShaderMaterial({
+      uniforms,
+      vertexShader,
+      fragmentShader,
       transparent: true,
-      opacity: 1,
       depthWrite: false,
-      map: starTexture,
-      alphaTest: 0.08,
-      sizeAttenuation: true,
+      blending: AdditiveBlending,
     });
-    const stars = new Points(starsGeometry, starsMaterial);
+
+    const stars = new Points(geometry, material);
+    stars.frustumCulled = false;
     scene.add(stars);
+
+    const render = () => renderer.render(scene, camera);
 
     const resize = () => {
       const { clientWidth, clientHeight } = root;
-      if (!clientWidth || !clientHeight) {
-        return;
-      }
+      if (!clientWidth || !clientHeight) return;
       renderer.setSize(clientWidth, clientHeight, false);
       camera.aspect = clientWidth / clientHeight;
       camera.updateProjectionMatrix();
+      uniforms.uScale.value = (clientHeight * pixelRatio) / 2;
+      if (reducedMotion) render();
     };
 
-    resize();
+    const pointer = { x: 0, y: 0 };
+    const look = { x: 0, y: 0 };
+    let warp = 0;
+    let lastScrollY = window.scrollY;
 
-    let raf = 0;
+    const onPointerMove = (event: PointerEvent) => {
+      if (event.pointerType !== "mouse") return;
+      pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
+      pointer.y = (event.clientY / window.innerHeight) * 2 - 1;
+    };
+
     const timer = new Timer();
-    const maxFpsStep = 1 / 60;
-    let elapsed = 0;
+    let raf = 0;
+    let running = false;
 
     const tick = (time: DOMHighResTimeStamp) => {
       timer.update(time);
-      const step = Math.min(timer.getDelta(), maxFpsStep);
-      elapsed += step;
-      const motionFactor = reducedMotion ? 0.35 : 1;
+      const dt = Math.min(timer.getDelta(), 1 / 30);
+      const elapsed = timer.getElapsed();
 
-      const positions = starsGeometry.attributes.position.array;
-      for (let i = 0; i < starCount; i += 1) {
-        const zIndex = i * 3 + 2;
-        positions[zIndex] += starSpeed[i] * step * motionFactor;
-        if (positions[zIndex] > 8) {
-          positions[zIndex] = -starFieldDepth - Math.random() * 26;
-          const xIndex = i * 3;
-          const yIndex = xIndex + 1;
-          positions[xIndex] = (Math.random() - 0.5) * starFieldWidth;
-          positions[yIndex] = (Math.random() - 0.5) * starFieldHeight;
-        }
-      }
-      starsGeometry.attributes.position.needsUpdate = true;
+      // Scrolling briefly speeds up the flight ("warp"), then eases back.
+      const scrollDelta = Math.abs(window.scrollY - lastScrollY);
+      lastScrollY = window.scrollY;
+      const warpTarget = Math.min(scrollDelta / Math.max(dt, 1e-3) / 350, 5);
+      warp += (warpTarget - warp) * (1 - Math.exp(-dt * (warpTarget > warp ? 6 : 2)));
 
-      camera.position.x = Math.sin(elapsed * 0.14) * 0.12 * motionFactor;
-      camera.position.y = Math.sin(elapsed * 0.11) * 0.08 * motionFactor;
+      uniforms.uTravel.value += dt * (1 + warp);
+      uniforms.uTime.value = elapsed;
+
+      // Slow idle drift plus a subtle parallax towards the mouse.
+      const ease = 1 - Math.exp(-dt * 2.5);
+      look.x += (pointer.x - look.x) * ease;
+      look.y += (pointer.y - look.y) * ease;
+      camera.position.x = Math.sin(elapsed * 0.14) * 0.12 + look.x * 0.9;
+      camera.position.y = Math.sin(elapsed * 0.11) * 0.08 - look.y * 0.6;
       camera.lookAt(camera.position.x * 0.4, camera.position.y * 0.4, -40);
 
-      renderer.render(scene, camera);
+      render();
       raf = window.requestAnimationFrame(tick);
     };
 
-    raf = window.requestAnimationFrame(tick);
-
-    const onVisibilityChange = () => {
-      if (document.hidden) {
-        window.cancelAnimationFrame(raf);
-        return;
-      }
-      timer.update();
+    const start = () => {
+      if (running || reducedMotion) return;
+      running = true;
+      timer.reset();
+      lastScrollY = window.scrollY;
       raf = window.requestAnimationFrame(tick);
     };
 
-    const onResize = () => resize();
+    const stop = () => {
+      running = false;
+      window.cancelAnimationFrame(raf);
+    };
+
+    const onVisibilityChange = () => (document.hidden ? stop() : start());
+    const onPageShow = (event: PageTransitionEvent) => event.persisted && start();
+
+    const onPageHide = (event: PageTransitionEvent) => {
+      stop();
+      // Pages kept in the back/forward cache come back via "pageshow" and must stay intact.
+      if (event.persisted) return;
+      document.removeEventListener("visibilitychange", onVisibilityChange);
+      window.removeEventListener("resize", resize);
+      window.removeEventListener("pointermove", onPointerMove);
+      window.removeEventListener("pageshow", onPageShow);
+      window.removeEventListener("pagehide", onPageHide);
+      geometry.dispose();
+      material.dispose();
+      renderer.dispose();
+    };
+
+    resize();
+    camera.lookAt(0, 0, -40);
+    if (reducedMotion) {
+      // Show a still star field instead of an animation.
+      uniforms.uTravel.value = 12;
+      render();
+    } else {
+      start();
+    }
 
     document.addEventListener("visibilitychange", onVisibilityChange);
-    window.addEventListener("resize", onResize, { passive: true });
+    window.addEventListener("resize", resize, { passive: true });
+    window.addEventListener("pointermove", onPointerMove, { passive: true });
+    window.addEventListener("pageshow", onPageShow);
+    window.addEventListener("pagehide", onPageHide);
+  };
 
-    const cleanup = () => {
-      window.cancelAnimationFrame(raf);
-      document.removeEventListener("visibilitychange", onVisibilityChange);
-      window.removeEventListener("resize", onResize);
-      starsGeometry.dispose();
-      starsMaterial.dispose();
-      starTexture?.dispose();
-      renderer.dispose();
-      root.removeAttribute("data-mounted");
-    };
+  const root = document.querySelector<HTMLElement>(".hero-3d-bg");
+  const canvas = root?.querySelector<HTMLCanvasElement>(".hero-3d-canvas");
 
-      window.addEventListener("pagehide", cleanup, { once: true });
+  if (root && canvas) {
+    // Load three.js once the page itself is ready, so it never competes with content.
+    const load = () => mount(root, canvas);
+    if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(load, { timeout: 1500 });
+    } else {
+      setTimeout(load, 200);
     }
   }
 </script>
@@ -192,7 +262,7 @@
     z-index: 0;
     pointer-events: none;
     overflow: hidden;
-    background-color: #05070f;
+    background-color: var(--color-background);
   }
 
   .hero-3d-canvas {
@@ -206,20 +276,9 @@
   .hero-3d-overlay {
     position: absolute;
     inset: 0;
-    background-color: rgba(6, 8, 14, 0.06);
+    background-color: rgba(5, 7, 15, 0.06);
     background-image:
       radial-gradient(circle at 50% 8%, rgba(59, 130, 246, 0.18), transparent 44%),
       radial-gradient(circle at 85% 15%, rgba(168, 85, 247, 0.1), transparent 38%);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .hero-3d-overlay {
-      background-color: rgba(9, 9, 11, 0.28);
-      background-image: radial-gradient(
-        circle at 50% 10%,
-        rgba(59, 130, 246, 0.16),
-        transparent 45%
-      );
-    }
   }
 </style>

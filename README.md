@@ -3,43 +3,40 @@
 ![GitHub Repo stars](https://img.shields.io/github/stars/firsttris/teufel-it-astro?style=flat-square)
 ![GitHub last commit](https://img.shields.io/github/last-commit/firsttris/teufel-it-astro?style=flat-square)
 ![GitHub contributors](https://img.shields.io/github/contributors/firsttris/teufel-it-astro?style=flat-square)
-![Node.js Version](https://img.shields.io/badge/node-v24.12.0-brightgreen?style=flat-square)
-![npm Version](https://img.shields.io/badge/npm-11.6.2-blue?style=flat-square)
-![Astro Version](https://img.shields.io/badge/astro-5.16.8-blueviolet?style=flat-square)
-![TailwindCSS Version](https://img.shields.io/badge/tailwindcss-3.3.5-06b6d4?style=flat-square)
+![Astro Version](https://img.shields.io/badge/astro-7-blueviolet?style=flat-square)
+![TailwindCSS Version](https://img.shields.io/badge/tailwindcss-4-06b6d4?style=flat-square)
 
-> **Moderne, mehrsprachige persönliche Website mit [Astro](https://astro.build/), TailwindCSS und MDX.**
+> **Persönliche, zweisprachige Website von Tristan Teufel – gebaut mit [Astro](https://astro.build/), Tailwind CSS und three.js.**
 
 ## ✨ Features
 
-- 🌍 Mehrsprachigkeit (de/en)
-- 🚀 Superschnell dank Astro
-- 🎨 Styling mit TailwindCSS
-- 📄 Inhalte als MDX
-- 🧩 Komponenten-basiert
-- 📱 Responsive Design
+- 🌍 Deutsch & Englisch (`/de/`, `/en/`), Startseite leitet anhand der Browsersprache weiter
+- 🚀 Statische Seite, nahezu ohne JavaScript
+- 🌌 Sternenfeld-Hintergrund mit three.js (GPU-Shader, Scroll-Warp, Maus-Parallax, `prefers-reduced-motion`)
+- 🎨 Styling mit Tailwind CSS 4
+- ⚖️ Impressum & Datenschutzerklärung
 
 ## 📦 Tech Stack
 
-- [Astro](https://astro.build/) (v5)
-- [TailwindCSS](https://tailwindcss.com/)
-- [MDX](https://mdxjs.com/)
+- [Astro](https://astro.build/) 7 (Node.js ≥ 22.12)
+- [Tailwind CSS](https://tailwindcss.com/) 4
+- [three.js](https://threejs.org/)
 - [astro-icon](https://github.com/natemoo-re/astro-icon)
 
 ## 📁 Projektstruktur
 
 ```
-├── public/
+├── public/              # Statische Dateien (Favicon, OG-Bild, CNAME)
 ├── src/
+│   ├── assets/          # Bilder, die von astro:assets optimiert werden
 │   ├── components/
-│   ├── content/
-│   ├── i18n/
-│   ├── images/
+│   ├── data/            # Impressumsangaben
+│   ├── i18n/            # Übersetzungen & Helfer
 │   ├── layouts/
 │   └── pages/
+│       ├── index.astro  # Sprach-Weiterleitung
+│       └── [lang]/      # Startseite, Impressum, Datenschutz je Sprache
 ├── astro.config.mjs
-├── tailwind.config.cjs
-├── tsconfig.json
 └── package.json
 ```
 
@@ -70,7 +67,7 @@ Die Seite ist dann unter [localhost:4321](http://localhost:4321) erreichbar.
 
 ## 📄 Lizenz
 
-MIT — siehe [LICENSE](LICENSE)
+MIT
 
 ## 👀 Want to learn more?
 
