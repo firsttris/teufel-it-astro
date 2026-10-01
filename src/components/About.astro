@@ -8,8 +8,6 @@ interface Props {
 }
 
 const t = useTranslations(Astro.props.lang);
-const linkClass =
-  "text-white font-semibold underline decoration-blue-500/50 hover:decoration-blue-500 transition-colors";
 ---
 
 <section class="relative py-24">
@@ -27,22 +25,7 @@ const linkClass =
     <div class="space-y-4">
       <h2 class="text-2xl font-bold text-white md:text-4xl">{t("about.title")}</h2>
       <p class="text-lg leading-relaxed text-zinc-300">{t("about.p1")}</p>
-      <p class="text-lg leading-relaxed text-zinc-300">
-        {
-          t.rich("about.p2", {
-            github: (
-              <a href="https://github.com/firsttris" target="_blank" rel="noopener noreferrer" class={linkClass}>
-                GitHub
-              </a>
-            ),
-            cv: (
-              <a href="https://cv.teufel-it.de" target="_blank" rel="noopener noreferrer" class={linkClass}>
-                {t("links.cv")}
-              </a>
-            ),
-          })
-        }
-      </p>
+      <p class="text-lg leading-relaxed text-zinc-300">{t("about.p2")}</p>
     </div>
   </div>
 </section>

@@ -1,7 +1,7 @@
 const de = {
   "meta.title": "Tristan Teufel – Software Craftsman",
   "meta.description":
-    "Tristan Teufel – selbständiger Software Craftsman mit über 10 Jahren Erfahrung. Sauberer Code, verlässliche Tests und Werkzeuge, die Teams schneller machen.",
+    "Tristan Teufel – selbständiger Software Craftsman mit über 15 Jahren Erfahrung. Sauberer Code, verlässliche Tests und Werkzeuge, die Teams schneller machen.",
 
   "hero.role": "Software Craftsman",
   "hero.tagline":
@@ -13,8 +13,9 @@ const de = {
   "about.title": "Über mich",
   "about.photoAlt": "Porträt von Tristan Teufel",
   "about.p1":
-    "Ich bin Tristan, selbständiger Software Craftsman mit über 10 Jahren Erfahrung. Gute Software ist für mich Handwerk: lesbarer Code, schnelle Feedback-Schleifen und Werkzeuge, die Entwicklern die Arbeit leichter machen.",
-  "about.p2": "Meine Open-Source-Projekte finden Sie auf {{github}}, eine Übersicht meiner Kundenprojekte im {{cv}}.",
+    "Ich bin Tristan, Software Craftsman aus Bühl in Baden. Seit über 15 Jahren entwickle ich Software, seit 2016 selbständig.",
+  "about.p2":
+    "Gute Software ist für mich Handwerk: lesbarer Code, schnelle Feedback-Schleifen und Werkzeuge, die Entwicklern die Arbeit leichter machen.",
 
 
   // Services
@@ -53,7 +54,7 @@ type Translations = Record<keyof typeof de, string>;
 const en: Translations = {
   "meta.title": "Tristan Teufel – Software Craftsman",
   "meta.description":
-    "Tristan Teufel – freelance software craftsman with more than 10 years of experience. Clean code, reliable tests and tools that make teams faster.",
+    "Tristan Teufel – freelance software craftsman with more than 15 years of experience. Clean code, reliable tests and tools that make teams faster.",
 
   "hero.role": "Software Craftsman",
   "hero.tagline":
@@ -65,8 +66,9 @@ const en: Translations = {
   "about.title": "About me",
   "about.photoAlt": "Portrait of Tristan Teufel",
   "about.p1":
-    "I'm Tristan, a freelance software craftsman with more than 10 years of experience. To me, good software is a craft: readable code, fast feedback loops and tools that make developers' lives easier.",
-  "about.p2": "You'll find my open source projects on {{github}} and an overview of my client work in my {{cv}}.",
+    "I'm Tristan, a software craftsman based in Bühl, Germany. I've been developing software for more than 15 years, and working freelance since 2016.",
+  "about.p2":
+    "To me, good software is a craft: readable code, fast feedback loops and tools that make developers' lives easier.",
 
 
   // Services
