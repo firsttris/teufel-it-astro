@@ -1,5 +1,6 @@
 ---
-import "@fontsource-variable/inter";
+// Only the latin subset of Inter is needed; it is preloaded and declared inline below.
+import interLatin from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url";
 import "../styles/global.css";
 import HeroBackground3D from "../components/HeroBackground3D.astro";
 import Footer from "../components/Footer.astro";
@@ -22,6 +23,16 @@ const pageTitle = title ? `${title} – Tristan Teufel` : t("meta.title");
 const pageDescription = description ?? t("meta.description");
 const canonical = new URL(localizedPath(lang, path), Astro.site).href;
 const ogImage = new URL("/og.png", Astro.site).href;
+
+// Same rule as in @fontsource-variable/inter, limited to the latin subset.
+const fontFace = `@font-face {
+  font-family: "Inter Variable";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url(${interLatin}) format("woff2-variations");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}`;
 ---
 
 <!doctype html>
@@ -31,6 +42,8 @@ const ogImage = new URL("/og.png", Astro.site).href;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#05070f" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preload" href={interLatin} as="font" type="font/woff2" crossorigin />
+    <style is:inline set:html={fontFace} />
     <meta name="generator" content={Astro.generator} />
 
     <title>{pageTitle}</title>
