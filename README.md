@@ -6,13 +6,13 @@
 ![Astro Version](https://img.shields.io/badge/astro-7-blueviolet?style=flat-square)
 ![TailwindCSS Version](https://img.shields.io/badge/tailwindcss-4-06b6d4?style=flat-square)
 
-> **Persönliche, zweisprachige Website von Tristan Teufel – gebaut mit [Astro](https://astro.build/), Tailwind CSS und three.js.**
+> **Persönliche, zweisprachige Website von Tristan Teufel – gebaut mit [Astro](https://astro.build/), Tailwind CSS und WebGL.**
 
 ## ✨ Features
 
 - 🌍 Deutsch & Englisch (`/de/`, `/en/`), Startseite leitet anhand der Browsersprache weiter
 - 🚀 Statische Seite, nahezu ohne JavaScript
-- 🌌 Sternenfeld-Hintergrund mit three.js: gelegentlich vorbeiziehender Planet, seltene Sternschnuppen, Scroll-Warp, Maus-Parallax, `prefers-reduced-motion`
+- 🌌 Sternenfeld-Hintergrund in purem WebGL (ohne Bibliothek, ~5 kB gzip): gelegentlich vorbeiziehender Planet, seltene Sternschnuppen, Scroll-Warp, Maus-Parallax; bei `prefers-reduced-motion` wird es gar nicht geladen
 - 🎨 Styling mit Tailwind CSS 4
 - ⚖️ Impressum & Datenschutzerklärung
 
@@ -20,7 +20,6 @@
 
 - [Astro](https://astro.build/) 7 (Node.js ≥ 22.12)
 - [Tailwind CSS](https://tailwindcss.com/) 4
-- [three.js](https://threejs.org/)
 - [astro-icon](https://github.com/natemoo-re/astro-icon)
 
 ## 📁 Projektstruktur
