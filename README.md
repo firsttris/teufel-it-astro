@@ -71,6 +71,7 @@ Die Seite ist dann unter [localhost:4321](http://localhost:4321) erreichbar.
 ⭐ Gefällt dir die Seite? Ein [Stern auf GitHub](https://github.com/firsttris/teufel-it-astro) hilft anderen, die Vorlage zu finden.<br>
 🐛 [Fehler melden](https://github.com/firsttris/teufel-it-astro/issues/new) · 💡 [Idee vorschlagen](https://github.com/firsttris/teufel-it-astro/issues/new)
 
-<sub>Lizenz: <a href="LICENSE">MIT</a> · © Tristan Teufel und Mitwirkende</sub>
+<sub>Code: <a href="LICENSE">MIT</a> · © Tristan Teufel und Mitwirkende<br>
+Texte, Fotos und Bilder der Seite fallen nicht unter die MIT-Lizenz: © Tristan Teufel, alle Rechte vorbehalten.</sub>
 
 </div>
