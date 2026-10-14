@@ -5,6 +5,7 @@
 ![GitHub contributors](https://img.shields.io/github/contributors/firsttris/teufel-it-astro?style=flat-square)
 ![Astro Version](https://img.shields.io/badge/astro-7-blueviolet?style=flat-square)
 ![TailwindCSS Version](https://img.shields.io/badge/tailwindcss-4-06b6d4?style=flat-square)
+[![Build](https://img.shields.io/github/actions/workflow/status/firsttris/teufel-it-astro/build.yml?style=flat-square&label=build)](https://github.com/firsttris/teufel-it-astro/actions/workflows/build.yml)
 
 > **Persönliche, zweisprachige Website von Tristan Teufel – gebaut mit [Astro](https://astro.build/), Tailwind CSS und WebGL.**
 
