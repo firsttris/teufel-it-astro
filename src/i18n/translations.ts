@@ -49,7 +49,7 @@ const de = {
   "about.title": "Über mich",
   "about.photoAlt": "Porträt von Tristan Teufel",
   "about.p1":
-    "Ich bin Tristan Teufel und mit Teufel IT in Bühl (Baden) selbständig. Seit über 15 Jahren entwickle ich Software, zuletzt vor allem in Enterprise-Projekten. Mir ist wichtig, dass Software auch nach Jahren noch gut weiterzuentwickeln ist: klare Architektur, gute Tests, wenig Überraschungen.",
+    "Ich bin Tristan Teufel und mit Teufel IT in Bühl (Baden) selbständig. Seit über 15 Jahren entwickle ich Software, zuletzt vor allem in Enterprise-Projekten. Mein Fokus liegt auf der Verbindung von Clean Architecture mit moderner Testautomation, um technische Schulden zu minimieren und die Release-Zyklen in kritischen Umgebungen nachhaltig zu beschleunigen.",
   "about.p2":
     "Heute arbeite ich agentenbasiert: Agenten übernehmen einen großen Teil der Umsetzung, ich verantworte Architektur, Qualität und Ergebnis. So entstehen Anwendungen in einem Umfang, für den früher ein ganzes Team nötig war.",
   // Followed by a link to the CV.
@@ -122,7 +122,7 @@ const en: Translations = {
   "about.title": "About me",
   "about.photoAlt": "Portrait of Tristan Teufel",
   "about.p1":
-    "I'm Tristan Teufel, running my own business, Teufel IT, in Bühl, Germany. I've been developing software for more than 15 years, most recently in enterprise projects. I care about software that is still easy to evolve years later: clear architecture, good tests, few surprises.",
+    "I'm Tristan Teufel, running my own business, Teufel IT, in Bühl, Germany. I've been developing software for more than 15 years, most recently in enterprise projects. My focus lies on connecting Clean Architecture with modern test automation to minimize technical debt and sustainably accelerate release cycles in critical environments.",
   "about.p2":
     "Today I work agent-based: agents take on a large part of the implementation while I own the architecture, the quality and the result. That way, applications come together at a scale that used to take a whole team.",
   // Followed by a link to the CV.
