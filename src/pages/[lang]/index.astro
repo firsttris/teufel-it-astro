@@ -2,6 +2,7 @@
 import Layout from "../../layouts/Layout.astro";
 import Hero from "../../components/Hero.astro";
 import About from "../../components/About.astro";
+import Projects from "../../components/Projects.astro";
 import Services from "../../components/Services.astro";
 import CTA from "../../components/CTA.astro";
 import { getStaticLangPaths, type Lang } from "../../i18n/utils";
@@ -13,7 +14,8 @@ const lang = Astro.params.lang as Lang;
 
 <Layout lang={lang}>
   <Hero lang={lang} />
-  <About lang={lang} />
+  <Projects lang={lang} />
   <Services lang={lang} />
+  <About lang={lang} />
   <CTA lang={lang} />
 </Layout>

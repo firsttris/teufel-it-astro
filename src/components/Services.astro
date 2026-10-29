@@ -10,16 +10,10 @@ const t = useTranslations(Astro.props.lang);
 
 const services = [
   {
-    icon: "mdi:hammer-wrench",
-    title: t("services.dx.title"),
-    desc: t("services.dx.desc"),
+    icon: "mdi:application-cog-outline",
+    title: t("services.custom.title"),
+    desc: t("services.custom.desc"),
     accent: "bg-blue-500/15 text-blue-300",
-  },
-  {
-    icon: "mdi:test-tube",
-    title: t("services.testing.title"),
-    desc: t("services.testing.desc"),
-    accent: "bg-green-500/15 text-green-300",
   },
   {
     icon: "mdi:source-branch-refresh",
@@ -29,28 +23,28 @@ const services = [
   },
   {
     icon: "mdi:robot-outline",
-    title: t("services.ai.title"),
-    desc: t("services.ai.desc"),
+    title: t("services.agents.title"),
+    desc: t("services.agents.desc"),
     accent: "bg-purple-500/15 text-purple-300",
   },
 ];
 ---
 
-<section class="relative isolate pt-32 pb-24">
+<section class="relative isolate py-24">
   <div class="container mx-auto px-6 md:px-12">
     <div class="mb-16 space-y-4 text-center">
       <h2 class="text-3xl font-bold text-white md:text-5xl">{t("services.title")}</h2>
       <p class="mx-auto max-w-2xl text-xl text-zinc-400">{t("services.subtitle")}</p>
     </div>
 
-    <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+    <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
       {
         services.map((service) => (
           <div class="group rounded-2xl border border-white/10 bg-linear-to-b from-zinc-900 to-zinc-950/50 p-8 transition-colors duration-300 hover:border-white/25">
             <div class:list={["mb-6 flex size-12 items-center justify-center rounded-lg", service.accent]}>
               <Icon name={service.icon} class="size-6" aria-hidden="true" />
             </div>
-            <h3 class="mb-4 min-h-14 text-xl font-bold text-white">{service.title}</h3>
+            <h3 class="mb-4 text-xl font-bold text-white">{service.title}</h3>
             <p class="leading-relaxed text-zinc-400">{service.desc}</p>
           </div>
         ))

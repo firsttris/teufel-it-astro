@@ -1,44 +1,64 @@
 const de = {
   "meta.title": "Tristan Teufel – Software Craftsman",
   "meta.description":
-    "Tristan Teufel – selbständiger Software Craftsman mit über 15 Jahren Erfahrung. Sauberer Code, verlässliche Tests und Werkzeuge, die Teams schneller machen.",
+    "Tristan Teufel, Software Craftsman aus Bühl (Baden): Architektur und Umsetzung von Business-Software, von der ersten Idee bis zum Betrieb. Über 15 Jahre Erfahrung.",
 
   "hero.role": "Software Craftsman",
+  "hero.tagline": "Architektur und Umsetzung von Business-Software, von der ersten Idee bis zum Betrieb.",
+  "hero.experience": "15+ Jahre Erfahrung",
+  "hero.location": "Bühl (Baden)",
+  "hero.availability": "Verfügbar ab Januar 2027",
   "links.cv": "Lebenslauf",
   "links.email": "E-Mail",
+
+  // Projects
+  "projects.title": "Was mit agentenbasierter Entwicklung heute möglich ist",
+  "projects.subtitle":
+    "Vollständige Produkte, die ich entworfen und gebaut habe. Open Source, selbst gehostet, die Daten bleiben in Europa.",
+  "projects.haben.tagline": "Alternative zu lexoffice und sevDesk",
+  "projects.haben.desc":
+    "Buchhaltung für Selbstständige und kleine Unternehmen: E-Rechnung (ZUGFeRD, XRechnung), Bankabgleich, EÜR und Umsatzsteuer-Voranmeldung direkt an ELSTER.",
+  "projects.haben.alt": "Übersicht in Haben mit offenen Forderungen, Umsatz, Kontostand und anstehenden Aufgaben",
+  "projects.kontext.tagline": "Alternative zu Google Workspace und Microsoft 365",
+  "projects.kontext.desc":
+    "Mail, Kalender, Kontakte, Aufgaben, Team-Chat und Telefonie in einer Anwendung, mit gemeinsamen Postfächern und ohne Kosten pro Nutzer.",
+  "projects.kontext.alt": "Posteingang in Kontext mit gemeinsamen Postfächern und geöffneter Mail",
+  "projects.schreibzeug.tagline": "Alternative zu Google Docs und Microsoft 365",
+  "projects.schreibzeug.desc":
+    "Word, Excel, PowerPoint und PDF gemeinsam in Echtzeit bearbeiten, im Browser oder als Desktop-App. Die Dateien bleiben .docx, .xlsx und .pptx.",
+  "projects.schreibzeug.alt": "Ein Word-Dokument im Editor von Schreibzeug",
+  "projects.docs": "Dokumentation",
+  "projects.source": "Quellcode",
+  // Followed by a link to vscode-jest-runner and this text.
+  "projects.jestRunner": "Test-Runner für VS Code, über 2 Mio. Installationen, gepflegt seit 2017.",
+
+  // Services
+  "services.title": "Leistungen",
+  "services.subtitle": "Wobei ich Unternehmen und Entwicklungsteams unterstütze.",
+  "services.custom.title": "Business-Software nach Maß",
+  "services.custom.desc":
+    "Fachanwendungen, interne Werkzeuge und Schnittstellen zu bestehenden Systemen. Auf Wunsch selbst gehostet und DSGVO-konform.",
+  "services.modernization.title": "Architektur & Modernisierung",
+  "services.modernization.desc":
+    "Gewachsene Systeme überführe ich Schritt für Schritt in eine wartbare Architektur, abgesichert durch eine belastbare Test-Infrastruktur statt durch einen riskanten Neuanfang.",
+  "services.agents.title": "Agentenbasierte Entwicklung",
+  "services.agents.desc":
+    "Ich führe Agenten produktiv in Ihre Entwicklung ein: mit klaren Leitplanken, Reviews und Tests, damit Tempo nicht auf Kosten der Qualität geht.",
 
   // About
   "about.title": "Über mich",
   "about.photoAlt": "Porträt von Tristan Teufel",
   "about.p1":
-    "Ich bin Tristan, selbständiger Software Craftsman aus Bühl in Baden. Seit über 15 Jahren entwickle ich Software.",
+    "Ich bin Tristan Teufel und mit Teufel IT in Bühl (Baden) selbständig. Seit über 15 Jahren entwickle ich Software, zuletzt vor allem in Enterprise-Projekten. Mir ist wichtig, dass Software auch nach Jahren noch gut weiterzuentwickeln ist: klare Architektur, gute Tests, wenig Überraschungen.",
   "about.p2":
-    "Gute Software ist für mich Handwerk: lesbarer Code, schnelle Feedback-Schleifen und Werkzeuge, die Entwicklern die Arbeit leichter machen.",
-  // Followed by a link to GitHub.
-  "about.p3": "Eine Übersicht meiner aktuellen Projekte finden Sie auf",
-
-
-  // Services
-  "services.title": "Wobei ich Sie unterstütze",
-  "services.subtitle": "Vier Schwerpunkte, in denen ich Teams am meisten weiterbringe.",
-  "services.dx.title": "Developer Experience & Tooling",
-  "services.dx.desc":
-    "Schnelle Builds, klare Monorepo-Strukturen mit Nx und passgenaue Editor- und CLI-Tools: Ich entferne Reibung aus dem Entwickleralltag.",
-  "services.testing.title": "Test-Infrastruktur & Strategie",
-  "services.testing.desc":
-    "Ich baue Test-Suiten mit Vitest, Playwright und Jest auf, die stabil laufen, schnell Feedback geben und Releases planbar machen.",
-  "services.modernization.title": "Modernisierung & Clean Code",
-  "services.modernization.desc":
-    "Schrittweise Refactorings statt Big Bang: Ich überführe Legacy-Code in eine wartbare Architektur nach SOLID & KISS – abgesichert durch Tests.",
-  "services.ai.title": "AI-Augmented Engineering",
-  "services.ai.desc":
-    "Ich binde agentenbasierte Workflows wie Claude Code sinnvoll in Ihren Entwicklungsprozess ein – mit klaren Leitplanken, Reviews und Tests.",
+    "Heute arbeite ich agentenbasiert: Agenten übernehmen einen großen Teil der Umsetzung, ich verantworte Architektur, Qualität und Ergebnis. So entstehen Anwendungen in einem Umfang, für den früher ein ganzes Team nötig war.",
+  // Followed by a link to the CV.
+  "about.p3": "Bisherige Projekte und Referenzen finden Sie in meinem",
 
   // CTA
-  "cta.title": "Bereit für das nächste Level an Code-Qualität?",
-  "cta.subtitle":
-    "Lassen Sie uns besprechen, wie wir technische Schulden abbauen und Ihr Team schneller machen.",
-  "cta.button": "Projekt anfragen",
+  "cta.title": "Sie haben ein Vorhaben?",
+  "cta.subtitle": "Schreiben Sie mir kurz, worum es geht. Ich melde mich zeitnah.",
+  "cta.button": "E-Mail schreiben",
 
   // Footer & legal
   "footer.imprint": "Impressum",
@@ -54,44 +74,64 @@ type Translations = Record<keyof typeof de, string>;
 const en: Translations = {
   "meta.title": "Tristan Teufel – Software Craftsman",
   "meta.description":
-    "Tristan Teufel – freelance software craftsman with more than 15 years of experience. Clean code, reliable tests and tools that make teams faster.",
+    "Tristan Teufel, software craftsman based in Bühl, Germany: architecture and delivery of business software, from the first idea to production. More than 15 years of experience.",
 
   "hero.role": "Software Craftsman",
+  "hero.tagline": "Architecture and delivery of business software, from the first idea to production.",
+  "hero.experience": "15+ years of experience",
+  "hero.location": "Bühl, Germany",
+  "hero.availability": "Available from January 2027",
   "links.cv": "CV",
   "links.email": "Email",
+
+  // Projects
+  "projects.title": "What agent-based development makes possible today",
+  "projects.subtitle":
+    "Complete products I designed and built. Open source, self-hosted, with the data staying in Europe.",
+  "projects.haben.tagline": "An alternative to lexoffice and sevDesk",
+  "projects.haben.desc":
+    "Bookkeeping for German freelancers and small businesses: e-invoicing (ZUGFeRD, XRechnung), bank reconciliation, EÜR and VAT returns sent straight to ELSTER.",
+  "projects.haben.alt": "Overview in Haben with open receivables, revenue, account balance and upcoming tasks",
+  "projects.kontext.tagline": "An alternative to Google Workspace and Microsoft 365",
+  "projects.kontext.desc":
+    "Mail, calendar, contacts, tasks, team chat and telephony in one application, with shared mailboxes and no per-seat pricing.",
+  "projects.kontext.alt": "Inbox in Kontext with shared mailboxes and an open mail",
+  "projects.schreibzeug.tagline": "An alternative to Google Docs and Microsoft 365",
+  "projects.schreibzeug.desc":
+    "Edit Word, Excel, PowerPoint and PDF files together in real time, in the browser or as a desktop app. Files stay .docx, .xlsx and .pptx.",
+  "projects.schreibzeug.alt": "A Word document in the Schreibzeug editor",
+  "projects.docs": "Documentation",
+  "projects.source": "Source code",
+  // Followed by a link to vscode-jest-runner and this text.
+  "projects.jestRunner": "test runner for VS Code, more than 2 million installs, maintained since 2017.",
+
+  // Services
+  "services.title": "Services",
+  "services.subtitle": "How I support companies and development teams.",
+  "services.custom.title": "Custom Business Software",
+  "services.custom.desc":
+    "Line-of-business applications, internal tools and integrations with existing systems. Self-hosted and GDPR-compliant if you need it.",
+  "services.modernization.title": "Architecture & Modernization",
+  "services.modernization.desc":
+    "I move grown systems step by step to a maintainable architecture, backed by solid test infrastructure instead of a risky rewrite.",
+  "services.agents.title": "Agent-Based Development",
+  "services.agents.desc":
+    "I bring agents into your development process productively: with clear guardrails, reviews and tests, so speed doesn't come at the cost of quality.",
 
   // About
   "about.title": "About me",
   "about.photoAlt": "Portrait of Tristan Teufel",
   "about.p1":
-    "I'm Tristan, a freelance software craftsman based in Bühl, Germany. I've been developing software for more than 15 years.",
+    "I'm Tristan Teufel, running my own business, Teufel IT, in Bühl, Germany. I've been developing software for more than 15 years, most recently in enterprise projects. I care about software that is still easy to evolve years later: clear architecture, good tests, few surprises.",
   "about.p2":
-    "To me, good software is a craft: readable code, fast feedback loops and tools that make developers' lives easier.",
-  // Followed by a link to GitHub.
-  "about.p3": "You'll find an overview of my current projects on",
-
-
-  // Services
-  "services.title": "How I can help you",
-  "services.subtitle": "Four areas where I add the most value to teams.",
-  "services.dx.title": "Developer Experience & Tooling",
-  "services.dx.desc":
-    "Fast builds, clear monorepo structures with Nx and tailored editor and CLI tools: I remove friction from your developers' day-to-day work.",
-  "services.testing.title": "Test Infrastructure & Strategy",
-  "services.testing.desc":
-    "I build test suites with Vitest, Playwright and Jest that run reliably, give fast feedback and make releases predictable.",
-  "services.modernization.title": "Modernization & Clean Code",
-  "services.modernization.desc":
-    "Incremental refactoring instead of a big bang: I move legacy code to a maintainable architecture following SOLID & KISS – backed by tests.",
-  "services.ai.title": "AI-Augmented Engineering",
-  "services.ai.desc":
-    "I integrate agent-based workflows such as Claude Code into your development process – with clear guardrails, reviews and tests.",
+    "Today I work agent-based: agents take on a large part of the implementation while I own the architecture, the quality and the result. That way, applications come together at a scale that used to take a whole team.",
+  // Followed by a link to the CV.
+  "about.p3": "Past projects and references are listed in my",
 
   // CTA
-  "cta.title": "Ready for the next level of code quality?",
-  "cta.subtitle":
-    "Let's talk about how we can pay down technical debt and make your team faster.",
-  "cta.button": "Request a project",
+  "cta.title": "Have a project in mind?",
+  "cta.subtitle": "Send me a short note about what it is. I'll get back to you promptly.",
+  "cta.button": "Send an email",
 
   // Footer & legal
   "footer.imprint": "Legal notice",
