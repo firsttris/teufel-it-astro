@@ -41,9 +41,9 @@ const de = {
   "services.modernization.title": "Architektur & Modernisierung",
   "services.modernization.desc":
     "Gewachsene Systeme überführe ich Schritt für Schritt in eine wartbare Architektur, abgesichert durch Tests statt durch einen riskanten Neuanfang.",
-  "services.testing.title": "Testautomatisierung & Strategie",
+  "services.testing.title": "Mehrschichtige Testarchitektur",
   "services.testing.desc":
-    "Ich baue Test-Suiten mit Vitest, Playwright und Jest auf, die stabil laufen, schnell Feedback geben und Releases planbar machen.",
+    "Agenten schreiben schnell Code. Ob er funktioniert, entscheidet die Testarchitektur: Unit-, Integrations- und End-to-End-Tests in der CI/CD-Pipeline, die jede Änderung prüfen, bevor sie live geht.",
   "services.agents.title": "Agentenbasierte Entwicklung",
   "services.agents.desc":
     "Ich führe Agenten produktiv in Ihre Entwicklung ein: mit klaren Leitplanken, Reviews und Tests, damit Tempo nicht auf Kosten der Qualität geht.",
@@ -117,9 +117,9 @@ const en: Translations = {
   "services.modernization.title": "Architecture & Modernization",
   "services.modernization.desc":
     "I move grown systems step by step to a maintainable architecture, backed by tests instead of a risky rewrite.",
-  "services.testing.title": "Test Automation & Strategy",
+  "services.testing.title": "Multi-Layer Test Architecture",
   "services.testing.desc":
-    "I build test suites with Vitest, Playwright and Jest that run reliably, give fast feedback and make releases predictable.",
+    "Agents write code fast. Whether it works is decided by the test architecture: unit, integration and end-to-end tests in the CI/CD pipeline that check every change before it goes live.",
   "services.agents.title": "Agent-Based Development",
   "services.agents.desc":
     "I bring agents into your development process productively: with clear guardrails, reviews and tests, so speed doesn't come at the cost of quality.",
