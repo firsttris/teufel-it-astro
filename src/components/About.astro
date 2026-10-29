@@ -17,10 +17,10 @@ const t = useTranslations(Astro.props.lang);
     <Image
       src={portrait}
       alt={t("about.photoAlt")}
-      width={144}
-      height={144}
+      width={160}
+      height={160}
       densities={[1, 2]}
-      class="portrait size-36 shrink-0 rounded-full object-cover ring-1 ring-white/15"
+      class="size-40 shrink-0 rounded-full object-cover ring-1 ring-white/15"
     />
     <div class="space-y-4">
       <h2 class="text-2xl font-bold text-white md:text-4xl">{t("about.title")}</h2>
@@ -29,23 +29,12 @@ const t = useTranslations(Astro.props.lang);
       <p class="text-lg leading-relaxed text-zinc-300">
         {t("about.p3")}{" "}
         <a
-          href="https://github.com/firsttris"
+          href="https://cv.teufel-it.de"
           target="_blank"
           rel="noopener noreferrer"
           class="font-semibold text-white underline decoration-blue-500/50 transition-colors hover:decoration-blue-500"
-        >GitHub</a>.
+        >{t("links.cv")}</a>.
       </p>
     </div>
   </div>
 </section>
-
-<style>
-  .portrait {
-    filter: grayscale(1) contrast(1.05);
-    transition: filter 0.5s ease;
-  }
-
-  .portrait:hover {
-    filter: grayscale(0);
-  }
-</style>
