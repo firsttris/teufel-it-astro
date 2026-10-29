@@ -28,6 +28,12 @@ const services = [
     accent: "bg-green-500/15 text-green-300",
   },
   {
+    icon: "mdi:hammer-wrench",
+    title: t("services.dx.title"),
+    desc: t("services.dx.desc"),
+    accent: "bg-amber-500/15 text-amber-300",
+  },
+  {
     icon: "mdi:robot-outline",
     title: t("services.agents.title"),
     desc: t("services.agents.desc"),
@@ -43,10 +49,10 @@ const services = [
       <p class="mx-auto max-w-2xl text-xl text-zinc-400">{t("services.subtitle")}</p>
     </div>
 
-    <div class="grid gap-8 md:grid-cols-2 xl:grid-cols-4">
+    <div class="flex flex-wrap justify-center gap-8">
       {
         services.map((service) => (
-          <div class="group rounded-2xl border border-white/10 bg-linear-to-b from-zinc-900 to-zinc-950/50 p-8 transition-colors duration-300 hover:border-white/25">
+          <div class="group w-full rounded-2xl md:w-[calc((100%-2rem)/2)] lg:w-[calc((100%-4rem)/3)] border border-white/10 bg-linear-to-b from-zinc-900 to-zinc-950/50 p-8 transition-colors duration-300 hover:border-white/25">
             <div class:list={["mb-6 flex size-12 items-center justify-center rounded-lg", service.accent]}>
               <Icon name={service.icon} class="size-6" aria-hidden="true" />
             </div>
