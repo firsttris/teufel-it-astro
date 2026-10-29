@@ -22,6 +22,12 @@ const services = [
     accent: "bg-cyan-500/15 text-cyan-300",
   },
   {
+    icon: "mdi:test-tube",
+    title: t("services.testing.title"),
+    desc: t("services.testing.desc"),
+    accent: "bg-green-500/15 text-green-300",
+  },
+  {
     icon: "mdi:robot-outline",
     title: t("services.agents.title"),
     desc: t("services.agents.desc"),
@@ -37,14 +43,14 @@ const services = [
       <p class="mx-auto max-w-2xl text-xl text-zinc-400">{t("services.subtitle")}</p>
     </div>
 
-    <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+    <div class="grid gap-8 md:grid-cols-2 xl:grid-cols-4">
       {
         services.map((service) => (
           <div class="group rounded-2xl border border-white/10 bg-linear-to-b from-zinc-900 to-zinc-950/50 p-8 transition-colors duration-300 hover:border-white/25">
             <div class:list={["mb-6 flex size-12 items-center justify-center rounded-lg", service.accent]}>
               <Icon name={service.icon} class="size-6" aria-hidden="true" />
             </div>
-            <h3 class="mb-4 text-xl font-bold text-white">{service.title}</h3>
+            <h3 class="mb-4 min-h-14 text-xl font-bold text-white">{service.title}</h3>
             <p class="leading-relaxed text-zinc-400">{service.desc}</p>
           </div>
         ))

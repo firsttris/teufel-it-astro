@@ -40,7 +40,10 @@ const de = {
     "Fachanwendungen, interne Werkzeuge und Schnittstellen zu bestehenden Systemen. Auf Wunsch selbst gehostet und DSGVO-konform.",
   "services.modernization.title": "Architektur & Modernisierung",
   "services.modernization.desc":
-    "Gewachsene Systeme überführe ich Schritt für Schritt in eine wartbare Architektur, abgesichert durch eine belastbare Test-Infrastruktur statt durch einen riskanten Neuanfang.",
+    "Gewachsene Systeme überführe ich Schritt für Schritt in eine wartbare Architektur, abgesichert durch Tests statt durch einen riskanten Neuanfang.",
+  "services.testing.title": "Mehrschichtige Testarchitektur",
+  "services.testing.desc":
+    "Agenten schreiben schnell Code. Ob er funktioniert, entscheidet die Testarchitektur: Unit-, Integrations- und End-to-End-Tests in der CI/CD-Pipeline, die jede Änderung prüfen, bevor sie live geht.",
   "services.agents.title": "Agentenbasierte Entwicklung",
   "services.agents.desc":
     "Ich führe Agenten produktiv in Ihre Entwicklung ein: mit klaren Leitplanken, Reviews und Tests, damit Tempo nicht auf Kosten der Qualität geht.",
@@ -113,7 +116,10 @@ const en: Translations = {
     "Line-of-business applications, internal tools and integrations with existing systems. Self-hosted and GDPR-compliant if you need it.",
   "services.modernization.title": "Architecture & Modernization",
   "services.modernization.desc":
-    "I move grown systems step by step to a maintainable architecture, backed by solid test infrastructure instead of a risky rewrite.",
+    "I move grown systems step by step to a maintainable architecture, backed by tests instead of a risky rewrite.",
+  "services.testing.title": "Multi-Layer Test Architecture",
+  "services.testing.desc":
+    "Agents write code fast. Whether it works is decided by the test architecture: unit, integration and end-to-end tests in the CI/CD pipeline that check every change before it goes live.",
   "services.agents.title": "Agent-Based Development",
   "services.agents.desc":
     "I bring agents into your development process productively: with clear guardrails, reviews and tests, so speed doesn't come at the cost of quality.",
