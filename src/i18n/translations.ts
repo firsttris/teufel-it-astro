@@ -1,7 +1,7 @@
 const de = {
   "meta.title": "Tristan Teufel – Software Craftsman",
   "meta.description":
-    "Tristan Teufel, Software Craftsman aus Bühl (Baden): Architektur und Umsetzung von Business-Software, von der ersten Idee bis zum Betrieb. Softwareentwicklung seit 2012.",
+    "Tristan Teufel, Software Craftsman aus Bühl (Baden): Architektur und Umsetzung von Business-Software, von der ersten Idee bis zum Betrieb. Sauberer Code, verlässliche Tests und Werkzeuge, die Teams schneller machen. Softwareentwicklung seit 2012.",
 
   "hero.role": "Software Craftsman",
   "hero.tagline": "Architektur und Umsetzung von Business-Software, von der ersten Idee bis zum Betrieb.",
@@ -44,6 +44,9 @@ const de = {
   "services.testing.title": "Mehrschichtige Testarchitektur",
   "services.testing.desc":
     "Agenten schreiben schnell Code. Ob er funktioniert, entscheidet die Testarchitektur: Unit-, Integrations- und End-to-End-Tests in der CI/CD-Pipeline, die jede Änderung prüfen, bevor sie live geht.",
+  "services.dx.title": "Developer Experience & Tooling",
+  "services.dx.desc":
+    "Schnelle Builds, klare Monorepo-Strukturen mit Nx und passgenaue Editor- und CLI-Tools: Ich entferne Reibung aus dem Entwickleralltag.",
   "services.agents.title": "Agentenbasierte Entwicklung",
   "services.agents.desc":
     "Ich führe Agenten produktiv in Ihre Entwicklung ein: mit klaren Leitplanken, Reviews und Tests, damit Tempo nicht auf Kosten der Qualität geht.",
@@ -77,7 +80,7 @@ type Translations = Record<keyof typeof de, string>;
 const en: Translations = {
   "meta.title": "Tristan Teufel – Software Craftsman",
   "meta.description":
-    "Tristan Teufel, software craftsman based in Bühl, Germany: architecture and delivery of business software, from the first idea to production. Building software since 2012.",
+    "Tristan Teufel, software craftsman based in Bühl, Germany: architecture and delivery of business software, from the first idea to production. Clean code, reliable tests and tools that make teams faster. Building software since 2012.",
 
   "hero.role": "Software Craftsman",
   "hero.tagline": "Architecture and delivery of business software, from the first idea to production.",
@@ -120,6 +123,9 @@ const en: Translations = {
   "services.testing.title": "Multi-Layer Test Architecture",
   "services.testing.desc":
     "Agents write code fast. Whether it works is decided by the test architecture: unit, integration and end-to-end tests in the CI/CD pipeline that check every change before it goes live.",
+  "services.dx.title": "Developer Experience & Tooling",
+  "services.dx.desc":
+    "Fast builds, clear monorepo structures with Nx and tailored editor and CLI tools: I remove friction from your developers' day-to-day work.",
   "services.agents.title": "Agent-Based Development",
   "services.agents.desc":
     "I bring agents into your development process productively: with clear guardrails, reviews and tests, so speed doesn't come at the cost of quality.",
