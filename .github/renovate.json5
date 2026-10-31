@@ -1,15 +1,17 @@
 // Renovate (GitHub App, https://github.com/apps/renovate): a pull request for each new release of
-// what the website builds on, plus the "Dependency Dashboard" issue listing what is open.
-// Only those: Astro with astro-icon and the withastro/action that builds and uploads the site,
-// Tailwind CSS, and the Node of the workflows. The icon sets, the font and the other actions are
-// not tracked here. Check with `npx --package renovate renovate-config-validator .github/renovate.json5`.
+// what the website builds on, plus the "Dependency Dashboard" issue listing what is open. Their own
+// pull requests: Astro with astro-icon and the withastro/action that builds and uploads the site,
+// Tailwind CSS, and the Node of the workflows.
+// Everything else (the other packages, the actions, the images) comes with the shared settings of
+// firsttris/workflows (renovate/default.json5): minor and patch updates once a month in one pull
+// request that merges itself when CI is green, majors on request in the dashboard.
+// Check with `npx --package renovate renovate-config-validator .github/renovate.json5`.
 {
   $schema: "https://docs.renovatebot.com/renovate-schema.json",
-  extends: ["config:recommended"],
-  enabledManagers: ["npm", "github-actions", "custom.regex"],
-  timezone: "Europe/Berlin",
-  labels: ["dependencies"],
+  extends: ["github>firsttris/workflows//renovate/default.json5"],
+  // Its pull requests run no CI, so nothing merges itself
   automerge: false,
+  lockFileMaintenance: { automerge: false },
   customManagers: [
     {
       // The Astro major of the README (badge and the stack list)
@@ -49,11 +51,6 @@
   ],
   packageRules: [
     {
-      // From npm and the actions only what is below
-      matchManagers: ["npm", "github-actions"],
-      enabled: false,
-    },
-    {
       // Astro, astro-icon and withastro/action in one PR: a new Astro major usually needs a new
       // astro-icon and a newer action (its default Node and package manager detection)
       matchPackageNames: ["astro", "@astrojs/**", "astro-icon", "withastro/action"],
@@ -63,6 +60,9 @@
       prBodyNotes: [
         "Before merging: read the Astro upgrade guide for a new major (https://docs.astro.build/en/upgrade-astro/) and its Node requirement (`node-version` in the workflows, \"Node.js ≥ 22.12\" in the README). The Check Build run of this PR builds the site; locally `npm run build` and look at the pages at 390, 1024 and 1440 px width (CLAUDE.md), German and English.",
       ],
+      schedule: ["at any time"],
+      automerge: false,
+      dependencyDashboardApproval: false,
     },
     {
       matchPackageNames: ["tailwindcss", "@tailwindcss/**"],
@@ -72,11 +72,17 @@
       prBodyNotes: [
         "Before merging: `npm run build` and look at the pages at 390, 1024 and 1440 px width (CLAUDE.md). A new major: read the upgrade guide (https://tailwindcss.com/docs/upgrade-guide).",
       ],
+      schedule: ["at any time"],
+      automerge: false,
+      dependencyDashboardApproval: false,
     },
     {
       matchPackageNames: ["node"],
       groupName: "Node",
       sourceUrl: "https://github.com/nodejs/node",
+      schedule: ["at any time"],
+      automerge: false,
+      dependencyDashboardApproval: false,
     },
   ],
 }
