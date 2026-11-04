@@ -15,10 +15,20 @@ jobs:
       - name: Checkout your repository using git
         uses: actions/checkout@v7
 
+      # withastro/action detects Bun from bun.lock but then sets up the latest Bun; this hands it
+      # the Bun of packageManager in package.json instead ("bun@x.y.z")
+      - name: Read the Bun version from package.json
+        id: bun
+        run: echo "package-manager=$(jq -r .packageManager package.json)" >> "$GITHUB_OUTPUT"
       - name: Install, build, and upload your site
         uses: withastro/action@v6
         with:
-          node-version: 26
+          # No node-version: the scripts run Astro on Bun (`bun --bun astro build`). The action
+          # (v6.1.4, action.yml) sets up Node for Bun projects anyway, at its default; nothing uses it
+          package-manager: ${{ steps.bun.outputs.package-manager }}
+      # The action runs `bun install` without --frozen-lockfile: fail if it had to change bun.lock
+      - name: Check that bun.lock matches package.json
+        run: git diff --exit-code bun.lock
 
   deploy:
     needs: build

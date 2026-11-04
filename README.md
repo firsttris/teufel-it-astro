@@ -19,7 +19,8 @@
 
 ## 📦 Tech Stack
 
-- [Astro](https://astro.build/) 7 (Node.js ≥ 22.12)
+- [Astro](https://astro.build/) 7
+- [Bun](https://bun.sh/) (Version in `packageManager` der `package.json`) installiert die Pakete und führt Astro aus (`bun --bun astro`), Node.js wird nicht gebraucht
 - [Tailwind CSS](https://tailwindcss.com/) 4
 - [astro-icon](https://github.com/natemoo-re/astro-icon)
 
@@ -45,8 +46,8 @@
 ```bash
 git clone git@github.com:firsttris/teufel-it-astro.git
 cd teufel-it-astro
-npm install
-npm run dev
+bun install
+bun run dev
 ```
 
 Die Seite ist dann unter [localhost:4321](http://localhost:4321) erreichbar.
@@ -55,10 +56,10 @@ Die Seite ist dann unter [localhost:4321](http://localhost:4321) erreichbar.
 
 | Befehl             | Beschreibung                                 |
 |--------------------|----------------------------------------------|
-| `npm install`      | Installiert Abhängigkeiten                   |
-| `npm run dev`      | Startet lokalen Dev-Server                   |
-| `npm run build`    | Produktion-Build im `dist/`-Ordner           |
-| `npm run preview`  | Vorschau des Builds                          |
+| `bun install`      | Installiert Abhängigkeiten                   |
+| `bun run dev`      | Startet lokalen Dev-Server                   |
+| `bun run build`    | Produktion-Build im `dist/`-Ordner           |
+| `bun run preview`  | Vorschau des Builds                          |
 
 ## 👥 Mitwirkende
 
