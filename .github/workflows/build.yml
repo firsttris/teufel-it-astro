@@ -26,10 +26,9 @@ jobs:
       - name: Install, build, and upload your site
         uses: withastro/action@v6
         with:
+          # No node-version: the scripts run Astro on Bun (`bun --bun astro build`). The action
+          # (v6.1.4, action.yml) sets up Node for Bun projects anyway, at its default; nothing uses it
           package-manager: ${{ steps.bun.outputs.package-manager }}
-          # Astro runs on Node (the action's bun runs `astro build`, whose bin starts with
-          # `#!/usr/bin/env node`); Astro 7 needs Node >= 22.12
-          node-version: 26
       # The action runs `bun install` without --frozen-lockfile: fail if it had to change bun.lock
       - name: Check that bun.lock matches package.json
         run: git diff --exit-code bun.lock

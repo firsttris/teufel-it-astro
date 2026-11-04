@@ -19,8 +19,8 @@
 
 ## 📦 Tech Stack
 
-- [Astro](https://astro.build/) 7 (Node.js ≥ 22.12)
-- [Bun](https://bun.sh/) (Version in `packageManager` der `package.json`) installiert die Pakete und startet die Skripte; Astro selbst läuft auf Node
+- [Astro](https://astro.build/) 7
+- [Bun](https://bun.sh/) (Version in `packageManager` der `package.json`) installiert die Pakete und führt Astro aus (`bun --bun astro`), Node.js wird nicht gebraucht
 - [Tailwind CSS](https://tailwindcss.com/) 4
 - [astro-icon](https://github.com/natemoo-re/astro-icon)
 
