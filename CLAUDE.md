@@ -17,4 +17,4 @@
 
 ## Prüfen
 
-- Nach jeder Änderung `npm run build` ausführen und die Seite bei 390, 1024 und 1440 px Breite ansehen.
+- Nach jeder Änderung `bun run build` ausführen und die Seite bei 390, 1024 und 1440 px Breite ansehen.

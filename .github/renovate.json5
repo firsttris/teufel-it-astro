@@ -1,11 +1,11 @@
 // Renovate (GitHub App, https://github.com/apps/renovate): a pull request for each new release of
 // what the website builds on, plus the "Dependency Dashboard" issue listing what is open. Their own
 // pull requests: Astro with astro-icon and the withastro/action that builds and uploads the site,
-// Tailwind CSS, and the Node of the workflows.
+// Tailwind CSS, Bun (packageManager in package.json) and the Node of the workflows.
 // Everything else (the other packages, the actions, the images) comes with the shared settings of
 // firsttris/workflows (renovate/default.json5): minor and patch updates once a month in one pull
 // request that merges itself when CI is green, majors on request in the dashboard.
-// Check with `npx --package renovate renovate-config-validator .github/renovate.json5`.
+// Check with `bunx --package renovate renovate-config-validator .github/renovate.json5`.
 {
   $schema: "https://docs.renovatebot.com/renovate-schema.json",
   extends: ["github>firsttris/workflows//renovate/default.json5"],
@@ -40,7 +40,8 @@
       versioningTemplate: "regex:^(?<major>\\d+)$",
     },
     {
-      // The Node of the build and deploy workflows
+      // The Node of the build and deploy workflows (withastro/action's node-version): Astro runs on
+      // Node, Bun installs and starts the scripts
       customType: "regex",
       managerFilePatterns: ["/^\\.github/workflows/[^/]+\\.ya?ml$/"],
       matchStrings: ["\\n\\s+node-version: (?<currentValue>\\d+)"],
@@ -58,7 +59,7 @@
       groupName: "Astro",
       sourceUrl: "https://github.com/withastro/astro",
       prBodyNotes: [
-        "Before merging: read the Astro upgrade guide for a new major (https://docs.astro.build/en/upgrade-astro/) and its Node requirement (`node-version` in the workflows, \"Node.js ≥ 22.12\" in the README). The Check Build run of this PR builds the site; locally `npm run build` and look at the pages at 390, 1024 and 1440 px width (CLAUDE.md), German and English.",
+        "Before merging: read the Astro upgrade guide for a new major (https://docs.astro.build/en/upgrade-astro/) and its Node requirement (`node-version` in the workflows, \"Node.js ≥ 22.12\" in the README). The Check Build run of this PR builds the site; locally `bun run build` and look at the pages at 390, 1024 and 1440 px width (CLAUDE.md), German and English.",
       ],
       schedule: ["at any time"],
       automerge: false,
@@ -70,7 +71,20 @@
       groupName: "Tailwind CSS",
       sourceUrl: "https://github.com/tailwindlabs/tailwindcss",
       prBodyNotes: [
-        "Before merging: `npm run build` and look at the pages at 390, 1024 and 1440 px width (CLAUDE.md). A new major: read the upgrade guide (https://tailwindcss.com/docs/upgrade-guide).",
+        "Before merging: `bun run build` and look at the pages at 390, 1024 and 1440 px width (CLAUDE.md). A new major: read the upgrade guide (https://tailwindcss.com/docs/upgrade-guide).",
+      ],
+      schedule: ["at any time"],
+      automerge: false,
+      dependencyDashboardApproval: false,
+    },
+    {
+      // packageManager in package.json (Renovate reads it as the dependency `bun`): the Bun that
+      // withastro/action sets up in both workflows (package-manager, read from package.json)
+      matchPackageNames: ["bun"],
+      groupName: "Bun",
+      sourceUrl: "https://github.com/oven-sh/bun",
+      prBodyNotes: [
+        "`packageManager` in package.json is the Bun of the Check Build and Deploy workflows (withastro/action's `package-manager`, read from package.json). Bun installs the packages (`bun.lock`, the workflows fail if `bun install` had to change it) and starts the scripts; Astro itself runs on Node. The Check Build run of this PR builds the site; locally `bun install && bun run build`.",
       ],
       schedule: ["at any time"],
       automerge: false,

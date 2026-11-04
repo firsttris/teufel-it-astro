@@ -18,10 +18,18 @@ jobs:
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v7
+      # withastro/action detects Bun from bun.lock but then sets up the latest Bun; this hands it
+      # the Bun of packageManager in package.json instead ("bun@x.y.z")
+      - name: Read the Bun version from package.json
+        id: bun
+        run: echo "package-manager=$(jq -r .packageManager package.json)" >> "$GITHUB_OUTPUT"
       - name: Install, build, and upload your site
         uses: withastro/action@v6
         with:
+          package-manager: ${{ steps.bun.outputs.package-manager }}
+          # Astro runs on Node (the action's bun runs `astro build`, whose bin starts with
+          # `#!/usr/bin/env node`); Astro 7 needs Node >= 22.12
           node-version: 26
-          # path: . # The root location of your Astro project inside the repository. (optional)
-          # node-version: 20 # The specific version of Node that should be used to build your site. Defaults to 20. (optional)
-          # package-manager: pnpm@latest # The Node package manager that should be used to install dependencies and build your site. Automatically detected based on your lockfile. (optional)
+      # The action runs `bun install` without --frozen-lockfile: fail if it had to change bun.lock
+      - name: Check that bun.lock matches package.json
+        run: git diff --exit-code bun.lock
