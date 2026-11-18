@@ -11,6 +11,14 @@ const de = lang === "de";
 ---
 
 <LegalPage lang={lang} path="/impressum/" title={t("imprint.title")}>
+  <p>
+    {
+      de
+        ? "Dieses Impressum gilt für teufel-it.de und für die Websites der Speicherstadt-Projekte: speicherstadt.app, haben.app, kontext.email, schreibzeug.app und belegt.net."
+        : "This legal notice applies to teufel-it.de and to the websites of the Speicherstadt projects: speicherstadt.app, haben.app, kontext.email, schreibzeug.app and belegt.net."
+    }
+  </p>
+
   <h2>{de ? "Angaben gemäß § 5 DDG" : "Information pursuant to Section 5 DDG (German Digital Services Act)"}</h2>
   <address>
     {owner.company}<br />
