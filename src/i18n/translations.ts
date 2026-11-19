@@ -47,6 +47,9 @@ const de = {
   "services.agents.title": "Agentenbasierte Entwicklung",
   "services.agents.desc":
     "Ich führe Agenten produktiv in Ihre Entwicklung ein: mit klaren Leitplanken, Reviews und Tests, damit Tempo nicht auf Kosten der Qualität geht.",
+  "services.speicherstadt.title": "Einrichtung und Betrieb der Speicherstadt-Apps",
+  "services.speicherstadt.desc":
+    "Einrichtung, Umzug und Support von Kontext, Haben, Schreibzeug und Belegt auf Ihrem Server oder als gehosteter Betrieb. Für IT-Dienstleister und Steuerberater, die die Apps bei ihren Kunden einrichten, gibt es eine Partnerschaft.",
 
   // About
   "about.title": "Über mich",
@@ -123,6 +126,9 @@ const en: Translations = {
   "services.agents.title": "Agent-Based Development",
   "services.agents.desc":
     "I bring agents into your development process productively: with clear guardrails, reviews and tests, so speed doesn't come at the cost of quality.",
+  "services.speicherstadt.title": "Setup and Operation of the Speicherstadt Apps",
+  "services.speicherstadt.desc":
+    "Setup, migration and support for Kontext, Haben, Schreibzeug and Belegt on your server, or as hosted operation. IT service providers and tax advisers who set up the apps for their customers can join a partnership.",
 
   // About
   "about.title": "About me",
