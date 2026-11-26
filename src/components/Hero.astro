@@ -32,14 +32,14 @@ const links = [
     <h1 class="reveal max-w-5xl text-6xl leading-[1.1] font-bold tracking-tight text-white md:text-8xl">
       Tristan Teufel
       <br />
-      <span class="animate-gradient-text">{t("hero.role")}</span>
+      <span class="text-zinc-400">{t("hero.role")}</span>
     </h1>
 
     <p class="reveal reveal-delay-2 max-w-2xl text-xl leading-relaxed font-light text-zinc-300 md:text-2xl">
       {t("hero.tagline")}
     </p>
 
-    <p class="reveal reveal-delay-2 text-sm tracking-wide text-zinc-500 md:text-base">
+    <p class="reveal reveal-delay-2 text-sm tracking-wide text-zinc-400 md:text-base">
       {t("hero.experience")} · {t("hero.location")} · {t("hero.availability")}
     </p>
 
@@ -49,38 +49,3 @@ const links = [
   </div>
 </section>
 
-<style>
-  @keyframes gradientTextFlow {
-    0% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
-  }
-
-  .animate-gradient-text {
-    display: inline-block;
-    color: transparent;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    -webkit-background-clip: text;
-    background-image: repeating-linear-gradient(
-      90deg,
-      #22d3ee 0%,
-      #3b82f6 34%,
-      #a855f7 50%,
-      #3b82f6 66%,
-      #22d3ee 100%
-    );
-    background-size: 200% 100%;
-    background-repeat: no-repeat;
-    animation: gradientTextFlow 18s ease-in-out infinite alternate;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .animate-gradient-text {
-      animation: none;
-    }
-  }
-</style>

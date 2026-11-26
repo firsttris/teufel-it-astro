@@ -1,5 +1,4 @@
 ---
-import { Icon } from "astro-icon/components";
 import { useTranslations, type Lang } from "../i18n/utils";
 
 interface Props {
@@ -10,34 +9,24 @@ const t = useTranslations(Astro.props.lang);
 
 const services = [
   {
-    icon: "mdi:application-cog-outline",
     title: t("services.custom.title"),
     desc: t("services.custom.desc"),
-    accent: "bg-blue-500/15 text-blue-300",
   },
   {
-    icon: "mdi:source-branch-refresh",
     title: t("services.modernization.title"),
     desc: t("services.modernization.desc"),
-    accent: "bg-cyan-500/15 text-cyan-300",
   },
   {
-    icon: "mdi:test-tube",
     title: t("services.testing.title"),
     desc: t("services.testing.desc"),
-    accent: "bg-green-500/15 text-green-300",
   },
   {
-    icon: "mdi:robot-outline",
     title: t("services.agents.title"),
     desc: t("services.agents.desc"),
-    accent: "bg-purple-500/15 text-purple-300",
   },
   {
-    icon: "mdi:server-network-outline",
     title: t("services.speicherstadt.title"),
     desc: t("services.speicherstadt.desc"),
-    accent: "bg-amber-500/15 text-amber-300",
     // Fifth card: spans the whole row so it does not stand alone in the 2- and 4-column grid.
     wide: true,
   },
@@ -48,23 +37,23 @@ const services = [
   <div class="container mx-auto px-6 md:px-12">
     <div class="mb-16 space-y-4 text-center">
       <h2 class="text-3xl font-bold text-white md:text-5xl">{t("services.title")}</h2>
-      <p class="mx-auto max-w-2xl text-xl text-zinc-400">{t("services.subtitle")}</p>
+      <p class="mx-auto max-w-2xl text-xl text-zinc-300">{t("services.subtitle")}</p>
     </div>
 
     <div class="grid gap-8 md:grid-cols-2 xl:grid-cols-4">
       {
-        services.map((service) => (
+        services.map((service, index) => (
           <div
             class:list={[
-              "group rounded-2xl border border-white/10 bg-linear-to-b from-zinc-900 to-zinc-950/50 p-8 transition-colors duration-300 hover:border-white/25",
+              "group rounded-2xl border border-white/10 bg-zinc-950/70 p-8 transition-colors duration-300 hover:border-white/25",
               service.wide && "md:col-span-2 xl:col-span-4",
             ]}
           >
-            <div class:list={["mb-6 flex size-12 items-center justify-center rounded-lg", service.accent]}>
-              <Icon name={service.icon} class="size-6" aria-hidden="true" />
-            </div>
+            <p class="mb-6 font-mono text-sm text-zinc-500" aria-hidden="true">
+              {String(index + 1).padStart(2, "0")}
+            </p>
             <h3 class:list={["mb-4 text-xl font-bold text-white", !service.wide && "min-h-14"]}>{service.title}</h3>
-            <p class:list={["leading-relaxed text-zinc-400", service.wide && "max-w-3xl"]}>{service.desc}</p>
+            <p class:list={["leading-relaxed text-zinc-300", service.wide && "max-w-3xl"]}>{service.desc}</p>
           </div>
         ))
       }
