@@ -14,7 +14,7 @@ const de = {
   // Projects
   "projects.title": "Was mit agentenbasierter Entwicklung heute möglich ist",
   "projects.subtitle":
-    "Vollständige Produkte, die ich entworfen und gebaut habe. Open Source, selbst gehostet, die Daten bleiben in Europa.",
+    "Vollständige Produkte, die ich entworfen und gebaut habe, zusammengefasst unter dem Namen Speicherstadt. Open Source, selbst gehostet, die Daten bleiben in Europa.",
   "projects.haben.tagline": "Alternative zu lexoffice und sevDesk",
   "projects.haben.desc":
     "Buchhaltung für Selbstständige und kleine Unternehmen: E-Rechnung (ZUGFeRD, XRechnung), Bankabgleich, EÜR und Umsatzsteuer-Voranmeldung direkt an ELSTER.",
@@ -27,6 +27,12 @@ const de = {
   "projects.schreibzeug.desc":
     "Word, Excel, PowerPoint und PDF gemeinsam in Echtzeit bearbeiten, im Browser oder als Desktop-App. Die Dateien bleiben .docx, .xlsx und .pptx.",
   "projects.schreibzeug.alt": "Ein Word-Dokument im Editor von Schreibzeug",
+  "projects.belegt.tagline": "Dokumentenarchiv mit GoBD-Modus",
+  "projects.belegt.desc":
+    "Mails, E-Rechnungen, Scans und beliebige Dokumente an einem Ort, durchsuchbar. Was aufbewahrt werden muss, bleibt bis Fristende unverändert, mit Prüferzugang und Datenträger für die Betriebsprüfung.",
+  "projects.belegt.alt": "Startseite von Belegt mit Eingang, Archiv, Fristen und Zustand der Hash-Kette",
+  "projects.beta": "Beta",
+  "projects.speicherstadt": "Alle Apps im Überblick auf",
   "projects.docs": "Dokumentation",
   "projects.source": "Quellcode",
   // Followed by a link to vscode-jest-runner and this text.
@@ -93,7 +99,7 @@ const en: Translations = {
   // Projects
   "projects.title": "What agent-based development makes possible today",
   "projects.subtitle":
-    "Complete products I designed and built. Open source, self-hosted, with the data staying in Europe.",
+    "Complete products I designed and built, grouped under the name Speicherstadt. Open source, self-hosted, with the data staying in Europe.",
   "projects.haben.tagline": "An alternative to lexoffice and sevDesk",
   "projects.haben.desc":
     "Bookkeeping for German freelancers and small businesses: e-invoicing (ZUGFeRD, XRechnung), bank reconciliation, EÜR and VAT returns sent straight to ELSTER.",
@@ -106,6 +112,12 @@ const en: Translations = {
   "projects.schreibzeug.desc":
     "Edit Word, Excel, PowerPoint and PDF files together in real time, in the browser or as a desktop app. Files stay .docx, .xlsx and .pptx.",
   "projects.schreibzeug.alt": "A Word document in the Schreibzeug editor",
+  "projects.belegt.tagline": "Document archive with a GoBD mode",
+  "projects.belegt.desc":
+    "Mails, e-invoices, scans and any other documents in one place, searchable. Whatever must be retained stays unchanged until the end of its retention period, with auditor access and the data medium for tax audits.",
+  "projects.belegt.alt": "Belegt start page with inbox, archive, retention periods and the state of the hash chain",
+  "projects.beta": "Beta",
+  "projects.speicherstadt": "All apps at a glance on",
   "projects.docs": "Documentation",
   "projects.source": "Source code",
   // Followed by a link to vscode-jest-runner and this text.
