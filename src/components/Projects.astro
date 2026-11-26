@@ -49,7 +49,6 @@ const projects = [
     desc: t("projects.belegt.desc"),
     docs: "https://belegt.store/",
     source: "https://github.com/Speicherstadt/belegt",
-    beta: true,
   },
 ];
 
@@ -79,11 +78,9 @@ const linkClass = "inline-flex items-center gap-1.5 text-zinc-300 transition-col
             <div class="flex flex-1 flex-col p-8">
               <h3 class="flex items-center gap-3 text-2xl font-bold text-white">
                 {project.name}
-                {project.beta && (
-                  <span class="rounded-full border border-amber-300/30 px-2 py-0.5 text-xs font-medium text-amber-200">
-                    {t("projects.beta")}
-                  </span>
-                )}
+                <span class="rounded-full border border-amber-300/30 px-2 py-0.5 text-xs font-medium text-amber-200">
+                  {t("projects.beta")}
+                </span>
               </h3>
               <p class="mt-1 text-sm font-medium text-blue-300">{project.tagline}</p>
               <p class="mt-4 flex-1 leading-relaxed text-zinc-300">{project.desc}</p>
