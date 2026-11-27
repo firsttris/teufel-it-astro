@@ -5,6 +5,7 @@ import "../styles/global.css";
 import HeroBackground3D from "../components/HeroBackground3D.astro";
 import Footer from "../components/Footer.astro";
 import LanguageSwitch from "../components/LanguageSwitch.astro";
+import { owner } from "../data/legal";
 import { languages, localizedPath, useTranslations, type Lang } from "../i18n/utils";
 
 interface Props {
@@ -23,6 +24,43 @@ const pageTitle = title ? `${title} – Tristan Teufel` : t("meta.title");
 const pageDescription = description ?? t("meta.description");
 const canonical = new URL(localizedPath(lang, path), Astro.site).href;
 const ogImage = new URL("/og.png", Astro.site).href;
+
+// Structured data for search engines, only on the home page. Region names live here
+// rather than in the visible text.
+const region = ["Bühl", "Baden-Baden", "Rastatt", "Achern", "Bühlertal", "Sinzheim", "Ottersweier", "Landkreis Rastatt", "Ortenaukreis", "Karlsruhe", "Baden-Württemberg"];
+const [postalCode, locality] = owner.city.split(" ");
+const jsonLd =
+  path === "/"
+    ? JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "@id": `${Astro.site}#business`,
+        name: owner.company,
+        url: canonical,
+        image: ogImage,
+        email: owner.email,
+        telephone: owner.phone,
+        vatID: owner.vatId,
+        description: pageDescription,
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: owner.street,
+          postalCode,
+          addressLocality: locality,
+          addressRegion: "Baden-Württemberg",
+          addressCountry: "DE",
+        },
+        areaServed: [...region.map((name) => ({ "@type": "Place", name })), { "@type": "Country", name: "Deutschland" }],
+        knowsAbout: ["Business-Software", "Individualsoftware", "Softwareentwicklung", "Softwarearchitektur", "Open-Source-Software", "Buchhaltungssoftware", "E-Rechnung", "Hosting"],
+        founder: {
+          "@type": "Person",
+          name: owner.name,
+          jobTitle: "Software Craftsman",
+          sameAs: ["https://github.com/firsttris", "https://www.linkedin.com/in/tristanteufel/", "https://cv.teufel-it.de"],
+        },
+        sameAs: ["https://github.com/firsttris", "https://www.linkedin.com/in/tristanteufel/"],
+      })
+    : undefined;
 
 // Same rule as in @fontsource-variable/inter, limited to the latin subset.
 const fontFace = `@font-face {
@@ -68,6 +106,7 @@ const fontFace = `@font-face {
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
+    {jsonLd && <script type="application/ld+json" is:inline set:html={jsonLd} />}
   </head>
   <body class="bg-background text-white antialiased selection:bg-blue-500 selection:text-white">
     <div class="fixed inset-0 z-0 pointer-events-none">

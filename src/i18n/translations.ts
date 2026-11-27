@@ -1,5 +1,5 @@
 const de = {
-  "meta.title": "Tristan Teufel – Software Craftsman",
+  "meta.title": "Tristan Teufel – Softwareentwicklung und Business-Software aus Bühl (Baden)",
   "meta.description":
     "Tristan Teufel, Software Craftsman aus Bühl (Baden): Architektur und Umsetzung von Business-Software, von der ersten Idee bis zum Betrieb. Softwareentwicklung seit 2012.",
 
@@ -86,7 +86,7 @@ const de = {
 type Translations = Record<keyof typeof de, string>;
 
 const en: Translations = {
-  "meta.title": "Tristan Teufel – Software Craftsman",
+  "meta.title": "Tristan Teufel – Software development and business software, Bühl, Germany",
   "meta.description":
     "Tristan Teufel, software craftsman based in Bühl, Germany: architecture and delivery of business software, from the first idea to production. Building software since 2012.",
 
