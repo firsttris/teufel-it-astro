@@ -34,6 +34,7 @@ const de = {
   "projects.beta": "Beta",
   "projects.dev": "In Entwicklung",
   "projects.speicherstadt": "Alle Apps im Überblick auf",
+  "projects.demo": "Demo",
   "projects.docs": "Dokumentation",
   "projects.source": "Quellcode",
   // Followed by a link to vscode-jest-runner and this text.
@@ -120,6 +121,7 @@ const en: Translations = {
   "projects.beta": "Beta",
   "projects.dev": "In development",
   "projects.speicherstadt": "All apps at a glance on",
+  "projects.demo": "Demo",
   "projects.docs": "Documentation",
   "projects.source": "Source code",
   // Followed by a link to vscode-jest-runner and this text.
