@@ -35,6 +35,7 @@ const de = {
   "projects.dev": "In Entwicklung",
   "projects.speicherstadt": "Alle Apps im Überblick auf",
   "projects.docs": "Dokumentation",
+  "projects.demo": "Demo",
   "projects.source": "Quellcode",
   // Followed by a link to vscode-jest-runner and this text.
   "projects.jestRunner": "Test-Runner für VS Code, über 2 Mio. Installationen, gepflegt seit 2017.",
@@ -121,6 +122,7 @@ const en: Translations = {
   "projects.dev": "In development",
   "projects.speicherstadt": "All apps at a glance on",
   "projects.docs": "Documentation",
+  "projects.demo": "Demo",
   "projects.source": "Source code",
   // Followed by a link to vscode-jest-runner and this text.
   "projects.jestRunner": "test runner for VS Code, more than 2 million installs, maintained since 2017.",

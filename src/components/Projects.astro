@@ -31,6 +31,7 @@ const projects = [
     tagline: t("projects.kontext.tagline"),
     desc: t("projects.kontext.desc"),
     docs: "https://kontext.email/",
+    demo: "https://kontext.email/demo/",
     status: "beta",
     source: "https://github.com/Speicherstadt/kontext",
   },
@@ -41,6 +42,7 @@ const projects = [
     tagline: t("projects.schreibzeug.tagline"),
     desc: t("projects.schreibzeug.desc"),
     docs: "https://schreibzeug.app/",
+    demo: "https://schreibzeug.app/demo/",
     status: "beta",
     source: "https://github.com/Speicherstadt/schreibzeug",
   },
@@ -51,6 +53,7 @@ const projects = [
     tagline: t("projects.belegt.tagline"),
     desc: t("projects.belegt.desc"),
     docs: "https://belegt.store/",
+    demo: "https://belegt.store/demo/",
     status: "beta",
     source: "https://github.com/Speicherstadt/belegt",
   },
@@ -100,6 +103,12 @@ const linkClass = "inline-flex items-center gap-1.5 text-zinc-300 transition-col
                   <Icon name="mdi:book-open-page-variant-outline" class="size-4" aria-hidden="true" />
                   {t("projects.docs")}
                 </a>
+                {project.demo && (
+                  <a href={project.demo} target="_blank" rel="noopener noreferrer" class={linkClass}>
+                    <Icon name="mdi:play-circle-outline" class="size-4" aria-hidden="true" />
+                    {t("projects.demo")}
+                  </a>
+                )}
                 <a href={project.source} target="_blank" rel="noopener noreferrer" class={linkClass}>
                   <Icon name="simple-icons:github" class="size-4" aria-hidden="true" />
                   {t("projects.source")}
